@@ -5,6 +5,7 @@ import { useEffect, useRef, useState,useCallback  } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ChatBubble from './components/ChatBubble';
+import ContactButton from './components/contactBtn';
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -233,17 +234,6 @@ export default function Home() {
         className={`relative cursor-default  backdrop-brightness-105 bg-blend-hard-light h-fit  font-medium  top-left-animation  ${choiceTheme == 'white' ? 'bg-zinc-400' :'bg-zinc-950'}`}
       >
 
-
-
-
-
-
-
-
-
-
-
-
         <div className={`h-1/5 md:h-3/5 flex flex-col w-full text-center ${choiceTheme == 'red' ?  'text-red-200' : choiceTheme == 'blue' ? 'text-blue-200' : choiceTheme == 'white' ? 'text-zinc-400' : 'text-gray-200'}`}>
           <div
             ref={titleRef}
@@ -272,16 +262,19 @@ export default function Home() {
 
 
             <img className={` w-full border-y-4  ${choiceTheme == 'red' ?  'border-red-800 ' : choiceTheme == 'blue' ? 'border-blue-200' : choiceTheme == 'white' ? 'border-black blur-sm' : 'border-gray-100'} absolute -rotate-45 top-10 left-40 md:top-3 md:left-80 overflow-hidden -z-10 `} src="./pgG2.jpg" alt="" />
-            <div className='flex md:mt-5 mt-0 ml-4 justify-center relative bottom-6'>
-                <svg className='w-10 h-10 text-white' viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div className=' flex md:mt-5 mt-0 ml-4 justify-center relative bottom-6'>
+                
+                <svg
+                 className=' w-10 h-10 text-white' viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path 
                     fillRule="evenodd" 
                     clipRule="evenodd" 
                     d="M128 32C74.9807 32 32 74.9807 32 128V384C32 437.019 74.9807 480 128 480H384C437.019 480 480 437.019 480 384V128C480 74.9807 437.019 32 384 32H128ZM175.999 116.001C169.372 107.165 156.836 105.374 147.999 112.001C139.163 118.629 137.372 131.165 143.999 140.001L230.999 256.001L143.999 372.001C137.372 380.838 139.163 393.374 147.999 400.001C156.836 406.629 169.372 404.838 175.999 396.001L255.999 289.335L335.999 396.001C342.627 404.838 355.163 406.629 363.999 400.001C372.836 393.374 374.627 380.838 367.999 372.001L280.999 256.001L367.999 140.001C374.627 131.165 372.836 118.629 363.999 112.001C355.163 105.374 342.627 107.165 335.999 116.001L255.999 222.668L175.999 116.001Z" 
-                    fill="currentColor" // Use currentColor to apply text color
+                    fill="currentColor" 
                   />
                 </svg>
 
+                <a href="https://www.linkedin.com/in/sarang-k-2b7844244/">
                 <svg className='w-10 h-10 text-white' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 107.3 107.3">
                   <g id="Layer_2" data-name="Layer 2">
                     <g data-name="图层 1">
@@ -299,19 +292,25 @@ export default function Home() {
                     </g>
                   </g>
                 </svg>
+                </a>
 
+
+                <a href="https://github.com/sarangk07">
                 <svg className='w-10 h-10 text-white' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
                   <g fill="currentColor">
                     <path fillRule="evenodd" d="M64 5.103c-33.347 0-60.388 27.035-60.388 60.388 0 26.682 17.303 49.317 41.297 57.303 3.017.56 4.125-1.31 4.125-2.905 0-1.44-.056-6.197-.082-11.243-16.8 3.653-20.345-7.125-20.345-7.125-2.747-6.98-6.705-8.836-6.705-8.836-5.48-3.748.413-3.67.413-3.67 6.063.425 9.257 6.223 9.257 6.223 5.386 9.23 14.127 6.562 17.573 5.02.542-3.903 2.107-6.568 3.834-8.076-13.413-1.525-27.514-6.704-27.514-29.843 0-6.593 2.36-11.98 6.223-16.21-.628-1.52-2.695-7.662.584-15.98 0 0 5.07-1.623 16.61 6.19C53.7 35 58.867 34.327 64 34.304c5.13.023 10.3.694 15.127 2.033 11.526-7.813 16.59-6.19 16.59-6.19 3.287 8.317 1.22 14.46.593 15.98 3.872 4.23 6.215 9.617 6.215 16.21 0 23.194-14.127 28.3-27.574 29.796 2.167 1.874 4.097 5.55 4.097 11.183 0 8.08-.07 14.583-.07 16.572 0 1.607 1.088 3.49 4.148 2.897 23.98-7.994 41.263-30.622 41.263-57.294C124.388 32.14 97.35 5.104 64 5.104z" clipRule="evenodd"></path>
                     <path d="M26.484 91.806c-.133.3-.605.39-1.035.185-.44-.196-.685-.605-.543-.906.13-.31.603-.395 1.04-.188.44.197.69.61.537.91zm-.743-.55M28.93 94.535c-.287.267-.85.143-1.232-.28-.396-.42-.47-.983-.177-1.254.298-.266.844-.14 1.24.28.394.426.472.984.17 1.255zm-.575-.618M31.312 98.012c-.37.258-.976.017-1.35-.52-.37-.538-.37-1.183.01-1.44.373-.258.97-.025 1.35.507.368.545.368 1.19-.01 1.452zm0 0M34.573 101.373c-.33.365-1.036.267-1.552-.23-.527-.487-.674-1.18-.343-1.544.336-.366 1.045-.264 1.564.23.527.486.686 1.18.333 1.543zm0 0M39.073 103.324c-.147.473-.825.688-1.51.486-.683-.207-1.13-.76-.99-1.238.14-.477.823-.7 1.512-.485.683.206 1.13.756.988 1.237zm0 0M44.016 103.685c.017.498-.563.91-1.28.92-.723.017-1.308-.387-1.315-.877 0-.503.568-.91 1.29-.924.717-.013 1.306.387 1.306.88zm0 0M48.614 102.903c.086.485-.413.984-1.126 1.117-.7.13-1.35-.172-1.44-.653-.086-.498.422-.997 1.122-1.126.714-.123 1.354.17 1.444.663zm0 0"></path>
                   </g>
                 </svg>
+                </a>
               </div>
-
+              {/* <button className={`relative px-4 mb-2 py-2  border-2 border-black hover:bg-black hover:text-white transition-colors duration-200 font-pixel text-sm ${choiceTheme == 'red' ?  'bg-red-600' : choiceTheme == 'blue' ? 'bg-blue-600' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-gray-100 text-black hover:border-white'}`}>
+                <a href="https://drive.google.com/uc?export=download&id=1UvJjKtmezPk-4623rI-QvvhJkL9jR-7K">
+                  CV
+                </a>
+              </button> */}
             
-            <button className={`relative bottom-5 px-4 mb-2 py-2  border-2 border-black hover:bg-black hover:text-white transition-colors duration-200 font-pixel text-sm ${choiceTheme == 'red' ?  'bg-red-400' : choiceTheme == 'blue' ? 'bg-blue-400' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-gray-100 text-black hover:border-white'}`}>
-              Contact
-            </button>
+            
           </div>
           <div className="flex flex-col md:flex md:flex-row h-3/4 m-4 rounded-lg backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110">
             <div className="relative h-2/4 md:w-2/3">
@@ -327,13 +326,13 @@ export default function Home() {
               ref={contactRef}
               className="h-2/4 m-3  md:w-1/3"
             >
-              <div className='relative h-40 text-right bg-stone-800  p-4'>
+              <div className='relative h-44 text-right bg-stone-800  p-4'>
               
                 <div className={`absolute -bottom-2 -right-2  w-full h-full ${timeTheme === 'morning' ? 'bg-blue-200' : timeTheme === 'afternoon' ? 'bg-orange-100' : 'bg-zinc-400'}`}></div>
               
-                <div className='relative font-silkscreen-regular flex flex-col justify-between font-semi-bold md:text-xl text-lg z-10 w-full h-full text-stone-900'>
+                <div className='relative font-silkscreen-regular flex flex-col justify-between font-semi-bold md:text-xl text-lg z-10 w-full h-full text-stone-900 overflow-y-scroll' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   
-                  <p><span className={`${timeTheme === 'morning' ? 'text-blue-500' : timeTheme === 'afternoon' ? 'text-orange-500' : 'text-zinc-500'} font-light`}>{greeting}</span> Guys, I'M <span className='font-bold text-gray-900'>Sarang </span> a passionate web developer</p>
+                  <p><span className={`${timeTheme === 'morning' ? 'text-blue-500' : timeTheme === 'afternoon' ? 'text-orange-500' : 'text-zinc-500'} font-light`}>{greeting}</span> everyone! I'M <span className='font-bold text-gray-900'>Sarang </span>— a passionate coder, committed to excellence, and always eager to learn.</p>
   
                   {/* <p>connect me on : </p> */}
                   
@@ -428,7 +427,9 @@ export default function Home() {
               <div className='relative right-11 md:right-0 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit bg-pixel-pattern bg-cyan-100 bg-pixel p-1 cursor-pointer'>
                   <div className={`${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-blue-700' : choiceTheme == 'white' ? 'bg-zinc-400 text-gray-900' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-64 md:h-64 pl-4 pr-4 `}>
                   BaBy Land
-                  <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-56 md:h-48 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="https://i.pinimg.com/236x/d5/6a/8e/d56a8eae13931044d7480ed2d6570142.jpg" />
+                  <a href="https://ecommerce-baby-products.vercel.app/" target="_blank">
+                  <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-56 md:h-48 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./Baby-Products.PNG" />
+                  </a>
                 </div>
               </div>
               <div className='relative left-11 md:left-0 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit bg-pixel-pattern bg-pixel bg-cyan-100 p-1 cursor-pointer'>
@@ -441,58 +442,35 @@ export default function Home() {
               <div className='relative right-11 md:right-0 mt-5  md:mt-0  project-item md:ml-5 ml-10 mb-3 w-fit bg-pixel-pattern bg-pixel bg-cyan-100 p-1 cursor-pointer'>
                   <div className={`${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-blue-700' : choiceTheme == 'white' ? 'bg-zinc-400 text-gray-900' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-64 md:h-64 pl-4 pr-4 `}>
                    RentKaroo
-                   <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-56 md:h-48 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="https://i.pinimg.com/236x/d5/6a/8e/d56a8eae13931044d7480ed2d6570142.jpg" />
-
+                   <a href="https://rentkaro.shop/" target="_blank">
+                   <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-56 md:h-48 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./RentKaro.PNG" />
+                   </a>
                 </div>
               </div>
               <div className='relative left-11 md:left-0 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit bg-pixel-pattern bg-pixel bg-cyan-100 p-1 cursor-pointer'>
                   <div className={`${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-blue-700' : choiceTheme == 'white' ? 'bg-zinc-400 text-gray-900' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-64 md:h-64 pl-4 pr-4 `}>
                   Social Media
-                  <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-56 md:h-48 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="https://i.pinimg.com/236x/d5/6a/8e/d56a8eae13931044d7480ed2d6570142.jpg" />
-
+                  <a href="https://social-media-azure-alpha.vercel.app/" target="_blank">
+                  <img  className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-56 md:h-48 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./social-meadia.PNG" />
+                  </a>
                 </div>
               </div>
             </div>
           </div>
-          <div className="m-4">
-            <p>Projects Videos</p>
-            <div className="flex overflow-x-auto custom-scrollbar">
-              <div className="m-4">
-                <h1>project name</h1>
-                {/* <iframe
-                  className="h-[250px] w-[440px] md:h-[315px] md:w-[560px]"
-                  src="https://www.youtube.com/embed/Yw7yWHigGKI?rel=0&controls=0&modestbranding=1&showinfo=0"
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                ></iframe> */}
-              </div>
-              <div className="m-4">
-                <h1>project name</h1>
-                {/* <iframe
-                  className="h-[250px] w-[440px] md:h-[315px] md:w-[560px]"
-                  src="https://www.youtube.com/embed/Yw7yWHigGKI?rel=0&controls=2&modestbranding=1&showinfo=0"
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                ></iframe> */}
-              </div>
-              <div className="m-4">
-                <h1>project name</h1>
-                {/* <iframe
-                  className="h-[250px] w-[440px] md:h-[315px] md:w-[560px]"
-                  src="https://www.youtube.com/embed/Yw7yWHigGKI?rel=0&controls=2&modestbranding=1&showinfo=0"
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                ></iframe> */}
-              </div>
+          <div className="m-4 flex border-spacing-9  border-t-4">
+            <div className="w-full p-3 flex flex-col justify-center items-center overflow-x-auto  custom-scrollbar">
+              <p>
+                 "Got a project in mind? Let’s turn it into reality.
+              </p>
+              <p>
+                Let’s build something amazing together.
+              </p>
+              
+              <p className='mb-5'>
+                Reach out and let’s collaborate on your next big idea."
+              </p>
+              
+               <ContactButton choiceThemes={choiceTheme} />
             </div>
           </div>
         </div>
