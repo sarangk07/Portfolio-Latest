@@ -170,7 +170,7 @@ const ChatBubble = ({ messages, typingSpeed = 50 }) => {
   return (
     <div className="h-24 font-jersey">
       <img 
-        className={`w-14 absolute cursor-pointer  ${flipImage ? 'scale-x-[-1]' : ''}`} 
+        className={`w-12 top-4  md:top-0 md:w-14 absolute cursor-pointer  ${flipImage ? 'scale-x-[-1]' : ''}`} 
         src={imageSrc} // Dynamic image source
         alt="Cartoon character" 
         onClick={startTyping}
