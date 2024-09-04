@@ -2,102 +2,6 @@
 
 
 
-// import React, { useState, useEffect, useCallback } from 'react';
-// import { Sparkles } from 'lucide-react';
-
-
-// const ChatBubble = ({ messages, typingSpeed = 50 }) => {
-//   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
-//   const [displayedText, setDisplayedText] = useState('');
-//   const [isTyping, setIsTyping] = useState(true);
-//   const [showBubble, setShowBubble] = useState(false);
-//   const [showSparkle, setShowSparkle] = useState(false);
-
-//   const startTyping = useCallback(() => {
-//     setCurrentMessageIndex(0);
-//     setDisplayedText('');
-//     setIsTyping(true);
-//     setShowBubble(true);
-//     setShowSparkle(false);
-//   }, []);
-
-//   useEffect(() => {
-//     startTyping();
-//   }, [startTyping]);
-
-//   useEffect(() => {
-//     if (currentMessageIndex < messages.length) {
-//       const message = messages[currentMessageIndex];
-//       let charIndex = 0;
-
-//       const typingInterval = setInterval(() => {
-//         if (charIndex < message.length) {
-//           setDisplayedText(message.slice(0, charIndex + 1));
-//           charIndex++;
-//         } else {
-//           clearInterval(typingInterval);
-//           setIsTyping(false);
-//           setTimeout(() => {
-//             if (currentMessageIndex === messages.length - 1) {
-//               setShowBubble(false);
-//               setShowSparkle(true);
-//             } else {
-//               setIsTyping(true);
-//               setDisplayedText('');
-//               setCurrentMessageIndex((prev) => prev + 1);
-//             }
-//           }, 2000); 
-//         }
-//       }, typingSpeed);
-
-//       return () => clearInterval(typingInterval);
-//     }
-//   }, [currentMessageIndex, messages, typingSpeed]);
-
-//   return (
-//     <div className="relative font-jersey">
-//       <img 
-//         className="w-14 cursor-pointer " 
-//         src="./pixA2.png" 
-//         alt="Cartoon character" 
-//         onClick={startTyping}
-//       />
-//       {showSparkle && (
-//           <Sparkles 
-//             className="relative -top-28 left-12 text-yellow-400 animate-pulse" 
-//             size={20}
-//           />
-//         )}
-//       {showBubble && (
-//         <div className="absolute left-16 top-0 bg-white border-2 border-black rounded-lg p-3 min-w-[200px] max-w-[300px] shadow-md">
-//           <div className="absolute left-[-10px] top-4 w-0 h-0 
-//                           border-t-[10px] border-t-transparent
-//                           border-r-[10px] border-r-black
-//                           border-b-[10px] border-b-transparent">
-//           </div>
-//           <div className="absolute left-[-8px] top-4 w-0 h-0 
-//                           border-t-[10px] border-t-transparent
-//                           border-r-[10px] border-r-white
-//                           border-b-[10px] border-b-transparent">
-//           </div>
-//           <p className="text-black text-md font-mono">
-//             {displayedText}
-//             {isTyping && <span className="animate-pulse">|</span>}
-//           </p>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default ChatBubble;
-
-
-
-
-
-
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Sparkles } from 'lucide-react';
 
@@ -168,7 +72,7 @@ const ChatBubble = ({ messages, typingSpeed = 50 }) => {
   }, [currentMessageIndex, messages, typingSpeed]);
 
   return (
-    <div className="h-24 font-jersey">
+    <div className=" font-jersey">
       <img 
         className={`w-12 top-4  md:top-0 md:w-14 absolute cursor-pointer  ${flipImage ? 'scale-x-[-1]' : ''}`} 
         src={imageSrc} // Dynamic image source
@@ -177,8 +81,8 @@ const ChatBubble = ({ messages, typingSpeed = 50 }) => {
       />
       {showSparkle && (
         <Sparkles 
-          className="relative left-10  text-yellow-400 animate-pulse" 
-          size={25}
+          className="size-15 relative bottom-20 left-10  text-yellow-400 animate-pulse" 
+          
         />
       )}
       {showBubble && (

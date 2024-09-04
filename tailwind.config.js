@@ -7,6 +7,20 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        glow: {
+          '0%, 100%': { boxShadow: '0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.6)' },
+          '50%': { boxShadow: '0 0 20px rgba(255, 0, 0, 1), 0 0 30px rgba(255, 0, 0, 0.8)' },
+        },
+        glowBlue: {
+          '0%, 100%': { boxShadow: '0 0 10px rgba(0, 0, 255, 0.8), 0 0 20px rgba(0, 0, 255, 0.6)' },
+          '50%': { boxShadow: '0 0 20px rgba(0, 0, 255, 1), 0 0 30px rgba(0, 0, 255, 0.8)' },
+        },
+      },
+      animation: {
+        glow: 'glow 2s infinite alternate',
+        glowBlue: 'glowBlue 2s infinite alternate',
+      },
       fontFamily: {
         'jersey': ['"Jersey 10"', 'sans-serif'],
         'pixelify-sans': ['"Pixelify Sans"', 'system-ui'],
@@ -18,8 +32,8 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         'pixel-pattern': `
-          linear-gradient(to right, black 5px, transparent 5px),
-          linear-gradient(to bottom, black 4px, transparent 4px)
+          linear-gradient(to right,  transparent 5px),
+          linear-gradient(to bottom, transparent 4px)
           `,
         
       },
