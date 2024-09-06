@@ -55,6 +55,9 @@ export default function Home() {
       if (containerRef.current && titleRef.current && contactRef.current && footerRef.current) {
         const ctx = gsap.context(() => {
 
+
+          
+
           // Fade-in and slide-in animations
           gsap.fromTo(
             titleRef.current,
@@ -123,12 +126,32 @@ export default function Home() {
           };
         });
 
+
+        
+
+
+
+
+
         // Cleanup GSAP animations
         return () => {
           ctx.revert(); 
         };
       }
     }, 100);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Lazy loading 
     const lazyImages = document.querySelectorAll('img[data-src]');
@@ -160,6 +183,39 @@ export default function Home() {
       observer.disconnect();
     };
   }, [loading]);
+
+
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx2 = gsap.context(() => {
+      
+
+      // New animation for skill bars when theme is red
+      if (choiceTheme === 'red') {
+        const skillBars = document.querySelectorAll('.pixel-bar > div');
+        skillBars.forEach((bar) => {
+          gsap.to(bar, {
+            x: "5px",
+            duration: 1,
+            ease: "sine.inOut",
+            repeat: -1,
+            yoyo: true,
+            yoyoEase: "sine.inOut"
+          });
+        });
+      } else {
+        // Reset animation when theme is not red
+        const skillBars = document.querySelectorAll('.pixel-bar > div');
+        skillBars.forEach((bar) => {
+          gsap.to(bar, { x: 0, duration: 0.3 });
+        });
+      }
+    });
+
+    return () => ctx2.revert();
+  }, [choiceTheme]);
  
 
   return (
@@ -177,12 +233,12 @@ export default function Home() {
         <div className={`h-1/5 md:h-3/5 flex flex-col w-full text-center ${choiceTheme == 'red' ?  'text-red-200' : choiceTheme == 'blue' ? 'text-blue-200' : choiceTheme == 'white' ? 'text-zinc-400' : 'text-gray-200'}`}>
           <div
             ref={titleRef}
-            className={`h-1/4 overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-28 ml-4 mr-4 ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-700 text-zinc-50' : choiceTheme == 'white' || 'dark' ? 'pt-28 bg-zinc-100 text-zinc-800' : 'bg-black'}`}
+            className={`h-1/4 overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-28 ml-4 mr-4 ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-700 text-zinc-50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : ' pt-28 bg-zinc-700'}`}
           >
             
             {choiceTheme === 'white' || choiceTheme === 'dark' ? (
               <>
-                {/* Content for white or dark theme */}
+                
               </>
             ) : choiceTheme === 'red' || 'blue' ? (
               <>
@@ -197,7 +253,7 @@ export default function Home() {
               </>
             ) : (
               <>
-                {/* Content for other themes */}
+                
               </>
             )}
 
@@ -261,11 +317,11 @@ export default function Home() {
                 </svg>
                 </a>
               </div>
-              {/* <button className={`relative px-4 mb-2 py-2  border-2 border-black hover:bg-black hover:text-white transition-colors duration-200 font-pixel text-sm ${choiceTheme == 'red' ?  'bg-red-600' : choiceTheme == 'blue' ? 'bg-blue-600' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-gray-100 text-black hover:border-white'}`}>
+              <button className={`relative px-4 mb-2 py-2  border-2 border-black hover:bg-black hover:text-white transition-colors duration-200 font-pixel text-sm ${choiceTheme == 'red' ?  'bg-red-600' : choiceTheme == 'blue' ? 'bg-blue-600' : choiceTheme == 'white' ? 'bg-zinc-200 border-zinc-500' : 'bg-gray-100 text-black hover:border-white'}`}>
                 <a href="https://drive.google.com/uc?export=download&id=1UvJjKtmezPk-4623rI-QvvhJkL9jR-7K">
-                  CV
+                 Download CV
                 </a>
-              </button> */}
+              </button>
             
             
           </div>
@@ -279,11 +335,11 @@ export default function Home() {
             >
               <div className={`relative h-52 md:h-36 text-right ${choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-stone-800'}  p-4`}>
               
-                <div className={`absolute -bottom-2 -right-2  w-full h-full ${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-blue-200' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-500' : 'bg-gray-100'}`}></div>
+                <div className={`absolute -bottom-2 -right-2  w-full h-full ${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-blue-200' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-500' : 'bg-zinc-600 '}`}></div>
               
                 <div className='relative font-silkscreen-regular flex flex-col justify-between font-semi-bold md:text-3xl  z-10 w-full h-full text-stone-900 overflow-y-scroll text-xl ' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   
-                  <p className={`${choiceTheme == 'white' ? 'text-gray-500' : 'text-stone-800'}`}><span className={`${timeTheme === 'morning' ? 'text-blue-500' : timeTheme === 'afternoon' ? 'text-orange-500' : 'text-zinc-500'} font-light `}>{greeting}</span> everyone! I'M <span className='font-bold text-gray-900'>Sarang </span>— a passionate coder, committed to excellence, and always eager to learn.</p>
+                  <p className={`${choiceTheme == 'white' ? 'text-gray-500' : choiceTheme == 'dark' ? 'text-zinc-100' : 'text-stone-900'}`}><span className={`${timeTheme === 'morning' ? 'text-blue-500' : timeTheme === 'afternoon' ? 'text-orange-500' : 'text-zinc-500'} font-light `}>{greeting}</span> everyone! I'M <span className='font-bold text-gray-900'>Sarang </span>— a passionate coder, committed to excellence, and always eager to learn.</p>
   
                 </div>
               </div>
@@ -292,90 +348,97 @@ export default function Home() {
 <div className={`${choiceTheme == 'white '|| 'dark' ? 'flex flex-col md:flex-row md:justify-around' : ''}`}>
               <div className='text-left mt-3 rounded-xl p-4'>
                 <div className='underline underline-offset-8 text-2xl mb-4 font-pixelify-sans'>Skills</div>
+                
+                
                 <div className='space-y-4 font-silkscreen-regular text-xs'>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold '>JavaScript</span>
                     <div className='relative ml-1 w-64 h-4  pixel-bar bg-stone-800'>
-                      <div className={`absolute pl-1 top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'}`} style={{ width: '96%' }}></div>
+                      <div className={`absolute pl-1 top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 animate-glow' : ''}`} style={{ width: '96%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Reactjs</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute pl-1 top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'}`} style={{ width: '95%' }}></div>
+                      <div className={`absolute pl-1 top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 ' : ''}`} style={{ width: '95%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Nextjs</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'}`} style={{ width: '95%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 animate-glow' : ''}`} style={{ width: '95%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>HTML & CSS</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'}`} style={{ width: '98%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 ' : ''}`} style={{ width: '98%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Python</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'}`} style={{ width: '90%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 animate-glow' : ''}`} style={{ width: '90%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>PSQL</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'}`} style={{ width: '75%' }}></div>
+                      <div className={`absolute top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 ' : ''}`} style={{ width: '75%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Django & DRF</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'}`} style={{ width: '85%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 animate-glow' : ''}`} style={{ width: '85%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>ORM</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'}`} style={{ width: '80%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 ' : ''}`} style={{ width: '80%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Tailwind CSS</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'}`} style={{ width: '90%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 animate-glow' : ''}`} style={{ width: '90%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Redux</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'}`} style={{ width: '70%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 ' : ''}`} style={{ width: '70%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold hover:font-extrabold'>GSAP</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'}`} style={{ width: '55%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 animate-glow' : ''}`} style={{ width: '55%' }}></div>
                     </div>
                   </div>
                   
                 </div>
+
               </div>
 
-{choiceTheme == 'white' || 'dark' ?
-<>
-              <div className='hidden md:flex'>
-                <img src="./graphics1.png" alt="" />
-              </div>
-</>
-:
-<>
 
-</>
-}
+
+              {choiceTheme == 'white' || 'dark' ?
+              <>
+                <div className='hidden lg:flex'>
+                  <img className='opacity-[0.50]' src="./homeImg.png" alt="" />
+                </div>
+              </>
+              :
+              <>
+
+              </>
+              }
               
 </div>
+
+
             </div>
           </div>
         </div>
@@ -390,9 +453,9 @@ export default function Home() {
                    className={`
                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                    `}>
-                  BaBy Land
+                  BaBy Land <span className='text-xs'> <a href="https://github.com/sarangk07/Ecommerce-baby-products" target="_blank">- git</a></span>
                   <a href="https://ecommerce-baby-products.vercel.app/" target="_blank">
-                  <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./Baby-Products.PNG" />
+                  <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./Baby-Products.PNG" />
                   </a>
                   <p className='hidden md:flex text-md hover:text-black'>Developed a small e-commerce website with Reactjs,Bootstrap,Redux</p>
 
@@ -405,8 +468,8 @@ export default function Home() {
                   <div className={`
                  ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                   `}>
-                  Modes Arena
-                  <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="https://i.pinimg.com/236x/d5/6a/8e/d56a8eae13931044d7480ed2d6570142.jpg" />
+                  Modes Arena <span className='text-xs'> <a href="https://github.com/sarangk07/Car-Modz" target="_blank">- git</a></span>
+                  <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./ModeArea.PNG" />
 
                   <p className='hidden md:flex text-md hover:text-black'>Developed a website for car accesseries with Nextjs,tailwindcss,redux,GSAP</p>
 
@@ -419,11 +482,11 @@ export default function Home() {
                   <div className={`
                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                     `}>
-                   RentKaroo
+                   RentKaroo <span className='text-xs'> <a href="https://github.com/sarangk07/Rent_karoo" target="_blank">- git</a></span>
                    <a href="https://rentkaro.shop/" target="_blank">
                    <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./RentKaro.PNG" />
                    </a>
-                  <p className='hidden md:flex text-md hover:text-black'>Developed a Rent a Car website using python Django,Bootstrap,JWT,AWS,Razorpay</p>
+                  <p className='hidden md:flex text-md hover:text-black'>Developed a Rent a Car website using python Django,JWT,AWS,Razorpay</p>
 
                 </div>
                 <div className={`
@@ -435,7 +498,7 @@ export default function Home() {
                     ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                     
                     `}>
-                  Social Media
+                  Virtual Mingle <span className='text-xs'> <a href="https://github.com/sarangk07/Social-Media--Frontend-" target="_blank">- git</a></span>
                   <a href="https://social-media-azure-alpha.vercel.app/" target="_blank">
                   <img  className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./social-meadia.PNG" />
                   </a>
@@ -465,13 +528,14 @@ export default function Home() {
                 Reach out and let’s collaborate on your next big idea."
               </p>
               
-               <ContactButton choiceThemes={choiceTheme} />
+               {/* <ContactButton choiceThemes={choiceTheme} /> */}
+               <a href="mailto:sarang00005@gmail.com">sarang00005@gmail.com</a>
             </div>
           </div>
         </div>
         <div
           ref={footerRef}
-          className="h-2/5 md:h-1/5 rounded-lg ml-2 mr-2 bg-zinc-900 text-center font-pixelify-sans text-2xl"
+          className={`h-2/5 md:h-1/5 rounded-lg ml-2 mr-2  text-center font-pixelify-sans text-2xl ${choiceTheme == 'red' ?  'bg-zinc-950 ' : choiceTheme == 'blue' ? 'bg-zinc-950' : choiceTheme == 'white' ? 'bg-zinc-200 ' : 'bg-zinc-950'}`}
         >
           TNX
         </div>
