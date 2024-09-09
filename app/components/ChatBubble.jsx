@@ -1,7 +1,4 @@
 
-
-
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Sparkles } from 'lucide-react';
 
@@ -11,8 +8,8 @@ const ChatBubble = ({ messages, typingSpeed = 50 }) => {
   const [isTyping, setIsTyping] = useState(true);
   const [showBubble, setShowBubble] = useState(false);
   const [showSparkle, setShowSparkle] = useState(false);
-  const [imageSrc, setImageSrc] = useState('./pixA1.png'); // Initial image
-  const [flipImage, setFlipImage] = useState(false); // State to track flipping
+  const [imageSrc, setImageSrc] = useState('./pixA1.png'); 
+  const [flipImage, setFlipImage] = useState(false);
 
   const startTyping = useCallback(() => {
     setCurrentMessageIndex(0);
@@ -36,13 +33,11 @@ const ChatBubble = ({ messages, typingSpeed = 50 }) => {
           setDisplayedText(message.slice(0, charIndex + 1));
           charIndex++;
 
-          // Switch images every 3 characters to slow down the toggle speed
+          
           if (charIndex % 3 === 0) {
             setImageSrc((prevSrc) => {
-              // Toggle between images
-              const newSrc = prevSrc === './pixA2.png' ? './pixA1.png' : './pixA2.png';
               
-              // If the new image is the second one, flip it
+              const newSrc = prevSrc === './pixA2.png' ? './pixA1.png' : './pixA2.png';
               setFlipImage(newSrc === './pixA1.png');
               
               return newSrc;
@@ -52,8 +47,8 @@ const ChatBubble = ({ messages, typingSpeed = 50 }) => {
         } else {
           clearInterval(typingInterval);
           setIsTyping(false);
-          setImageSrc('./pixA2.png'); // Reset to default image after typing
-          setFlipImage(false); // Reset the flip
+          setImageSrc('./pixA2.png'); 
+          setFlipImage(false); 
           setTimeout(() => {
             if (currentMessageIndex === messages.length - 1) {
               setShowBubble(false);

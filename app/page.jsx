@@ -5,7 +5,8 @@ import { useEffect, useRef, useState,useCallback  } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ChatBubble from './components/ChatBubble';
-import ContactButton from './components/ContactBtn';
+// import ContactButton from './components/ContactBtn';
+import Image from 'next/image';
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -41,14 +42,14 @@ export default function Home() {
 
   useEffect(() => {
     updateTimeBasedContent();
-    const timer = setInterval(updateTimeBasedContent, 60000); // Update every minute
+    const timer = setInterval(updateTimeBasedContent, 60000); 
 
     return () => clearInterval(timer);
   }, [updateTimeBasedContent]);
 
   useEffect(() => {
 
-    //GSAP ANIMATIONS
+    
     gsap.registerPlugin(ScrollTrigger);
 
     const animationDelay = setTimeout(() => {
@@ -58,7 +59,7 @@ export default function Home() {
 
           
 
-          // Fade-in and slide-in animations
+          // Fade-in and slide-in animations-----------------------------------------------
           gsap.fromTo(
             titleRef.current,
             { opacity: 0, x: -50 },
@@ -71,14 +72,14 @@ export default function Home() {
             { opacity: 1, x: 0, duration: 1, ease: 'power2.out', delay: 1 }
           );
 
-          // Footer slide-up animation
+          // Footer slide-up animation-----------------------------------------------
           gsap.fromTo(
             footerRef.current,
             { y: 100, opacity: 0 },
             { y: 0, opacity: 1, duration: 1, ease: 'power2.out', delay: 1.5 }
           );
           
-          // Wave-animation - skill bars
+          // Wave-animation - skill bars-----------------------------------------------
           const pixelBars = document.querySelectorAll('.pixel-bar');
           if (pixelBars.length > 0) {
             gsap.to(pixelBars, {
@@ -93,7 +94,7 @@ export default function Home() {
             });
           }
 
-          // Project-items animation
+          // Project-items animation-----------------------------------------------
           const projectItems = gsap.utils.toArray('.project-item');
           if (projectItems.length > 0) {
             gsap.set(projectItems, { opacity: 0, x: (i) => i % 2 === 0 ? -50 : 50 });
@@ -112,28 +113,20 @@ export default function Home() {
             });
           }
 
-          // Handle window resize events
+          
           const handleResize = () => {
             ScrollTrigger.refresh(true);
           };
 
           window.addEventListener('resize', handleResize);
 
-          // Cleanup function
+          
           return () => {
             window.removeEventListener('resize', handleResize);
             ScrollTrigger.getAll().forEach(st => st.kill());
           };
         });
 
-
-        
-
-
-
-
-
-        // Cleanup GSAP animations
         return () => {
           ctx.revert(); 
         };
@@ -142,18 +135,7 @@ export default function Home() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    // Lazy loading 
+    // Lazy loading -----------------------------------------------
     const lazyImages = document.querySelectorAll('img[data-src]');
     const onIntersection = (entries, observer) => {
       entries.forEach(entry => {
@@ -176,7 +158,7 @@ export default function Home() {
       setLoading(false);
     }, 500);
 
-    // Cleanups
+    
     return () => {
       clearTimeout(animationDelay);
       clearTimeout(loadingTimer);
@@ -192,7 +174,7 @@ export default function Home() {
     const ctx2 = gsap.context(() => {
       
 
-      // New animation for skill bars when theme is red
+      //animation for skill bars when theme is red-----------------------------------------------
       if (choiceTheme === 'red') {
         const skillBars = document.querySelectorAll('.pixel-bar > div');
         skillBars.forEach((bar) => {
@@ -206,7 +188,7 @@ export default function Home() {
           });
         });
       } else {
-        // Reset animation when theme is not red
+        // Reset animation when theme is not red-----------------------------------------------
         const skillBars = document.querySelectorAll('.pixel-bar > div');
         skillBars.forEach((bar) => {
           gsap.to(bar, { x: 0, duration: 0.3 });
@@ -345,7 +327,7 @@ export default function Home() {
               </div>
 
 
-<div className={`${choiceTheme == 'white '|| 'dark' ? 'flex flex-col md:flex-row md:justify-around' : ''}`}>
+            <div className={`${choiceTheme == 'white '|| 'dark' ? 'flex flex-col md:flex-row md:justify-around' : ''}`}>
               <div className='text-left mt-3 rounded-xl p-4'>
                 <div className='underline underline-offset-8 text-2xl mb-4 font-pixelify-sans'>Skills</div>
                 
@@ -424,19 +406,19 @@ export default function Home() {
 
 
 
-              {choiceTheme == 'white' || 'dark' ?
-              <>
-                <div className='hidden lg:flex'>
-                  <img className='opacity-[0.50]' src="./homeImg.png" alt="" />
-                </div>
-              </>
-              :
-              <>
+                {choiceTheme == 'white' || 'dark' ?
+                  <>
+                    <div className='hidden lg:flex'>
+                      <img className='opacity-[0.50]' src="./graphics1.png" alt="" />
+                    </div>
+                  </>
+                :
+                  <>
 
-              </>
-              }
+                  </>
+                }
               
-</div>
+            </div>  
 
 
             </div>
@@ -444,7 +426,7 @@ export default function Home() {
         </div>
         <div className={`h-2/5 text-gray-200 m-2 rounded-lg  font-pixelify-sans text-2xl ${choiceTheme == 'red' ?  'bg-black' : choiceTheme == 'blue' ? 'bg-black' : choiceTheme == 'white' ? 'bg-zinc-200 text-gray-900' : 'bg-stone-900 text-gray-200'}`}>
           <div className="m-4 ">
-            <p className={`${choiceTheme == 'white' ? 'text-zinc-500' : ''}`}>
+            <p className={`${choiceTheme == 'white' ? 'text-zinc-500' : ''} flex items-center justify-center mb-5`}>
              My Projects
             </p>
             <div ref={projectsRef} className='flex  items-center flex-col overflow-hidden md:overflow-x-auto custom-scrollbar text-zinc-900 mb-3 pb-5'>
@@ -453,23 +435,61 @@ export default function Home() {
                    className={`
                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                    `}>
-                  BaBy Land <span className='text-xs'> <a href="https://github.com/sarangk07/Ecommerce-baby-products" target="_blank">- git</a></span>
+                    <div className='flex justify-between'>
+                      <p>
+                      BaBy Land <span className='text-xs'> <a href="https://github.com/sarangk07/Ecommerce-baby-products" target="_blank">- git</a></span>
+                      </p>
+                      <p className='text-xs md:text-sm cursor-default'>Mini-Project</p>
+                    </div>
+                    
+                  
                   <a href="https://ecommerce-baby-products.vercel.app/" target="_blank">
-                  <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./Baby-Products.PNG" />
+                  {/* <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./Baby-Products.PNG" /> */}
+                  
+                  <Image
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                    src="/Baby-Products.PNG"
+                    alt="Baby Land"
+                    width={500}
+                    height={300}
+                    loading='lazy'
+                  />
                   </a>
                   <p className='hidden md:flex text-md hover:text-black'>Developed a small e-commerce website with Reactjs,Bootstrap,Redux</p>
 
                 </div>
+
+
                 <div className={`
                    ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -right-64 `} />              
               </div>
-              <div className={`relative left-3  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
+
+
+
+              <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
                   <div className={`
                  ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                   `}>
-                  Modes Arena <span className='text-xs'> <a href="https://github.com/sarangk07/Car-Modz" target="_blank">- git</a></span>
-                  <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./ModeArea.PNG" />
+                    <div className='flex justify-between'>
+                      <p>
+                        Modes Arena <span className='text-xs'> <a href="https://github.com/sarangk07/Car-Modz" target="_blank">- git</a></span>
+                      </p>
+                      <p className='hidden md:flex text-xs md:text-sm cursor-default'>
+                        Main-Project
+                      </p>
+                    </div>
+                  {/* <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./ModeArea.PNG" /> */}
+
+
+                  <Image
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                    src="/ModeArea.PNG"
+                    alt="ModeArea"
+                    width={500}
+                    height={300}
+                    loading='lazy'
+                  />
 
                   <p className='hidden md:flex text-md hover:text-black'>Developed a website for car accesseries with Nextjs,tailwindcss,redux,GSAP</p>
 
@@ -478,13 +498,34 @@ export default function Home() {
                    ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -left-64 `} />
               </div>
+
+
+
               <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
                   <div className={`
                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                     `}>
-                   RentKaroo <span className='text-xs'> <a href="https://github.com/sarangk07/Rent_karoo" target="_blank">- git</a></span>
+
+                    <div className='flex justify-between'>
+                      <p>
+                        RentKaroo <span className='text-xs'> <a href="https://github.com/sarangk07/Rent_karoo" target="_blank">- git</a></span>
+                      </p>
+                      <p className=' text-xs md:text-sm cursor-default'>
+                        Mini-Project
+                      </p>
+                    </div>
                    <a href="https://rentkaro.shop/" target="_blank">
-                   <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./RentKaro.PNG" />
+                   {/* <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./RentKaro.PNG" /> */}
+                   
+                   <Image
+                      className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                      src="/RentKaro.PNG"
+                      alt="RentKaro"
+                      width={500}
+                      height={300}
+                      loading='lazy'
+                    />
+                   
                    </a>
                   <p className='hidden md:flex text-md hover:text-black'>Developed a Rent a Car website using python Django,JWT,AWS,Razorpay</p>
 
@@ -493,14 +534,35 @@ export default function Home() {
                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -right-64 `} />
               </div>
-              <div className={`relative left-3  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
+
+
+
+              <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
                   <div className={`
                     ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                     
                     `}>
-                  Virtual Mingle <span className='text-xs'> <a href="https://github.com/sarangk07/Social-Media--Frontend-" target="_blank">- git</a></span>
+
+                      <div className='flex justify-between'>
+                      <p>
+                        Virtual Mingle <span className='text-xs'> <a href="https://github.com/sarangk07/Social-Media--Frontend-" target="_blank">- git</a></span>
+                      </p>
+                      <p className='hidden md:flex text-xs md:text-sm cursor-default'>
+                        Main-Project
+                      </p>
+                    </div>
                   <a href="https://social-media-azure-alpha.vercel.app/" target="_blank">
-                  <img  className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./social-meadia.PNG" />
+                  {/* <img  className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./social-meadia.PNG" /> */}
+                  
+                  <Image
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                    src="/social-meadia.PNG"
+                    alt="social-meadia"
+                    width={500}
+                    height={300}
+                    loading='lazy'
+                  />
+                  
                   </a>
                   <p className='hidden md:flex text-md hover:text-black'>Developed a social meadia website using NEXTJS , Tailwindcss, GSAP</p>
                 </div>
