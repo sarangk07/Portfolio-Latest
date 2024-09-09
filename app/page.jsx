@@ -455,7 +455,7 @@ export default function Home() {
                     loading='lazy'
                   />
                   </a>
-                  <p className='hidden md:flex text-md hover:text-black'>Developed a small e-commerce website with Reactjs,Bootstrap,Redux</p>
+                  <p className='hidden md:flex text-md hover:text-black'>Developed a small e-commerce website with Reactjs,Bootstrap</p>
 
                 </div>
 
@@ -491,7 +491,7 @@ export default function Home() {
                     loading='lazy'
                   />
 
-                  <p className='hidden md:flex text-md hover:text-black'>Developed a website for car accesseries with Nextjs,tailwindcss,redux,GSAP</p>
+                  <p className='hidden md:flex text-md hover:text-black'>Developed a website for car accesseries with Nextjs,Tailwindcss,Redux,GSAP</p>
 
                 </div>
                 <div className={`
@@ -510,9 +510,9 @@ export default function Home() {
                       <p>
                         RentKaroo <span className='text-xs'> <a href="https://github.com/sarangk07/Rent_karoo" target="_blank">- git</a></span>
                       </p>
-                      <p className=' text-xs md:text-sm cursor-default'>
-                        Mini-Project
-                      </p>
+                      {/* <p className=' text-xs md:text-sm cursor-default'>
+                        Main-Project
+                      </p> */}
                     </div>
                    <a href="https://rentkaro.shop/" target="_blank">
                    {/* <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./RentKaro.PNG" /> */}
@@ -527,7 +527,7 @@ export default function Home() {
                     />
                    
                    </a>
-                  <p className='hidden md:flex text-md hover:text-black'>Developed a Rent a Car website using python Django,JWT,AWS,Razorpay</p>
+                  <p className='hidden md:flex text-md hover:text-black'>Developed a Rent a Car website using python Django,JWT,SMTP,AWS,Razorpay</p>
 
                 </div>
                 <div className={`
@@ -564,7 +564,7 @@ export default function Home() {
                   />
                   
                   </a>
-                  <p className='hidden md:flex text-md hover:text-black'>Developed a social meadia website using NEXTJS , Tailwindcss, GSAP</p>
+                  <p className='hidden md:flex text-md hover:text-black'>Developed a social meadia website using NEXTJS ,API ,Tailwindcss ,GSAP</p>
                 </div>
                 <div className={`
                    ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
