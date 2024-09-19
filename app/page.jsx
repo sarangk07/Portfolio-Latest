@@ -484,7 +484,7 @@ export default function Home() {
 
                   <Image
                     className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
-                    src="/ModeArea.PNG"
+                    src="/Mode-Arena-latest.PNG"
                     alt="ModeArea"
                     width={500}
                     height={300}
