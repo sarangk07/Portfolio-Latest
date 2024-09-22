@@ -7,6 +7,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ChatBubble from './components/ChatBubble';
 // import ContactButton from './components/ContactBtn';
 import Image from 'next/image';
+import AutoScrollImages from './components/AutoScrollImg';
+
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -199,6 +201,30 @@ export default function Home() {
     return () => ctx2.revert();
   }, [choiceTheme]);
  
+
+  let famiImg = [
+    './logos/react.png',
+    './logos/html.png',
+    './logos/css.png',
+    './logos/js.png',
+    './logos/GSAP.png',
+    './logos/python.png',
+    './logos/psql.png',
+    './logos/django.png',
+    './logos/redux.png',
+    // './logos/postman.png',
+    // './logos/sqlite.png',
+    
+  ]
+
+
+
+
+
+
+
+
+
 
   return (
     <>
@@ -400,6 +426,16 @@ export default function Home() {
                     </div>
                   </div>
                   
+
+
+
+                  <div className='flex lg:hidden'>
+                    <AutoScrollImages images={famiImg} />
+                  </div>
+
+
+
+
                 </div>
 
               </div>
