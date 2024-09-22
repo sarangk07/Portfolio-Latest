@@ -202,20 +202,20 @@ export default function Home() {
   }, [choiceTheme]);
  
 
-  let famiImg = [
-    './logos/react.png',
-    './logos/html.png',
-    './logos/css.png',
-    './logos/js.png',
-    './logos/GSAP.png',
-    './logos/python.png',
-    './logos/psql.png',
-    './logos/django.png',
-    './logos/redux.png',
-    // './logos/postman.png',
-    // './logos/sqlite.png',
+  // let famiImg = [
+  //   './logos/react.png',
+  //   './logos/html.png',
+  //   './logos/css.png',
+  //   './logos/js.png',
+  //   './logos/GSAP.png',
+  //   './logos/python.png',
+  //   './logos/psql.png',
+  //   './logos/django.png',
+  //   './logos/redux.png',
+  //   // './logos/postman.png',
+  //   // './logos/sqlite.png',
     
-  ]
+  // ]
 
 
 
@@ -429,9 +429,9 @@ export default function Home() {
 
 
 
-                  <div className='flex lg:hidden'>
+                  {/* <div className='flex lg:hidden'>
                     <AutoScrollImages images={famiImg} />
-                  </div>
+                  </div> */}
 
 
 
