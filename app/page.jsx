@@ -156,14 +156,14 @@ export default function Home() {
     });
 
     // Loading Status
-    const loadingTimer = setTimeout(() => {
-      setLoading(false);
-    }, 500);
+    // const loadingTimer = setTimeout(() => {
+    //   setLoading(false);
+    // }, 500);
 
     
     return () => {
       clearTimeout(animationDelay);
-      clearTimeout(loadingTimer);
+      // clearTimeout(loadingTimer);
       observer.disconnect();
     };
   }, [loading]);
@@ -228,11 +228,7 @@ export default function Home() {
 
   return (
     <>
-    {loading ? (
-        <div className='flex overflow-hidden align-middle justify-center w-screen h-full items-center'>
-          <img className='flex justify-center items-center w-52 h-52' src="./loadingpixel.gif" alt="Loading" />
-        </div>
-      ) : (
+    
       <div
         ref={containerRef}
         className={`relative cursor-default  backdrop-brightness-105 bg-blend-hard-light h-fit  font-medium  top-left-animation  ${choiceTheme == 'white' ? 'bg-zinc-100' :'bg-zinc-950'}`}
@@ -241,7 +237,7 @@ export default function Home() {
         <div className={`h-1/5 md:h-3/5 flex flex-col w-full text-center ${choiceTheme == 'red' ?  'text-red-200' : choiceTheme == 'blue' ? 'text-blue-200' : choiceTheme == 'white' ? 'text-zinc-400' : 'text-gray-200'}`}>
           <div
             ref={titleRef}
-            className={`h-1/4 overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-28 ml-4 mr-4 ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-700 text-zinc-50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : ' pt-28 bg-zinc-700'}`}
+            className={`h-1/4 overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-28 ml-4 mr-4 ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-700 text-zinc-50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : ' pt-28 bg-zinc-900'}`}
           >
             
             {choiceTheme === 'white' || choiceTheme === 'dark' ? (
@@ -326,9 +322,14 @@ export default function Home() {
                 </a>
               </div>
               <button className={`relative px-4 mb-2 py-2  border-2 border-black hover:bg-black hover:text-white transition-colors duration-200 font-pixel text-sm ${choiceTheme == 'red' ?  'bg-red-600' : choiceTheme == 'blue' ? 'bg-blue-600' : choiceTheme == 'white' ? 'bg-zinc-200 border-zinc-500' : 'bg-gray-100 text-black hover:border-white'}`}>
-                <a href="https://drive.google.com/uc?export=download&id=1UvJjKtmezPk-4623rI-QvvhJkL9jR-7K">
-                 Download CV
-                </a>
+              <a
+                className="font-mono font-bold"
+                href="https://drive.google.com/file/d/1UvJjKtmezPk-4623rI-QvvhJkL9jR-7K/view"
+                target="_blank"  
+                rel="noopener noreferrer" 
+              >
+                View CV
+              </a>
               </button>
             
             
@@ -343,11 +344,11 @@ export default function Home() {
             >
               <div className={`relative h-52 md:h-36 text-right ${choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-stone-800'}  p-4`}>
               
-                <div className={`absolute -bottom-2 -right-2  w-full h-full ${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-blue-200' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-500' : 'bg-zinc-600 '}`}></div>
+                <div className={`absolute -bottom-2 -right-2  w-full h-full ${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-blue-200' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-500' : 'bg-zinc-900 '}`}></div>
               
                 <div className='relative font-silkscreen-regular flex flex-col justify-between font-semi-bold md:text-3xl  z-10 w-full h-full text-stone-900 overflow-y-scroll text-xl ' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   
-                  <p className={`${choiceTheme == 'white' ? 'text-gray-500' : choiceTheme == 'dark' ? 'text-zinc-100' : 'text-stone-900'}`}><span className={`${timeTheme === 'morning' ? 'text-blue-500' : timeTheme === 'afternoon' ? 'text-orange-500' : 'text-zinc-500'} font-light `}>{greeting}</span> everyone! I'M <span className='font-bold text-gray-900'>Sarang </span>— a passionate coder, committed to excellence, and always eager to learn.</p>
+                  <p className={`${choiceTheme == 'white' ? 'text-gray-500' : choiceTheme == 'dark' ? 'text-zinc-100' : 'text-stone-900'}`}><span className={`${timeTheme === 'morning' ? 'text-blue-500' : timeTheme === 'afternoon' ? 'text-orange-500' : 'text-zinc-500'} font-light `}>{greeting}</span> everyone! I'M <span className='font-bold text-gray-500'>Sarang </span>— a passionate coder, committed to excellence, and always eager to learn.</p>
   
                 </div>
               </div>
@@ -677,7 +678,7 @@ export default function Home() {
           TNX
         </div>
       </div>
-      )}
+      
     </>
   );
 }
