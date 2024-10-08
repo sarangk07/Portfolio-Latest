@@ -4,10 +4,10 @@
 import { useEffect, useRef, useState,useCallback  } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import ChatBubble from './components/ChatBubble';
+// import ChatBubble from './components/ChatBubble';
 // import ContactButton from './components/ContactBtn';
 import Image from 'next/image';
-import AutoScrollImages from './components/AutoScrollImg';
+// import AutoScrollImages from './components/AutoScrollImg';
 
 
 export default function Home() {
@@ -178,17 +178,17 @@ export default function Home() {
 
       //animation for skill bars when theme is red-----------------------------------------------
       if (choiceTheme === 'red') {
-        const skillBars = document.querySelectorAll('.pixel-bar > div');
-        skillBars.forEach((bar) => {
-          gsap.to(bar, {
-            x: "5px",
-            duration: 1,
-            ease: "sine.inOut",
-            repeat: -1,
-            yoyo: true,
-            yoyoEase: "sine.inOut"
-          });
-        });
+        // const skillBars = document.querySelectorAll('.pixel-bar > div');
+        // skillBars.forEach((bar) => {
+        //   gsap.to(bar, {
+        //     x: "5px",
+        //     duration: 1,
+        //     ease: "sine.inOut",
+        //     repeat: -1,
+        //     yoyo: true,
+        //     yoyoEase: "sine.inOut"
+        //   });
+        // });
       } else {
         // Reset animation when theme is not red-----------------------------------------------
         const skillBars = document.querySelectorAll('.pixel-bar > div');
@@ -231,16 +231,16 @@ export default function Home() {
     
       <div
         ref={containerRef}
-        className={`relative cursor-default  backdrop-brightness-105 bg-blend-hard-light h-fit  font-medium  top-left-animation  ${choiceTheme == 'white' ? 'bg-zinc-100' :'bg-zinc-950'}`}
+        className={`relative cursor-default  backdrop-brightness-105 bg-blend-hard-light h-fit  font-medium  top-left-animation  ${choiceTheme == 'white' ? 'bg-zinc-100' :'bg-black'}`}
       >
 
         <div className={`h-1/5 md:h-3/5 flex flex-col w-full text-center ${choiceTheme == 'red' ?  'text-red-200' : choiceTheme == 'blue' ? 'text-blue-200' : choiceTheme == 'white' ? 'text-zinc-400' : 'text-gray-200'}`}>
           <div
             ref={titleRef}
-            className={`h-1/4 overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-28 ml-4 mr-4 ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-700 text-zinc-50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : ' pt-28 bg-zinc-900'}`}
+            className={`h-1/4 overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-9 ml-4 mr-4 ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-700 text-zinc-50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : '  bg-black hover:bg-zinc-950 border border-t-0'}`}
           >
             
-            {choiceTheme === 'white' || choiceTheme === 'dark' ? (
+            {/* {choiceTheme === 'white' || choiceTheme === 'dark' ? (
               <>
                 
               </>
@@ -259,18 +259,18 @@ export default function Home() {
               <>
                 
               </>
-            )}
+            )} */}
 
                 
 
-            <div className='flex z-50 absolute left-1 top-28'>
-              <p onClick={()=> setChoiceTheme('blue')} className='w-4 h-4 bg-blue-500 mr-2 border border-cyan-400'/>
-              <p onClick={()=> setChoiceTheme('red')} className='w-4 h-4 bg-red-500 mr-2 border border-cyan-400'/>
-              <p onClick={()=> setChoiceTheme('white')} className='w-4 h-4 bg-white mr-2 border border-cyan-400'/>
-              <p onClick={()=> setChoiceTheme('dark')} className='w-4 h-4 bg-zinc-900 mr-2 border border-cyan-400'/>
+            <div className='flex z-50 absolute left-1 top-2'>
+              <p onClick={()=> setChoiceTheme('blue')} className='w-3 h-3 bg-blue-500 mr-2 border border-cyan-400'/>
+              <p onClick={()=> setChoiceTheme('red')} className='w-3 h-3 bg-red-500 mr-2 border border-cyan-400'/>
+              <p onClick={()=> setChoiceTheme('white')} className='w-3 h-3 bg-white mr-2 border border-cyan-400'/>
+              <p onClick={()=> setChoiceTheme('dark')} className='w-3 h-3 bg-zinc-900 mr-2 border border-cyan-400'/>
             </div>
 
-              {
+              {/* {
                 choiceTheme == 'white' ?
                 <> 
                 </> :
@@ -278,7 +278,7 @@ export default function Home() {
                   <img className={` w-full border-y-4  ${choiceTheme == 'red' ?  'border-red-800 ' : choiceTheme == 'blue' ? 'border-blue-200' : choiceTheme == 'white' ? 'border-black blur-sm' : 'border-gray-100'} absolute -rotate-45 top-10 left-40 md:top-3 md:left-80 overflow-hidden -z-10 `} src="./pgG2.jpg" alt="" />
                 
                 </>
-              }
+              } */}
             <div className=' flex md:mt-5 mt-0 ml-4 justify-center relative bottom-6'>
                 
                 <svg
@@ -321,14 +321,14 @@ export default function Home() {
                 </svg>
                 </a>
               </div>
-              <button className={`relative px-4 mb-2 py-2  border-2 border-black hover:bg-black hover:text-white transition-colors duration-200 font-pixel text-sm ${choiceTheme == 'red' ?  'bg-red-600' : choiceTheme == 'blue' ? 'bg-blue-600' : choiceTheme == 'white' ? 'bg-zinc-200 border-zinc-500' : 'bg-gray-100 text-black hover:border-white'}`}>
+              <button className={`relative  px-2 mb-2 py-2  border-2 border-black hover:bg-black hover:text-white transition-colors duration-200 font-pixel text-sm ${choiceTheme == 'red' ?  'bg-red-600' : choiceTheme == 'blue' ? 'bg-blue-600' : choiceTheme == 'white' ? 'bg-zinc-200 border-zinc-500' : 'bg-gray-100 text-black hover:border-white'}`}>
               <a
-                className="font-mono font-bold"
+                className="font-mono"
                 href="https://drive.google.com/file/d/1UvJjKtmezPk-4623rI-QvvhJkL9jR-7K/view"
                 target="_blank"  
                 rel="noopener noreferrer" 
               >
-                View CV
+                VIEW CV
               </a>
               </button>
             
@@ -342,13 +342,13 @@ export default function Home() {
               ref={contactRef}
               className={` m-3${choiceTheme == 'white' ? 'h-4/4 md:w-3/3' : 'h-4/4 md:w-3/3 '}`}
             >
-              <div className={`relative h-52 md:h-36 text-right ${choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-stone-800'}  p-4`}>
+              <div className={`relative h-52 md:h-72  text-right ${choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-200'}  p-4`}>
               
-                <div className={`absolute -bottom-2 -right-2  w-full h-full ${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-blue-200' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-500' : 'bg-zinc-900 '}`}></div>
+                <div className={`absolute -bottom-2 -right-2  w-full h-full ${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-blue-300' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-500' : 'bg-black  border-2 '}`}></div>
               
-                <div className='relative font-silkscreen-regular flex flex-col justify-between font-semi-bold md:text-3xl  z-10 w-full h-full text-stone-900 overflow-y-scroll text-xl ' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                <div className='relative font-silkscreen-regular flex flex-col justify-between font-semi-bold md:text-3xl  z-10 w-full h-full text-stone-900 overflow-y-scroll text-md ' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   
-                  <p className={`${choiceTheme == 'white' ? 'text-gray-500' : choiceTheme == 'dark' ? 'text-zinc-100' : 'text-stone-900'}`}><span className={`${timeTheme === 'morning' ? 'text-blue-500' : timeTheme === 'afternoon' ? 'text-orange-500' : 'text-zinc-500'} font-light `}>{greeting}</span> everyone! I'M <span className='font-bold text-gray-500'>Sarang </span>— a passionate coder, committed to excellence, and always eager to learn.</p>
+                  <p className={`leading-relaxed md:leading-relaxed ${choiceTheme == 'white' ? 'text-gray-500' : choiceTheme == 'dark' ? 'text-zinc-300' : 'text-stone-900'}`}><span className={`${timeTheme === 'morning' ? 'text-blue-500' : timeTheme === 'afternoon' ? 'text-orange-500' : 'text-zinc-500'} font-light `}>{greeting}</span> everyone! I'M <span className='font-bold '>Sarang </span>— a dedicated developer, driven by a passion for coding, committed to achieving excellence, and constantly seeking opportunities to grow and learn.</p>
   
                 </div>
               </div>
@@ -363,67 +363,67 @@ export default function Home() {
                   <div className='flex items-center justify-between'>
                     <span className='font-bold '>JavaScript</span>
                     <div className='relative ml-1 w-64 h-4  pixel-bar bg-stone-800'>
-                      <div className={`absolute pl-1 top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 animate-glow' : ''}`} style={{ width: '96%' }}></div>
+                      <div className={`absolute pl-1 top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '96%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Reactjs</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute pl-1 top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 ' : ''}`} style={{ width: '95%' }}></div>
+                      <div className={`absolute pl-1 top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '95%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Nextjs</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 animate-glow' : ''}`} style={{ width: '95%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '95%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>HTML & CSS</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 ' : ''}`} style={{ width: '98%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '98%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Python</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 animate-glow' : ''}`} style={{ width: '90%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '90%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>PSQL</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 ' : ''}`} style={{ width: '75%' }}></div>
+                      <div className={`absolute top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '75%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Django & DRF</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 animate-glow' : ''}`} style={{ width: '85%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '85%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>ORM</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 ' : ''}`} style={{ width: '80%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '80%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Tailwind CSS</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 animate-glow' : ''}`} style={{ width: '90%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '90%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Redux</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 ' : ''}`} style={{ width: '70%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '70%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold hover:font-extrabold'>GSAP</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? 'animate-wave bg-red-600 animate-glow' : ''}`} style={{ width: '55%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-orange-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '55%' }}></div>
                     </div>
                   </div>
                   
@@ -461,7 +461,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className={`h-2/5 text-gray-200 m-2 rounded-lg  font-pixelify-sans text-2xl ${choiceTheme == 'red' ?  'bg-black' : choiceTheme == 'blue' ? 'bg-black' : choiceTheme == 'white' ? 'bg-zinc-200 text-gray-900' : 'bg-stone-900 text-gray-200'}`}>
+        <div className={`h-2/5 text-gray-200 m-2 rounded-lg  font-pixelify-sans text-2xl ${choiceTheme == 'red' ?  'bg-black' : choiceTheme == 'blue' ? 'bg-black' : choiceTheme == 'white' ? 'bg-zinc-200 text-gray-900' : 'bg-black text-gray-200 border-t-4'}`}>
           <div className="m-4 ">
             <p className={`${choiceTheme == 'white' ? 'text-zinc-500' : ''} flex items-center justify-center mb-5`}>
              My Projects
