@@ -223,7 +223,7 @@ export default function Home() {
 
               
             
-              <button className={`relative rounded-2xl px-2 mb-2 py-2  border-2 border-white hover:bg-white hover:text-black transition-colors duration-200  text-sm ${choiceTheme == 'red' ?  'bg-red-600 border-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-600' : choiceTheme == 'white' ? 'bg-zinc-200 border-zinc-500' : 'bg-black text-white hover:border-white'}`}>
+              <button className={`relative rounded-2xl px-2 mb-2 py-2  border-2 border-white hover:bg-white hover:text-black transition-colors duration-200  text-sm ${choiceTheme == 'red' ?  'bg-red-600 border-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-600' : choiceTheme == 'white' ? 'bg-zinc-100 border-zinc-500' : 'bg-black text-white hover:border-white'}`}>
               <a
                 className="font-mono "
                 href="https://drive.google.com/file/d/1UvJjKtmezPk-4623rI-QvvhJkL9jR-7K/view"
@@ -235,9 +235,9 @@ export default function Home() {
               </button>
 
               <div className='flex flex-col justify-center items-center h-screen '>
-                <p className='text-[4rem] md:text-[6rem]'>Hello, I'M</p>
+                <p className='text-[3rem] md:text-[6rem]'>Hello, I'M</p>
                 
-                <p className='text-[7rem] md:text-[10rem]'>SARANG</p>
+                <p className='text-[4rem] md:text-[10rem]'>SARANG</p>
               </div>
             
             
