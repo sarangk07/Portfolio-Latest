@@ -211,11 +211,11 @@ export default function Home() {
             className={`h-[45rem] md:h-[40rem] overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-9 ml-4 mr-4 flex flex-col justify-center items-center ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-700 text-zinc-50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : '  bg-black '}`}
           >
 
-            <div className='flex z-50 absolute left-1 top-2'>
-              <p onClick={()=> setChoiceTheme('blue')} className='w-3 h-3 bg-blue-500 mr-2 border border-cyan-400 rounded-sm'/>
-              <p onClick={()=> setChoiceTheme('red')} className='w-3 h-3 bg-red-500 mr-2 border border-cyan-400 rounded-sm'/>
-              <p onClick={()=> setChoiceTheme('white')} className='w-3 h-3 bg-white mr-2 border border-cyan-400 rounded-sm'/>
-              <p onClick={()=> setChoiceTheme('dark')} className='w-3 h-3 bg-zinc-900 mr-2 border border-cyan-400 rounded-sm'/>
+            <div className='flex z-50 absolute left-1 top-4'>
+              <p onClick={()=> setChoiceTheme('blue')} className='w-4 h-4 bg-blue-500 mr-3 border border-white rounded-sm'/>
+              <p onClick={()=> setChoiceTheme('red')} className='w-4 h-4 bg-red-500 mr-3 border border-white rounded-sm'/>
+              <p onClick={()=> setChoiceTheme('white')} className='w-4 h-4 bg-white mr-3 border border-white rounded-sm'/>
+              <p onClick={()=> setChoiceTheme('dark')} className='w-4 h-4 bg-zinc-900 mr-3 border border-white rounded-sm'/>
             </div>
             {/* <div  className='flex z-30 absolute left-0 top-2 '>
               <Image src="/logo2.png" layout="fixed" alt="logo" width={100} height={100} loading='lazy' className='w-28  md:w-56 '/>
