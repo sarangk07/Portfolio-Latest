@@ -190,7 +190,10 @@ export default function Home() {
     return () => ctx2.revert();
   }, [choiceTheme]);
  
-
+  //system dark mode , avoiding-------------------------
+  useEffect(() => {
+    document.documentElement.style.colorScheme = 'none';
+  }, []);
 
 
 
@@ -208,7 +211,7 @@ export default function Home() {
         <div className={`h-1/5 md:h-3/5 flex flex-col w-full text-center ${choiceTheme == 'red' ?  'text-red-200' : choiceTheme == 'blue' ? 'text-blue-200' : choiceTheme == 'white' ? 'text-zinc-400' : 'text-gray-200'}`}>
           <div
             ref={titleRef}
-            className={`h-[45rem] md:h-[40rem] overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-9 ml-4 mr-4 flex flex-col justify-center items-center ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-700 text-zinc-50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : '  bg-black '}`}
+            className={`h-[45rem] md:h-[42rem] overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-9 ml-4 mr-4 flex flex-col justify-center items-center ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-700 text-zinc-50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : 'bg-gradient-to-r from-black via-gray-900 to-black shadow-lg shadow-black/50'}`}
           >
 
             <div className='flex z-50 absolute left-1 top-4'>
@@ -223,7 +226,7 @@ export default function Home() {
 
               
             
-              <button className={`relative rounded-2xl px-2 mb-2 py-2  border-2 border-white hover:bg-white hover:text-black transition-colors duration-200  text-sm ${choiceTheme == 'red' ?  'bg-red-600 border-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-600' : choiceTheme == 'white' ? 'bg-zinc-100 border-zinc-500' : 'bg-black text-white hover:border-white'}`}>
+              <button className={`relative rounded-md px-2 mb-2 py-2  border-2 border-white hover:bg-white hover:text-black transition-colors duration-200  text-sm ${choiceTheme == 'red' ?  'bg-red-600 border-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-600' : choiceTheme == 'white' ? 'bg-zinc-100 border-zinc-500' : 'bg-black text-white hover:border-white'}`}>
               <a
                 className="font-mono "
                 href="https://drive.google.com/file/d/1UvJjKtmezPk-4623rI-QvvhJkL9jR-7K/view"
@@ -250,16 +253,19 @@ export default function Home() {
               ref={contactRef}
               className={` m-3${choiceTheme == 'white' ? 'h-4/4 md:w-3/3' : 'h-4/4 md:w-3/3 '}`}
             >
-              <div className={`relative h-52 md:h-72  text-right ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'}  p-4`}>
+              <div className={`relative h-52 md:h-72  text-right ${timeTheme === 'morning' ? 'bg-cyan-600 ' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'}  p-4`}>
               
-                <div className={`absolute -bottom-2 -right-2  w-full h-full ${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-blue-300' : choiceTheme == 'white' ? 'bg-zinc-100 text-zinc-500' : 'bg-black  border-2 '}`}></div>
+                <div className={`absolute -bottom-2 -right-2  w-full h-full ${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-blue-300' : choiceTheme == 'white' ? 'bg-zinc-100 text-zinc-500 border-2 border-zinc-300' : 'bg-black  border-2 rounded-md '}`}></div>
               
                 <div className={` ${choiceTheme == 'white' ? 'font-silkscreen-regular ' : 'font-sans text-lg '} relative  flex flex-col justify-between font-semi-bold md:text-3xl  z-10 w-full h-full text-stone-900 overflow-y-scroll text-md `} style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   
-                  <p className={`leading-relaxed md:leading-relaxed ${choiceTheme == 'white' ? 'text-gray-500' : choiceTheme == 'dark' ? 'text-zinc-200' : 'text-stone-900'}`}><span className={`${timeTheme === 'morning' ? 'text-blue-500' : timeTheme === 'afternoon' ? 'text-emerald-500' : 'text-zinc-500'} font-bold `}>{greeting}</span> everyone! I'M <span className='font-bold '>Sarang </span>— a dedicated developer, driven by a passion for coding, committed to achieving excellence, and constantly seeking opportunities to grow and learn.</p>
+                  <p className={`leading-relaxed md:leading-relaxed ${choiceTheme == 'white' ? 'text-gray-500' : choiceTheme == 'dark' ? 'text-zinc-200' : 'text-stone-900'}`}><span className={`${timeTheme === 'morning' ? 'text-cyan-500' : timeTheme === 'afternoon' ? 'text-emerald-500' : 'text-zinc-500'} font-bold `}>{greeting}</span> everyone! I'M <span className='font-bold '>Sarang </span>— a dedicated developer, driven by a passion for coding, committed to achieving excellence, and constantly seeking opportunities to grow and learn.</p>
   
                 </div>
               </div>
+
+
+
 
 
             <div className={`${choiceTheme == 'white '|| 'dark' ? 'flex flex-col md:flex-row md:justify-around' : ''}`}>
@@ -271,67 +277,67 @@ export default function Home() {
                   <div className='flex items-center justify-between'>
                     <span className='font-bold '>JavaScript</span>
                     <div className='relative ml-1 w-64 h-4  pixel-bar bg-stone-800'>
-                      <div className={`absolute pl-1 top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '85%' }}></div>
+                      <div className={`absolute pl-1 top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '85%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Reactjs</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute pl-1 top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '88%' }}></div>
+                      <div className={`absolute pl-1 top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '88%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Nextjs</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '80%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '80%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>HTML & CSS</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '95%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '95%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Python</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '80%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '80%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>PSQL</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '70%' }}></div>
+                      <div className={`absolute top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '70%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Django & DRF</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '70%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '70%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>ORM</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '60%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '60%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Tailwind CSS</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '95%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '95%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold'>Redux</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '70%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '70%' }}></div>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold hover:font-extrabold'>GSAP</span>
                     <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-blue-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '50%' }}></div>
+                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '50%' }}></div>
                     </div>
                   </div>
 
