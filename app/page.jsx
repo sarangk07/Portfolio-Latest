@@ -211,7 +211,7 @@ export default function Home() {
         <div className={`h-1/5 md:h-3/5 flex flex-col w-full text-center ${choiceTheme == 'red' ?  'text-red-200' : choiceTheme == 'blue' ? 'text-blue-200' : choiceTheme == 'white' ? 'text-zinc-400' : 'text-gray-200'}`}>
           <div
             ref={titleRef}
-            className={`h-[45rem] md:h-[42rem] overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-9 ml-4 mr-4 flex flex-col justify-center items-center ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-700 text-zinc-50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : 'bg-gradient-to-r from-black via-gray-900 to-black shadow-lg shadow-black/50'}`}
+            className={`h-[45rem] md:h-[42rem] overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-9 ml-4 mr-4 flex flex-col justify-center items-center ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? ' text-zinc-50 bg-gradient-to-r from-black via-blue-600 to-black shadow-md shadow-black/50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : 'bg-gradient-to-r from-black via-gray-700 to-black shadow-lg shadow-black/50'}`}
           >
 
             <div className='flex z-50 absolute left-1 top-4'>
@@ -255,11 +255,11 @@ export default function Home() {
             >
               <div className={`relative h-52 md:h-72  text-right ${timeTheme === 'morning' ? 'bg-cyan-600 ' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'}  p-4`}>
               
-                <div className={`absolute -bottom-2 -right-2  w-full h-full ${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-blue-300' : choiceTheme == 'white' ? 'bg-zinc-100 text-zinc-500 border-2 border-zinc-300' : 'bg-black  border-2 rounded-md '}`}></div>
+                <div className={`absolute -bottom-2 -right-2  w-full h-full ${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-black' : choiceTheme == 'white' ? 'bg-zinc-100 text-zinc-500 border-2 border-zinc-300' : 'bg-black  border-2 rounded-md '}`}></div>
               
                 <div className={` ${choiceTheme == 'white' ? 'font-silkscreen-regular ' : 'font-sans text-lg '} relative  flex flex-col justify-between font-semi-bold md:text-3xl  z-10 w-full h-full text-stone-900 overflow-y-scroll text-md `} style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   
-                  <p className={`leading-relaxed md:leading-relaxed ${choiceTheme == 'white' ? 'text-gray-500' : choiceTheme == 'dark' ? 'text-zinc-200' : 'text-stone-900'}`}><span className={`${timeTheme === 'morning' ? 'text-cyan-500' : timeTheme === 'afternoon' ? 'text-emerald-500' : 'text-zinc-500'} font-bold `}>{greeting}</span> everyone! I'M <span className='font-bold '>Sarang </span>— a dedicated developer, driven by a passion for coding, committed to achieving excellence, and constantly seeking opportunities to grow and learn.</p>
+                  <p className={`leading-relaxed md:leading-relaxed ${choiceTheme == 'white' ? 'text-gray-500' : choiceTheme == 'blue' ? 'text-white ' : choiceTheme == 'dark' ? 'text-zinc-200' : 'text-stone-900'}`}><span className={`${timeTheme === 'morning' ? 'text-cyan-500' : timeTheme === 'afternoon' ? 'text-emerald-500' : 'text-zinc-500'} font-bold `}>{greeting}</span> everyone! I'M <span className='font-bold '>Sarang </span>— a dedicated developer, driven by a passion for coding, committed to achieving excellence, and constantly seeking opportunities to grow and learn.</p>
   
                 </div>
               </div>
