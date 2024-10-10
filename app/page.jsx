@@ -220,9 +220,9 @@ export default function Home() {
               <p onClick={()=> setChoiceTheme('white')} className='w-4 h-4 bg-white mr-3 border border-white rounded-sm'/>
               <p onClick={()=> setChoiceTheme('dark')} className='w-4 h-4 bg-zinc-900 mr-3 border border-white rounded-sm'/>
             </div>
-            {/* <div  className='flex z-30 absolute left-0 top-2 '>
-              <Image src="/logo2.png" layout="fixed" alt="logo" width={100} height={100} loading='lazy' className='w-28  md:w-56 '/>
-            </div> */}
+            <div  className='flex z-30 absolute left-0 top-8 '>
+              <Image src="/LOGOP.png" layout="fixed" alt="logo" width={100} height={100} loading='lazy' className='w-28  md:w-32 '/>
+            </div>
 
               
             
