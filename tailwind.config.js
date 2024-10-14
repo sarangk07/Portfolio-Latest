@@ -26,6 +26,8 @@ module.exports = {
         'jersey': ['"Jersey 10"', 'sans-serif'],
         'pixelify-sans': ['"Pixelify Sans"', 'system-ui'],
         'silkscreen-regular': ['"Silkscreen"', 'sans-serif'],
+        'protest-strike-regular': ["Protest Strike", 'sans-serif'],
+        'spicy-rice-regular':["Spicy Rice", 'serif'],
         
       },
       backgroundImage: {

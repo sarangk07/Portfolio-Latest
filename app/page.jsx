@@ -205,7 +205,7 @@ export default function Home() {
     
       <div
         ref={containerRef}
-        className={`relative cursor-default  backdrop-brightness-105 bg-blend-hard-light h-fit  font-medium  top-left-animation  ${choiceTheme == 'white' ? 'bg-zinc-100 font-pixelify-sans' :'font-serif bg-black'}`}
+        className={`relative cursor-default  backdrop-brightness-105 bg-blend-hard-light h-fit  font-medium  top-left-animation  ${choiceTheme == 'white' ? 'bg-zinc-100 font-pixelify-sans' : choiceTheme == 'blue' ? 'font-spicy-rice-regular' : 'font-serif bg-black'}`}
       >
 
         <div className={`h-1/5 md:h-3/5 flex flex-col w-full text-center ${choiceTheme == 'red' ?  'text-red-200' : choiceTheme == 'blue' ? 'text-blue-200' : choiceTheme == 'white' ? 'text-zinc-400' : 'text-gray-200'}`}>
@@ -255,7 +255,7 @@ export default function Home() {
             >
               <div className={`relative h-52 md:h-72  text-right ${timeTheme === 'morning' ? 'bg-cyan-600 ' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'}  p-4`}>
               
-                <div className={`absolute -bottom-2 -right-2  w-full h-full ${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-black' : choiceTheme == 'white' ? 'bg-zinc-100 text-zinc-500 border-2 border-zinc-300' : 'bg-black  border-2 rounded-md '}`}></div>
+                <div className={`absolute -bottom-2 -right-2  w-full h-full ${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-black ' : choiceTheme == 'white' ? 'bg-zinc-100 text-zinc-500 border-2 border-zinc-300' : 'bg-black  border-2 rounded-md '}`}></div>
               
                 <div className={` ${choiceTheme == 'white' ? 'font-silkscreen-regular ' : 'font-sans text-lg '} relative  flex flex-col justify-between font-semi-bold md:text-3xl  z-10 w-full h-full text-stone-900 overflow-y-scroll text-md `} style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   
@@ -372,7 +372,7 @@ export default function Home() {
 
 
 
-        <div className={`h-2/5 text-gray-200 m-2 rounded-lg   text-2xl ${choiceTheme == 'red' ?  'bg-black font-sans' : choiceTheme == 'blue' ? 'font-sans bg-black' : choiceTheme == 'white' ? 'font-pixelify-sans bg-zinc-200 text-gray-900' : 'bg-black font-sans text-gray-200 border-t-4'}`}>
+        <div className={`h-2/5 text-gray-200 m-2 rounded-lg   text-2xl ${choiceTheme == 'red' ?  'bg-black font-sans' : choiceTheme == 'blue' ? 'font-serif bg-black' : choiceTheme == 'white' ? 'font-pixelify-sans bg-zinc-200 text-gray-900' : 'bg-black font-sans text-gray-200 border-t-4'}`}>
           <div className="m-4 ">
             <p className={`${choiceTheme == 'white' ? 'text-zinc-500' : ''} flex items-center justify-center mb-5`}>
              My Projects
@@ -586,7 +586,7 @@ export default function Home() {
                   />
                   
                   </a>
-                  <p className='hidden cursor-default md:flex text-md hover:text-black'>Developed a LUDO game using NEXTJS, Tailwindcss, Claude.ai</p>
+                  <p className='hidden cursor-default md:flex text-md hover:text-black'>Developed a LUDO game using NEXTJS, Tailwindcss.</p>
                 </div>
                 <div className={`
                    ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
