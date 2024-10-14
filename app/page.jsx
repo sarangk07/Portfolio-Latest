@@ -211,22 +211,22 @@ export default function Home() {
         <div className={`h-1/5 md:h-3/5 flex flex-col w-full text-center ${choiceTheme == 'red' ?  'text-red-200' : choiceTheme == 'blue' ? 'text-blue-200' : choiceTheme == 'white' ? 'text-zinc-400' : 'text-gray-200'}`}>
           <div
             ref={titleRef}
-            className={`h-[45rem] md:h-[42rem] overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-9 ml-4 mr-4 flex flex-col justify-center items-center ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? ' text-zinc-50 bg-gradient-to-r from-black via-blue-600 to-black shadow-md shadow-black/50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : 'bg-gradient-to-r from-black via-gray-700 to-black shadow-lg shadow-black/50'}`}
+            className={`h-[45rem] md:h-[42rem] overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-9 ml-4 mr-4 flex flex-col justify-center items-center ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? ' text-zinc-50 bg-gradient-to-r from-black via-blue-600 to-black shadow-md shadow-black/50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : 'bg-gradient-to-r from-black via-gray-900 to-black shadow-lg shadow-black/50'}`}
           >
 
-            <div className='flex z-50 absolute left-1 top-4'>
-              <p onClick={()=> setChoiceTheme('blue')} className='w-4 h-4 bg-blue-500 mr-3 border border-white rounded-sm'/>
-              <p onClick={()=> setChoiceTheme('red')} className='w-4 h-4 bg-red-500 mr-3 border border-white rounded-sm'/>
-              <p onClick={()=> setChoiceTheme('white')} className='w-4 h-4 bg-white mr-3 border border-white rounded-sm'/>
-              <p onClick={()=> setChoiceTheme('dark')} className='w-4 h-4 bg-zinc-900 mr-3 border border-white rounded-sm'/>
+            <div className='flex flex-col z-50 absolute right-2 top-4'>
+              <p onClick={()=> setChoiceTheme('blue')} className='w-4 h-4 bg-blue-500 mt-3 border border-white rounded-sm'/>
+              {/* <p onClick={()=> setChoiceTheme('red')} className='w-4 h-4 bg-red-500 mt-3 border border-white rounded-sm'/> */}
+              <p onClick={()=> setChoiceTheme('white')} className='w-4 h-4 bg-white mt-3 border border-white rounded-sm'/>
+              <p onClick={()=> setChoiceTheme('dark')} className='w-4 h-4 bg-zinc-900 mt-3 border border-white rounded-sm'/>
             </div>
-            <div  className='flex z-30 absolute left-0 top-8 '>
-              <Image src="/LOGOP.png" layout="fixed" alt="logo" width={100} height={100} loading='lazy' className='w-28  md:w-32 '/>
+            <div  className='flex z-30 absolute left-0 top-5 '>
+              <Image src="/LOGOP.png" alt="logo" width={100} height={100} loading='lazy' className='w-28  md:w-32 '/>
             </div>
 
               
             
-              <button className={`relative rounded-md px-2 mb-2 py-2  border-2 border-white hover:bg-white hover:text-black transition-colors duration-200  text-sm ${choiceTheme == 'red' ?  'bg-red-600 border-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-600' : choiceTheme == 'white' ? 'bg-zinc-100 border-zinc-500' : 'bg-black text-white hover:border-white'}`}>
+              <button className={`relative rounded-md px-2 mb-2 py-2  border-2 border-white hover:bg-white hover:text-black transition-colors duration-200  text-sm ${choiceTheme == 'red' ?  'bg-red-600 border-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-600' : choiceTheme == 'white' ? 'bg-zinc-100 border-zinc-500' : 'bg-zinc-950 text-white hover:border-white'}`}>
               <a
                 className="font-mono "
                 href="https://drive.google.com/file/d/1UvJjKtmezPk-4623rI-QvvhJkL9jR-7K/view"
@@ -405,7 +405,7 @@ export default function Home() {
                     
                   />
                   </a>
-                  <p className='hidden md:flex text-md hover:text-black'>Developed a small e-commerce website with Reactjs,Bootstrap</p>
+                  <p className='hidden md:flex text-md  cursor-default hover:text-black'>Developed a small e-commerce website with Reactjs,Bootstrap</p>
 
                 </div>
 
@@ -441,7 +441,7 @@ export default function Home() {
                     loading='lazy'
                   />
 
-                  <p className='hidden md:flex md:flex-col text-md hover:text-black'>Developed a website for car accesseries with <span className='text-[17px] font-bold'>Nextjs,Tailwindcss,Redux,GSAP,Python-Django,DRF,SQLlite</span></p>
+                  <p className='hidden cursor-default md:flex md:flex-col text-md hover:text-black'>Developed a website for car accesseries with <span className='text-[17px] font-bold'>Nextjs,Tailwindcss,Redux,GSAP,Python-Django,DRF,SQLlite</span></p>
 
                 </div>
                 <div className={`
@@ -477,7 +477,7 @@ export default function Home() {
                     />
                    
                    </a>
-                  <p className='hidden md:flex text-md hover:text-black'>Developed a Rent a Car website using python Django,PSQL,JWT,SMTP,AWS,Razorpay</p>
+                  <p className='hidden cursor-default md:flex text-md hover:text-black'>Developed a Rent a Car website using python Django,PSQL,JWT,SMTP,AWS,Razorpay</p>
 
                 </div>
                 <div className={`
@@ -514,7 +514,7 @@ export default function Home() {
                   />
                   
                   </a>
-                  <p className='hidden md:flex text-md hover:text-black'>Developed a social meadia website using NEXTJS ,API ,Tailwindcss ,GSAP</p>
+                  <p className='hidden cursor-default md:flex text-md hover:text-black'>Developed a social meadia website using NEXTJS ,API ,Tailwindcss ,GSAP</p>
                 </div>
                 <div className={`
                    ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
@@ -550,11 +550,47 @@ export default function Home() {
                   />
                   
                   </a>
-                  <p className='hidden md:flex text-md hover:text-black'>Developed a Quiz-game using NEXTJS ,Open-Trivia API ,Tailwindcss</p>
+                  <p className='hidden cursor-default md:flex text-md hover:text-black'>Developed a Quiz-game using NEXTJS ,Open-Trivia API ,Tailwindcss</p>
                 </div>
                 <div className={`
                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -right-64 `} />
+
+              </div>
+
+
+              <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
+                  <div className={`
+                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
+                    
+                    `}>
+
+                      <div className='flex justify-between'>
+                      <p>
+                        Poki-Arena<span className='text-xs'> </span>
+                      </p>
+                      <p className='hidden md:flex text-xs md:text-sm cursor-default'>
+                        
+                      </p>
+                    </div>
+                  <a href="https://mini-games-five.vercel.app/" target="_blank">
+                  {/* <img  className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./social-meadia.PNG" /> */}
+                  
+                  <Image
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                    src="/poki-arena.png"
+                    alt="poki-arena"
+                    width={500}
+                    height={300}
+                    loading='lazy'
+                  />
+                  
+                  </a>
+                  <p className='hidden cursor-default md:flex text-md hover:text-black'>Developed a LUDO game using NEXTJS, Tailwindcss, Claude.ai</p>
+                </div>
+                <div className={`
+                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
+                  hidden md:flex h-full w-2 absolute top-1 -left-64 `} />
 
               </div>
 
