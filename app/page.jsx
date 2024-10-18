@@ -570,7 +570,7 @@ export default function Home() {
                         Poki-Arena<span className='text-xs'> </span>
                       </p>
                       <p className='hidden md:flex text-xs md:text-sm cursor-default'>
-                        
+                        in-progress
                       </p>
                     </div>
                   <a href="https://mini-games-five.vercel.app/" target="_blank">
