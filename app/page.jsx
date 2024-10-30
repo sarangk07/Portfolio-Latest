@@ -221,7 +221,7 @@ export default function Home() {
               <p onClick={()=> setChoiceTheme('dark')} className='w-4 h-4 bg-zinc-900 mt-3 border border-white rounded-sm'/>
             </div>
             <div  className='flex z-30 absolute left-0 top-5 '>
-              <Image src="/LOGOP.png" alt="logo" width={100} height={100} loading='lazy' className='w-28  md:w-32 '/>
+              <Image src="/LOGOP.png" alt="logo" width={100} height={100} loading='lazy' className='w-20  md:w-32 '/>
             </div>
 
               
@@ -425,8 +425,8 @@ export default function Home() {
                       <p>
                         Modes Arena <span className='text-xs'> <a href="https://github.com/sarangk07/Car-Modz" target="_blank">- git</a></span>
                       </p>
-                      <p className='hidden md:flex text-xs md:text-sm cursor-default'>
-                        Main-Project
+                      <p className='flex text-xs md:text-sm cursor-default'>
+                        in-progress
                       </p>
                     </div>
                   {/* <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./ModeArea.PNG" /> */}
@@ -441,7 +441,7 @@ export default function Home() {
                     loading='lazy'
                   />
 
-                  <p className='hidden cursor-default md:flex md:flex-col text-md hover:text-black'>Developed a website for car accesseries with <span className='text-[17px] font-bold'>Nextjs,Tailwindcss,Redux,GSAP,Python-Django,DRF,SQLlite</span></p>
+                  <p className='hidden cursor-default md:flex md:flex-col text-md hover:text-black'>Developing a website for car accesseries with <span className='text-[17px] font-bold'>Nextjs,Tailwindcss,Redux,GSAP,Python-Django,DRF,SQLlite</span></p>
 
                 </div>
                 <div className={`
@@ -559,7 +559,7 @@ export default function Home() {
               </div>
 
 
-              <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
+              {/* <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
                   <div className={`
                     ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                     
@@ -574,7 +574,7 @@ export default function Home() {
                       </p>
                     </div>
                   <a href="https://mini-games-five.vercel.app/" target="_blank">
-                  {/* <img  className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./social-meadia.PNG" /> */}
+                 
                   
                   <Image
                     className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
@@ -592,7 +592,7 @@ export default function Home() {
                    ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -left-64 `} />
 
-              </div>
+              </div> */}
 
 
 
