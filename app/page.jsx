@@ -313,7 +313,7 @@ export default function Home() {
               <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
                   <div
                    className={`
-                   ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-r-4 border-zinc-800 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
+                   ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-r-4 text-gray-200'} ${timeTheme === 'morning' ? 'border-cyan-500' : timeTheme === 'afternoon' ? 'border-emerald-500' : 'border-zinc-500'} w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                    `}>
                     <div className='flex justify-between'>
                       <p className='text-[1.2rem] md:text-md'>
@@ -323,7 +323,7 @@ export default function Home() {
                     </div>
                   <a href="https://ecommerce-baby-products.vercel.app/" target="_blank">
                   <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
                     src="/Baby-Products.PNG"
                     alt="Baby Land"
                     width={500}
@@ -340,7 +340,7 @@ export default function Home() {
 
               <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
                   <div className={`
-                 ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-l-4 border-zinc-800 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
+                 ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-l-4 border-zinc-800 text-gray-200'}  ${timeTheme === 'morning' ? 'border-cyan-500' : timeTheme === 'afternoon' ? 'border-emerald-500' : 'border-zinc-500'} w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                   `}>
                     <div className='flex justify-between'>
                       <p className='text-[1.2rem] md:text-md'>
@@ -351,7 +351,7 @@ export default function Home() {
                       </p>
                     </div>
                   <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
                     src="/Mode-Arena-latest.PNG"
                     alt="ModeArea"
                     width={500}
@@ -367,7 +367,7 @@ export default function Home() {
 
               <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
                   <div className={`
-                   ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-r-4 border-zinc-800 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
+                   ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-r-4 border-zinc-800 text-gray-200'}  ${timeTheme === 'morning' ? 'border-cyan-500' : timeTheme === 'afternoon' ? 'border-emerald-500' : 'border-zinc-500'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                     `}>
                     <div className='flex justify-between'>
                       <p className='text-[1.2rem] md:text-md'>
@@ -376,7 +376,7 @@ export default function Home() {
                     </div>
                    <a href="https://rentkaro.shop/" target="_blank">
                    <Image
-                      className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                      className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
                       src="/RentKaro.PNG"
                       alt="RentKaro"
                       width={500}
@@ -393,7 +393,7 @@ export default function Home() {
 
               <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
                   <div className={`
-                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-l-4 border-zinc-800 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent`}>
+                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-l-4 border-zinc-800 text-gray-200'} ${timeTheme === 'morning' ? 'border-cyan-500' : timeTheme === 'afternoon' ? 'border-emerald-500' : 'border-zinc-500'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent`}>
                       <div className='flex justify-between'>
                       <p className='text-[1.2rem] md:text-md'>
                         Virtual Mingle <span className='text-xs'> <a href="https://github.com/sarangk07/Social-Media--Frontend-" target="_blank">- git</a></span>
@@ -404,7 +404,7 @@ export default function Home() {
                     </div>
                   <a href="https://social-media-azure-alpha.vercel.app/" target="_blank">
                   <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
                     src="/social-meadia.PNG"
                     alt="social-meadia"
                     width={500}
@@ -421,7 +421,7 @@ export default function Home() {
 
               <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
                   <div className={`
-                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-r-4 border-zinc-800 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent`}>
+                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-r-4 border-zinc-800 text-gray-200'}  ${timeTheme === 'morning' ? 'border-cyan-500' : timeTheme === 'afternoon' ? 'border-emerald-500' : 'border-zinc-500'} w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent`}>
                       <div className='flex justify-between'>
                       <p className='text-[1.2rem] md:text-md'>
                         QuZ <span className='text-xs'> <a href="https://github.com/sarangk07/quz" target="_blank">- git</a></span>
@@ -432,7 +432,7 @@ export default function Home() {
                     </div>
                   <a href="https://quz-game.vercel.app/" target="_blank">
                   <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
                     src="/quz.PNG"
                     alt="qz"
                     width={500}
@@ -466,7 +466,7 @@ export default function Home() {
                  
                   
                   <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
                     src="/poki-arena.png"
                     alt="poki-arena"
                     width={500}
