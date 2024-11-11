@@ -1,13 +1,8 @@
-
 'use client';
-
-import { useEffect, useRef, useState,useCallback  } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// import ChatBubble from './components/ChatBubble';
-// import ContactButton from './components/ContactBtn';
 import Image from 'next/image';
-// import AutoScrollImages from './components/AutoScrollImg';
 
 
 export default function Home() {
@@ -16,181 +11,152 @@ export default function Home() {
   const contactRef = useRef(null);
   const footerRef = useRef(null);
   const projectsRef = useRef(null);
-  
- 
   const [greeting, setGreeting] = useState('');
   const [timeTheme, setTimeTheme] = useState('');
   const [choiceTheme, setChoiceTheme] = useState('dark');
 
+  // Time-based content update
   const updateTimeBasedContent = useCallback(() => {
     const hours = new Date().getHours();
-    let newGreeting;
-    let newTheme;
-
-    if (hours < 12) {
-      newGreeting = 'Good Morning';
-      newTheme = 'morning';
-    } else if (hours < 18) {
-      newGreeting = 'Good Afternoon';
-      newTheme = 'afternoon';
-    } else {
-      newGreeting = 'Good Evening';
-      newTheme = 'evening';
-    }
-
+    const newGreeting = hours < 12 ? 'Good Morning' : 
+                       hours < 18 ? 'Good Afternoon' : 
+                       'Good Evening';
+    const newTheme = hours < 12 ? 'morning' : 
+                     hours < 18 ? 'afternoon' : 
+                     'evening';
+    
     setGreeting(newGreeting);
     setTimeTheme(newTheme);
   }, []);
 
+  // Time update effect
   useEffect(() => {
     updateTimeBasedContent();
-    const timer = setInterval(updateTimeBasedContent, 60000); 
-
+    const timer = setInterval(updateTimeBasedContent, 60000);
     return () => clearInterval(timer);
   }, [updateTimeBasedContent]);
 
-
-
-
+  // Main animations setup
   useEffect(() => {
-
-    
     gsap.registerPlugin(ScrollTrigger);
+    
+    // Batch all GSAP animations for better performance
+    const setupAnimations = () => {
+      if (!containerRef.current || !titleRef.current || 
+          !contactRef.current || !footerRef.current) return;
 
-    const animationDelay = setTimeout(() => {
-      if (containerRef.current && titleRef.current && contactRef.current && footerRef.current) {
-        const ctx = gsap.context(() => {
-
-
-          
-
-          // Fade-in and slide-in animations-----------------------------------------------
-          gsap.fromTo(
-            titleRef.current,
+      const ctx = gsap.context(() => {
+        // Initial animations batch
+        const initialTl = gsap.timeline({ delay: 1 });
+        initialTl
+          .fromTo(
+            [titleRef.current, contactRef.current],
             { opacity: 0, x: -50 },
-            { opacity: 1, x: 0, duration: 1, ease: 'power2.out', delay: 1 }
-          );
-
-          gsap.fromTo(
-            contactRef.current,
-            { opacity: 0, x: -50 },
-            { opacity: 1, x: 0, duration: 1, ease: 'power2.out', delay: 1 }
-          );
-
-          // Footer slide-up animation-----------------------------------------------
-          gsap.fromTo(
+            { opacity: 1, x: 0, duration: 1, ease: 'power2.out', stagger: 0.2 }
+          )
+          .fromTo(
             footerRef.current,
             { y: 100, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1, ease: 'power2.out', delay: 1.5 }
+            { y: 0, opacity: 1, duration: 1, ease: 'power2.out' },
+            '-=0.5'
           );
+
+        // Optimize pixel bars animation
+        const pixelBars = document.querySelectorAll('.pixel-bar');
+        if (pixelBars.length) {
+          gsap.to(pixelBars, {
+            duration: 1.5,
+            y: '5%',
+            x: '5%',
+            rotation: 1,
+            repeat: 1,
+            yoyo: true,
+            ease: 'sine.inOut',
+            stagger: 0.15,
+          });
+        }
+
+        // Optimize project items animation
+        const projectItems = gsap.utils.toArray('.project-item');
+        if (projectItems.length) {
+          gsap.set(projectItems, { 
+            opacity: 0, 
+            x: (i) => i % 2 === 0 ? -50 : 50 
+          });
           
-          // Wave-animation - skill bars-----------------------------------------------
-          const pixelBars = document.querySelectorAll('.pixel-bar');
-          if (pixelBars.length > 0) {
-            gsap.to(pixelBars, {
-              duration: 1.5,
-              y: '5%',
-              x: '5%',
-              rotation: 1,
-              repeat: 1,
-              yoyo: true,
-              ease: 'sine.inOut',
+          // Use markers: false to reduce debug overhead
+          ScrollTrigger.batch(projectItems, {
+            onEnter: (batch) => gsap.to(batch, {
+              opacity: 1,
+              x: 0,
               stagger: 0.15,
-            });
-          }
-
-          // Project-items animation-----------------------------------------------
-          const projectItems = gsap.utils.toArray('.project-item');
-          if (projectItems.length > 0) {
-            gsap.set(projectItems, { opacity: 0, x: (i) => i % 2 === 0 ? -50 : 50 });
-            
-            ScrollTrigger.batch(projectItems, {
-              onEnter: (batch) => gsap.to(batch, {
-                opacity: 1,
-                x: 0,
-                stagger: 0.15,
-                overwrite: true,
-                duration: 1,
-                ease: 'power2.out',
-              }),
-              start: 'top 80%',
-              once: true
-            });
-          }
-
-          
-          const handleResize = () => {
-            ScrollTrigger.refresh(true);
-          };
-
-          window.addEventListener('resize', handleResize);
-
-          
-          return () => {
-            window.removeEventListener('resize', handleResize);
-            ScrollTrigger.getAll().forEach(st => st.kill());
-          };
-        });
-
-        return () => {
-          ctx.revert(); 
-        };
-      }
-    }, 100);
-
-
-
-    // Lazy loading -----------------------------------------------
-    const lazyImages = document.querySelectorAll('img[data-src]');
-    const onIntersection = (entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.getAttribute('data-src');
-          img.removeAttribute('data-src');
-          observer.unobserve(img);
+              overwrite: true,
+              duration: 1,
+              ease: 'power2.out',
+            }),
+            start: 'top 80%',
+            once: true,
+            markers: false
+          });
         }
       });
+
+      return ctx;
     };
 
-    const observer = new IntersectionObserver(onIntersection);
-    lazyImages.forEach(img => {
-      observer.observe(img);
+    // Debounced resize handler
+    let resizeTimeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        ScrollTrigger.refresh(true);
+      }, 250);
+    };
+
+    const ctx = setupAnimations();
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    return () => {
+      ctx?.revert();
+      window.removeEventListener('resize', handleResize);
+      ScrollTrigger.getAll().forEach(st => st.kill());
+      clearTimeout(resizeTimeout);
+    };
+  }, []);
+
+  // Optimize image lazy loading using IntersectionObserver
+  useEffect(() => {
+    const imageObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            observer.unobserve(img);
+          }
+        });
+      },
+      {
+        rootMargin: '50px 0px',
+        threshold: 0.1
+      }
+    );
+
+    document.querySelectorAll('img[data-src]').forEach(img => {
+      imageObserver.observe(img);
     });
 
-
-    
-    return () => {
-      clearTimeout(animationDelay);
-      // clearTimeout(loadingTimer);
-      observer.disconnect();
-    };
+    return () => imageObserver.disconnect();
   }, []);
 
 
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
 
-    const ctx2 = gsap.context(() => {
-      
+  
 
-      //animation for skill bars when theme is red-----------------------------------------------
-      if (choiceTheme === 'red') {
-        
-      } else {
-        // Reset animation when theme is not red-----------------------------------------------
-        const skillBars = document.querySelectorAll('.pixel-bar > div');
-        skillBars.forEach((bar) => {
-          gsap.to(bar, { x: 0, duration: 0.3 });
-        });
-      }
-    });
-
-    return () => ctx2.revert();
-  }, [choiceTheme]);
- 
-  //system dark mode , avoiding-------------------------
+  // Theme effect
+  // System dark mode handling
   useEffect(() => {
     document.documentElement.style.colorScheme = 'none';
   }, []);
@@ -198,35 +164,29 @@ export default function Home() {
 
 
 
-
+  
 
   return (
     <>
-    
       <div
         ref={containerRef}
         className={`relative cursor-default  backdrop-brightness-105 bg-blend-hard-light h-fit  font-medium  top-left-animation  ${choiceTheme == 'white' ? 'bg-zinc-100 font-pixelify-sans' : choiceTheme == 'blue' ? 'font-spicy-rice-regular' : 'font-serif bg-black'}`}
       >
-
         <div className={`h-1/5 md:h-3/5 flex flex-col w-full text-center ${choiceTheme == 'red' ?  'text-red-200' : choiceTheme == 'blue' ? 'text-blue-200' : choiceTheme == 'white' ? 'text-zinc-400' : 'text-gray-200'}`}>
           <div
             ref={titleRef}
-            className={`h-[45rem] md:h-[42rem] overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-9 ml-4 mr-4 flex flex-col justify-center items-center ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? ' text-zinc-50 bg-gradient-to-r from-black via-blue-600 to-black shadow-md shadow-black/50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : 'bg-gradient-to-r from-black via-gray-900 to-black shadow-lg shadow-black/50'}`}
+            className={`h-[45rem] md:h-[42rem] overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-9 ml-4 mr-4 flex flex-col justify-center items-center ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? ' text-zinc-50 bg-gradient-to-r from-black via-blue-600 to-black shadow-md shadow-black/50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : 'bg-gradient-to-r from-black via-zinc-700 to-black shadow-lg shadow-black/50'}`}
           >
-
             <div className='flex flex-col z-50 absolute right-2 top-4'>
               <p onClick={()=> setChoiceTheme('blue')} className='w-4 h-4 bg-blue-500 mt-3 border border-white rounded-sm'/>
               {/* <p onClick={()=> setChoiceTheme('red')} className='w-4 h-4 bg-red-500 mt-3 border border-white rounded-sm'/> */}
               <p onClick={()=> setChoiceTheme('white')} className='w-4 h-4 bg-white mt-3 border border-white rounded-sm'/>
               <p onClick={()=> setChoiceTheme('dark')} className='w-4 h-4 bg-zinc-900 mt-3 border border-white rounded-sm'/>
             </div>
-            <div  className='flex z-30 absolute left-0 top-5 '>
+            {/* <div  className='flex z-30 absolute left-0 top-5 '>
               <Image src="/LOGOP.png" alt="logo" width={100} height={100} loading='lazy' className='w-20  md:w-32 '/>
-            </div>
-
-              
-            
-              <button className={`relative rounded-md px-2 mb-2 py-2  border-2 border-white hover:bg-white hover:text-black transition-colors duration-200  text-sm ${choiceTheme == 'red' ?  'bg-red-600 border-zinc-900' : choiceTheme == 'blue' ? 'bg-blue-600' : choiceTheme == 'white' ? 'bg-zinc-100 border-zinc-500' : 'bg-zinc-950 text-white hover:border-white'}`}>
+            </div> */}
+              <button className={`relative rounded-sm px-2 mb-2 py-2  border-2 border-white hover:bg-white hover:text-black transition-colors duration-200  text-sm ${choiceTheme == 'red' ?  'bg-transparent border-zinc-900' : choiceTheme == 'blue' ? 'bg-transparent' : choiceTheme == 'white' ? 'bg-transparent border-zinc-500' : 'bg-transparent text-white hover:border-white'}`}>
               <a
                 className="font-mono "
                 href="https://drive.google.com/file/d/1UvJjKtmezPk-4623rI-QvvhJkL9jR-7K/view"
@@ -236,43 +196,26 @@ export default function Home() {
                 VIEW CV
               </a>
               </button>
-
               <div className='flex flex-col justify-center items-center h-screen '>
-                <p className='text-[3rem] md:text-[6rem]'>Hello, I'M</p>
+                <p className='text-[2rem] md:text-[3rem]'>Hello, I'M</p>
                 
-                <p className='text-[4rem] md:text-[10rem]'>SARANG</p>
+                <p className='text-[1.5rem] md:text-[2rem]'>SARANG</p>
               </div>
-            
-            
           </div>
           <div className="flex flex-col md:flex md:flex-row  m-4 rounded-lg backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110">
-            
-
-
             <div
               ref={contactRef}
               className={` m-3${choiceTheme == 'white' ? 'h-4/4 md:w-3/3' : 'h-4/4 md:w-3/3 '}`}
             >
               <div className={`relative h-52 md:h-72  text-right ${timeTheme === 'morning' ? 'bg-cyan-600 ' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'}  p-4`}>
-              
-                <div className={`absolute -bottom-2 -right-2  w-full h-full ${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-black ' : choiceTheme == 'white' ? 'bg-zinc-100 text-zinc-500 border-2 border-zinc-300' : 'bg-black  border-2 rounded-md '}`}></div>
-              
-                <div className={` ${choiceTheme == 'white' ? 'font-silkscreen-regular ' : 'font-sans text-lg '} relative  flex flex-col justify-between font-semi-bold md:text-3xl  z-10 w-full h-full text-stone-900 overflow-y-scroll text-md `} style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                  
+                <div className={`absolute -bottom-2 -right-2  w-full h-full ${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-black border-2 border-blue-300' : choiceTheme == 'white' ? 'bg-zinc-100 text-zinc-500 border-2 border-zinc-300' : 'bg-black  border-2 rounded-md '}`}></div>
+                <div className={` ${choiceTheme == 'white' ? 'font-silkscreen-regular ' : 'font-serif text-lg '} relative  flex flex-col justify-between font-semi-bold md:text-3xl  z-10 w-full h-full text-stone-900 overflow-y-scroll text-md `} style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   <p className={`leading-relaxed md:leading-relaxed ${choiceTheme == 'white' ? 'text-gray-500' : choiceTheme == 'blue' ? 'text-white ' : choiceTheme == 'dark' ? 'text-zinc-200' : 'text-stone-900'}`}><span className={`${timeTheme === 'morning' ? 'text-cyan-500' : timeTheme === 'afternoon' ? 'text-emerald-500' : 'text-zinc-500'} font-bold `}>{greeting}</span> everyone! I'M <span className='font-bold '>Sarang </span>— a dedicated developer, driven by a passion for coding, committed to achieving excellence, and constantly seeking opportunities to grow and learn.</p>
-  
                 </div>
               </div>
-
-
-
-
-
             <div className={`${choiceTheme == 'white '|| 'dark' ? 'flex flex-col md:flex-row md:justify-around' : ''}`}>
               <div className='text-left mt-3 rounded-xl p-4'>
                 <div className='underline underline-offset-8 text-2xl mb-4 '>Skills</div>
-                
-                
                 <div className={`space-y-4  text-xs ${choiceTheme == 'white' ? 'font-silkscreen-regular' : ' font-serif'}`}>
                   <div className='flex items-center justify-between'>
                     <span className='font-bold '>JavaScript</span>
@@ -340,37 +283,26 @@ export default function Home() {
                       <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '50%' }}></div>
                     </div>
                   </div>
-
                 </div>
-
               </div>
-
-
-
-                {choiceTheme == 'white' || 'dark' ?
+                {/* {choiceTheme == 'white' || 'dark' ?
                   <>
-                    <div className='hidden lg:flex'>
+                    <div className='hidden lg:flex p-5'>
                       <img className='opacity-[0.50]' src="./graphics1.png" alt="" />
+                      
+                       <h2>what i do</h2>
+                       <div></div>
+                       
                     </div>
                   </>
                 :
                   <>
-
                   </>
-                }
-              
+                } */}
             </div>  
-
-
             </div>
           </div>
         </div>
-
-
-
-
-
-
 
         <div className={`h-2/5 text-gray-200 m-2 rounded-lg   text-2xl ${choiceTheme == 'red' ?  'bg-black font-sans' : choiceTheme == 'blue' ? 'font-serif bg-black' : choiceTheme == 'white' ? 'font-pixelify-sans bg-zinc-200 text-gray-900' : 'bg-black font-sans text-gray-200 border-t-4'}`}>
           <div className="m-4 ">
@@ -381,19 +313,15 @@ export default function Home() {
               <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
                   <div
                    className={`
-                   ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
+                   ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-r-4 border-zinc-800 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                    `}>
                     <div className='flex justify-between'>
-                      <p>
+                      <p className='text-[1.2rem] md:text-md'>
                       BaBy Land <span className='text-xs'> <a href="https://github.com/sarangk07/Ecommerce-baby-products" target="_blank">- git</a></span>
                       </p>
                       <p className='text-xs md:text-sm cursor-default'>Mini-Project</p>
                     </div>
-                    
-                  
                   <a href="https://ecommerce-baby-products.vercel.app/" target="_blank">
-                  {/* <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./Baby-Products.PNG" /> */}
-                  
                   <Image
                     className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
                     src="/Baby-Products.PNG"
@@ -401,37 +329,27 @@ export default function Home() {
                     width={500}
                     height={300}
                     loading='lazy'
-                    
-                    
                   />
                   </a>
-                  <p className='hidden md:flex text-md  cursor-default hover:text-black'>Developed a small e-commerce website with Reactjs,Bootstrap</p>
-
+                  <p className=' mt-3 hidden md:flex text-sm  cursor-default hover:text-black'>Developed a small e-commerce website with Reactjs,Bootstrap</p>
                 </div>
-
-
                 <div className={`
                    ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -right-64 `} />              
               </div>
 
-
-
               <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
                   <div className={`
-                 ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
+                 ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-l-4 border-zinc-800 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                   `}>
                     <div className='flex justify-between'>
-                      <p>
+                      <p className='text-[1.2rem] md:text-md'>
                         Modes Arena <span className='text-xs'> <a href="https://github.com/sarangk07/Car-Modz" target="_blank">- git</a></span>
                       </p>
                       <p className='flex text-xs md:text-sm cursor-default'>
                         in-progress
                       </p>
                     </div>
-                  {/* <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./ModeArea.PNG" /> */}
-
-
                   <Image
                     className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
                     src="/Mode-Arena-latest.PNG"
@@ -440,33 +358,23 @@ export default function Home() {
                     height={300}
                     loading='lazy'
                   />
-
-                  <p className='hidden cursor-default md:flex md:flex-col text-md hover:text-black'>Developing a website for car accesseries with <span className='text-[17px] font-bold'>Nextjs,Tailwindcss,Redux,GSAP,Python-Django,DRF,SQLlite</span></p>
-
+                  <p className='mt-3 hidden cursor-default md:flex md:flex-col text-sm  hover:text-black'>Developing a website for car accesseries with <span className='text-[14px] font-bold'>Nextjs,Tailwindcss,Redux,GSAP,Python-Django,DRF,SQLlite</span></p>
                 </div>
                 <div className={`
                    ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -left-64 `} />
               </div>
 
-
-
               <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
                   <div className={`
-                   ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
+                   ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-r-4 border-zinc-800 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                     `}>
-
                     <div className='flex justify-between'>
-                      <p>
+                      <p className='text-[1.2rem] md:text-md'>
                         RentKaroo <span className='text-xs'> <a href="https://github.com/sarangk07/Rent_karoo" target="_blank">- git</a></span>
                       </p>
-                      {/* <p className=' text-xs md:text-sm cursor-default'>
-                        Main-Project
-                      </p> */}
                     </div>
                    <a href="https://rentkaro.shop/" target="_blank">
-                   {/* <img className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./RentKaro.PNG" /> */}
-                   
                    <Image
                       className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
                       src="/RentKaro.PNG"
@@ -475,26 +383,19 @@ export default function Home() {
                       height={300}
                       loading='lazy'
                     />
-                   
                    </a>
-                  <p className='hidden cursor-default md:flex text-md hover:text-black'>Developed a Rent a Car website using python Django,PSQL,JWT,SMTP,AWS,Razorpay</p>
-
+                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Developed a Rent a Car website using python Django,PSQL,JWT,SMTP,AWS,Razorpay</p>
                 </div>
                 <div className={`
                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -right-64 `} />
               </div>
 
-
-
               <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
                   <div className={`
-                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
-                    
-                    `}>
-
+                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-l-4 border-zinc-800 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent`}>
                       <div className='flex justify-between'>
-                      <p>
+                      <p className='text-[1.2rem] md:text-md'>
                         Virtual Mingle <span className='text-xs'> <a href="https://github.com/sarangk07/Social-Media--Frontend-" target="_blank">- git</a></span>
                       </p>
                       <p className='hidden md:flex text-xs md:text-sm cursor-default'>
@@ -502,8 +403,6 @@ export default function Home() {
                       </p>
                     </div>
                   <a href="https://social-media-azure-alpha.vercel.app/" target="_blank">
-                  {/* <img  className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./social-meadia.PNG" /> */}
-                  
                   <Image
                     className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
                     src="/social-meadia.PNG"
@@ -512,25 +411,19 @@ export default function Home() {
                     height={300}
                     loading='lazy'
                   />
-                  
                   </a>
-                  <p className='hidden cursor-default md:flex text-md hover:text-black'>Developed a social meadia website using NEXTJS ,API ,Tailwindcss ,GSAP</p>
+                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Developed a social meadia website using NEXTJS ,API ,Tailwindcss ,GSAP</p>
                 </div>
                 <div className={`
                    ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -left-64 `} />
-
               </div>
-
 
               <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
                   <div className={`
-                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
-                    
-                    `}>
-
+                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-r-4 border-zinc-800 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent`}>
                       <div className='flex justify-between'>
-                      <p>
+                      <p className='text-[1.2rem] md:text-md'>
                         QuZ <span className='text-xs'> <a href="https://github.com/sarangk07/quz" target="_blank">- git</a></span>
                       </p>
                       <p className='flex text-xs md:text-sm cursor-default'>
@@ -538,8 +431,6 @@ export default function Home() {
                       </p>
                     </div>
                   <a href="https://quz-game.vercel.app/" target="_blank">
-                  {/* <img  className={`${choiceTheme == 'red' ?  'shadow-custom-red ' : choiceTheme == 'blue' ? 'shadow-custom-blue' :'shadow-md'} md:w-fit md:h-72 h-44 w-64`} src="https://i.pinimg.com/564x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg" alt="" loading='lazy' data-src="./social-meadia.PNG" /> */}
-                  
                   <Image
                     className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
                     src="/quz.PNG"
@@ -548,25 +439,23 @@ export default function Home() {
                     height={300}
                     loading='lazy'
                   />
-                  
                   </a>
-                  <p className='hidden cursor-default md:flex text-md hover:text-black'>Developed a Quiz-game using NEXTJS ,Open-Trivia API ,Tailwindcss</p>
+                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Developed a Quiz-game using NEXTJS ,Open-Trivia API ,Tailwindcss</p>
                 </div>
                 <div className={`
                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -right-64 `} />
-
               </div>
 
 
               {/* <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
                   <div className={`
-                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
+                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-l-4 border-zinc-800 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
                     
                     `}>
 
                       <div className='flex justify-between'>
-                      <p>
+                      <p className='text-[1.2rem] md:text-md'>
                         Poki-Arena<span className='text-xs'> </span>
                       </p>
                       <p className='flex text-xs md:text-sm cursor-default'>
@@ -586,7 +475,7 @@ export default function Home() {
                   />
                   
                   </a>
-                  <p className='hidden cursor-default md:flex text-md hover:text-black'>Developed a LUDO game using NEXTJS, Tailwindcss.</p>
+                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Developed a LUDO game using NEXTJS, Tailwindcss.</p>
                 </div>
                 <div className={`
                    ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
@@ -598,10 +487,6 @@ export default function Home() {
 
             </div>
           </div>
-
-
-
-
           <div className="m-4 flex border-spacing-9  border-t-4">
             <div className={`${choiceTheme == 'white' ? 'text-zinc-400' : ''} w-full p-3 flex flex-col justify-center items-center overflow-x-auto  custom-scrollbar`}>
               <p>
@@ -610,17 +495,11 @@ export default function Home() {
               <p>
                 Let’s build something amazing together.
               </p>
-              
               <p className='mb-5'>
                 Reach out and let’s collaborate on your next big idea."
               </p>
-              
-              
-               <a href="mailto:sarang00005@gmail.com" className='border  p-2 pt-1 m-2 rounded-lg' >sarang00005@gmail.com</a>
-
-
-               <div className=' flex md:mt-5 mt-0 ml-4 justify-center '>
-                
+               <a href="mailto:sarang00005@gmail.com" className='border  p-2 pt-1 m-2 rounded-md' >sarang00005@gmail.com</a>
+               <div className=' flex md:mt-5 mt-0 ml-4 justify-center '>  
                 <svg
                  className={`w-10 h-10 ${choiceTheme == 'white' ? 'hover:text-zinc-400 text-black transform hover:duration-200' : 'text-white'} `} viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path 
@@ -630,7 +509,6 @@ export default function Home() {
                     fill="currentColor" 
                   />
                 </svg>
-
                 <a href="https://www.linkedin.com/in/sarang-k-2b7844244/">
                 <svg className={`w-10 h-10 ${choiceTheme == 'white' ?  'hover:text-zinc-400 text-blue-600 transform hover:duration-200' : 'text-white'} `} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 107.3 107.3">
                   <g id="Layer_2" data-name="Layer 2">
@@ -650,8 +528,6 @@ export default function Home() {
                   </g>
                 </svg>
                 </a>
-
-
                 <a href="https://github.com/sarangk07">
                 <svg className={`w-10 h-10 ${choiceTheme == 'white' ? 'hover:text-zinc-400 text-zinc-900 transform hover:duration-100' : 'text-white'} `} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
                   <g fill="currentColor">
@@ -666,12 +542,11 @@ export default function Home() {
         </div>
         <div
           ref={footerRef}
-          className={`h-2/5 md:h-1/5 rounded-lg ml-2 mr-2  text-center font-pixelify-sans text-2xl ${choiceTheme == 'red' ?  'bg-zinc-950 ' : choiceTheme == 'blue' ? 'bg-zinc-950' : choiceTheme == 'white' ? 'bg-zinc-200 ' : 'bg-zinc-950'}`}
+          className={`h-2/5 md:h-1/5 rounded-lg ml-2 mr-2  text-center font-mono text-md ${choiceTheme == 'red' ?  'bg-zinc-950 ' : choiceTheme == 'blue' ? 'bg-zinc-950' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-500' : 'bg-zinc-950'}`}
         >
-          TNX
+          © 2024. All rights reserved by Sarang
         </div>
       </div>
-      
     </>
   );
 }
