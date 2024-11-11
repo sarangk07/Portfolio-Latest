@@ -544,7 +544,7 @@ export default function Home() {
           ref={footerRef}
           className={`h-2/5 md:h-1/5 rounded-lg ml-2 mr-2  text-center font-mono text-md ${choiceTheme == 'red' ?  'bg-zinc-950 ' : choiceTheme == 'blue' ? 'bg-zinc-950' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-500' : 'bg-zinc-950'}`}
         >
-          © 2024. All rights reserved by Sarang
+          © 2024. All Rights Reserved By Sarang
         </div>
       </div>
     </>
