@@ -13,13 +13,13 @@ export default function Home() {
   const footerRef = useRef(null);
   const projectsRef = useRef(null);
 
-  const pointerRef = useRef(null);
+  
 
   const [greeting, setGreeting] = useState('');
   const [timeTheme, setTimeTheme] = useState('');
   const [choiceTheme, setChoiceTheme] = useState('dark');
 
-  // Time-based content update
+  // --Time-based content update
   const updateTimeBasedContent = useCallback(() => {
     const hours = new Date().getHours();
     const newGreeting = hours < 12 ? 'Good Morning' : 
@@ -33,24 +33,24 @@ export default function Home() {
     setTimeTheme(newTheme);
   }, []);
 
-  // Time update effect
+  // --Time update
   useEffect(() => {
     updateTimeBasedContent();
     const timer = setInterval(updateTimeBasedContent, 60000);
     return () => clearInterval(timer);
   }, [updateTimeBasedContent]);
 
-  // Main animations setup
+  // --Main animations
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     
-    // Batch all GSAP animations for better performance
+    // --all GSAP animations
     const setupAnimations = () => {
       if (!containerRef.current || !titleRef.current || 
           !contactRef.current || !footerRef.current) return;
 
       const ctx = gsap.context(() => {
-        // Initial animations batch
+        // --Initial animations batch
         const initialTl = gsap.timeline({ delay: 1 });
         initialTl
           .fromTo(
@@ -65,7 +65,7 @@ export default function Home() {
             '-=0.5'
           );
 
-        // Optimize pixel bars animation
+        //--pixel bars animation
         const pixelBars = document.querySelectorAll('.pixel-bar');
         if (pixelBars.length) {
           gsap.to(pixelBars, {
@@ -79,41 +79,12 @@ export default function Home() {
             stagger: 0.15,
           });
         }
-
-        // Optimize project items animation
-        // const projectItems = gsap.utils.toArray('.project-item');
-        // if (projectItems.length) {
-        //   gsap.set(projectItems, { 
-        //     opacity: 0, 
-        //     x: (i) => i % 2 === 0 ? -50 : 50 
-        //   });
-          
-        //   // Use markers: false to reduce debug overhead
-        //   ScrollTrigger.batch(projectItems, {
-        //     onEnter: (batch) => gsap.to(batch, {
-        //       opacity: 1,
-        //       x: 0,
-        //       stagger: 0.15,
-        //       overwrite: true,
-        //       duration: 1,
-        //       ease: 'power2.out',
-        //     }),
-        //     start: 'top 80%',
-        //     once: true,
-        //     markers: false
-        //   });
-        // }
-
-        
-        
-
-
       });
 
       return ctx;
     };
 
-    // Debounced resize handler
+    // --Debounced resize handler
     let resizeTimeout;
     const handleResize = () => {
       clearTimeout(resizeTimeout);
@@ -133,7 +104,7 @@ export default function Home() {
     };
   }, []);
 
-  // Optimize image lazy loading using IntersectionObserver
+  // --image lazy loading
   useEffect(() => {
     const imageObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -163,8 +134,7 @@ export default function Home() {
 
   
 
-  // Theme effect
-  // System dark mode handling
+  // --Theme effect
   useEffect(() => {
     document.documentElement.style.colorScheme = 'none';
   }, []);
@@ -176,7 +146,6 @@ export default function Home() {
 
   return (
     <>
-      <p className='absolute text-2xl' ref={pointerRef}>*</p>
 
       <div
         ref={containerRef}

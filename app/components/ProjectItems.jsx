@@ -21,7 +21,7 @@ const ProjectItem = ({ choiceTheme, timeTheme, children }) => {
 
     if (!containerRef.current) return;
 
-    // Create timeline with eased animations
+
     const tl = gsap.timeline({
       defaults: {
         ease: 'power2.inOut',
@@ -30,7 +30,7 @@ const ProjectItem = ({ choiceTheme, timeTheme, children }) => {
       paused: true
     });
 
-    // Animate only bottom border
+
     tl.fromTo(bottomBorderRef.current, 
       { scaleX: 0, transformOrigin: 'left' },
       { scaleX: 1 }
