@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
+import ProjectItem from './components/ProjectItems';
 
 
 export default function Home() {
@@ -11,6 +12,9 @@ export default function Home() {
   const contactRef = useRef(null);
   const footerRef = useRef(null);
   const projectsRef = useRef(null);
+
+  const pointerRef = useRef(null);
+
   const [greeting, setGreeting] = useState('');
   const [timeTheme, setTimeTheme] = useState('');
   const [choiceTheme, setChoiceTheme] = useState('dark');
@@ -77,28 +81,33 @@ export default function Home() {
         }
 
         // Optimize project items animation
-        const projectItems = gsap.utils.toArray('.project-item');
-        if (projectItems.length) {
-          gsap.set(projectItems, { 
-            opacity: 0, 
-            x: (i) => i % 2 === 0 ? -50 : 50 
-          });
+        // const projectItems = gsap.utils.toArray('.project-item');
+        // if (projectItems.length) {
+        //   gsap.set(projectItems, { 
+        //     opacity: 0, 
+        //     x: (i) => i % 2 === 0 ? -50 : 50 
+        //   });
           
-          // Use markers: false to reduce debug overhead
-          ScrollTrigger.batch(projectItems, {
-            onEnter: (batch) => gsap.to(batch, {
-              opacity: 1,
-              x: 0,
-              stagger: 0.15,
-              overwrite: true,
-              duration: 1,
-              ease: 'power2.out',
-            }),
-            start: 'top 80%',
-            once: true,
-            markers: false
-          });
-        }
+        //   // Use markers: false to reduce debug overhead
+        //   ScrollTrigger.batch(projectItems, {
+        //     onEnter: (batch) => gsap.to(batch, {
+        //       opacity: 1,
+        //       x: 0,
+        //       stagger: 0.15,
+        //       overwrite: true,
+        //       duration: 1,
+        //       ease: 'power2.out',
+        //     }),
+        //     start: 'top 80%',
+        //     once: true,
+        //     markers: false
+        //   });
+        // }
+
+        
+        
+
+
       });
 
       return ctx;
@@ -152,7 +161,6 @@ export default function Home() {
 
 
 
-
   
 
   // Theme effect
@@ -168,6 +176,8 @@ export default function Home() {
 
   return (
     <>
+      <p className='absolute text-2xl' ref={pointerRef}>*</p>
+
       <div
         ref={containerRef}
         className={`relative cursor-default  backdrop-brightness-105 bg-blend-hard-light h-fit  font-medium  top-left-animation  ${choiceTheme == 'white' ? 'bg-zinc-100 font-pixelify-sans' : choiceTheme == 'blue' ? 'font-spicy-rice-regular' : 'font-serif bg-black'}`}
@@ -311,10 +321,9 @@ export default function Home() {
             </p>
             <div ref={projectsRef} className='flex  items-center flex-col overflow-hidden md:overflow-x-auto custom-scrollbar text-zinc-900 mb-3 pb-5'>
               <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
-                  <div
-                   className={`
-                   ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-r-4 text-gray-200'} ${timeTheme === 'morning' ? 'border-cyan-500' : timeTheme === 'afternoon' ? 'border-emerald-500' : 'border-zinc-500'} w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
-                   `}>
+                  
+                  
+                  <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
                     <div className='flex justify-between'>
                       <p className='text-[1.2rem] md:text-md'>
                       BaBy Land <span className='text-xs'> <a href="https://github.com/sarangk07/Ecommerce-baby-products" target="_blank">- git</a></span>
@@ -323,7 +332,7 @@ export default function Home() {
                     </div>
                   <a href="https://ecommerce-baby-products.vercel.app/" target="_blank">
                   <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64 z-20`}
                     src="/Baby-Products.PNG"
                     alt="Baby Land"
                     width={500}
@@ -332,16 +341,17 @@ export default function Home() {
                   />
                   </a>
                   <p className=' mt-3 hidden md:flex text-sm  cursor-default hover:text-black'>Developed a small e-commerce website with Reactjs,Bootstrap</p>
-                </div>
+                  </ProjectItem>
+
+
                 <div className={`
                    ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -right-64 `} />              
               </div>
 
               <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
-                  <div className={`
-                 ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-l-4 border-zinc-800 text-gray-200'}  ${timeTheme === 'morning' ? 'border-cyan-500' : timeTheme === 'afternoon' ? 'border-emerald-500' : 'border-zinc-500'} w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
-                  `}>
+                  
+              <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
                     <div className='flex justify-between'>
                       <p className='text-[1.2rem] md:text-md'>
                         Modes Arena <span className='text-xs'> <a href="https://github.com/sarangk07/Car-Modz" target="_blank">- git</a></span>
@@ -351,7 +361,7 @@ export default function Home() {
                       </p>
                     </div>
                   <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
                     src="/Mode-Arena-latest.PNG"
                     alt="ModeArea"
                     width={500}
@@ -359,16 +369,16 @@ export default function Home() {
                     loading='lazy'
                   />
                   <p className='mt-3 hidden cursor-default md:flex md:flex-col text-sm  hover:text-black'>Developing a website for car accesseries with <span className='text-[14px] font-bold'>Nextjs,Tailwindcss,Redux,GSAP,Python-Django,DRF,SQLlite</span></p>
-                </div>
+                  </ProjectItem>
+
+
                 <div className={`
                    ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -left-64 `} />
               </div>
 
               <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
-                  <div className={`
-                   ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-r-4 border-zinc-800 text-gray-200'}  ${timeTheme === 'morning' ? 'border-cyan-500' : timeTheme === 'afternoon' ? 'border-emerald-500' : 'border-zinc-500'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
-                    `}>
+              <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
                     <div className='flex justify-between'>
                       <p className='text-[1.2rem] md:text-md'>
                         RentKaroo <span className='text-xs'> <a href="https://github.com/sarangk07/Rent_karoo" target="_blank">- git</a></span>
@@ -376,7 +386,7 @@ export default function Home() {
                     </div>
                    <a href="https://rentkaro.shop/" target="_blank">
                    <Image
-                      className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                      className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
                       src="/RentKaro.PNG"
                       alt="RentKaro"
                       width={500}
@@ -385,15 +395,16 @@ export default function Home() {
                     />
                    </a>
                   <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Developed a Rent a Car website using python Django,PSQL,JWT,SMTP,AWS,Razorpay</p>
-                </div>
+                  </ProjectItem>
+
+
                 <div className={`
                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -right-64 `} />
               </div>
 
               <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
-                  <div className={`
-                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-l-4 border-zinc-800 text-gray-200'} ${timeTheme === 'morning' ? 'border-cyan-500' : timeTheme === 'afternoon' ? 'border-emerald-500' : 'border-zinc-500'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent`}>
+              <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
                       <div className='flex justify-between'>
                       <p className='text-[1.2rem] md:text-md'>
                         Virtual Mingle <span className='text-xs'> <a href="https://github.com/sarangk07/Social-Media--Frontend-" target="_blank">- git</a></span>
@@ -404,7 +415,7 @@ export default function Home() {
                     </div>
                   <a href="https://social-media-azure-alpha.vercel.app/" target="_blank">
                   <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
                     src="/social-meadia.PNG"
                     alt="social-meadia"
                     width={500}
@@ -413,15 +424,14 @@ export default function Home() {
                   />
                   </a>
                   <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Developed a social meadia website using NEXTJS ,API ,Tailwindcss ,GSAP</p>
-                </div>
+                  </ProjectItem>
                 <div className={`
                    ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -left-64 `} />
               </div>
 
               <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
-                  <div className={`
-                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-r-4 border-zinc-800 text-gray-200'}  ${timeTheme === 'morning' ? 'border-cyan-500' : timeTheme === 'afternoon' ? 'border-emerald-500' : 'border-zinc-500'} w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent`}>
+              <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
                       <div className='flex justify-between'>
                       <p className='text-[1.2rem] md:text-md'>
                         QuZ <span className='text-xs'> <a href="https://github.com/sarangk07/quz" target="_blank">- git</a></span>
@@ -432,7 +442,7 @@ export default function Home() {
                     </div>
                   <a href="https://quz-game.vercel.app/" target="_blank">
                   <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
                     src="/quz.PNG"
                     alt="qz"
                     width={500}
@@ -441,47 +451,11 @@ export default function Home() {
                   />
                   </a>
                   <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Developed a Quiz-game using NEXTJS ,Open-Trivia API ,Tailwindcss</p>
-                </div>
+                  </ProjectItem>
                 <div className={`
                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -right-64 `} />
               </div>
-
-
-              {/* <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
-                  <div className={`
-                    ${choiceTheme == 'red' ?  ' text-zinc-100' : choiceTheme == 'blue' ? 'text-zinc-100' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-400' : 'bg-stone-950 border-b-4 border-l-4 border-zinc-800 text-gray-200'}  w-72 h-44 md:w-[580px] md:h-96 pl-4 pr-4 md:bg-transparent
-                    
-                    `}>
-
-                      <div className='flex justify-between'>
-                      <p className='text-[1.2rem] md:text-md'>
-                        Poki-Arena<span className='text-xs'> </span>
-                      </p>
-                      <p className='flex text-xs md:text-sm cursor-default'>
-                        in-progress
-                      </p>
-                    </div>
-                  <a href="https://mini-games-five.vercel.app/" target="_blank">
-                 
-                  
-                  <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[0.9] md:w-fit md:h-72 h-44 w-64`}
-                    src="/poki-arena.png"
-                    alt="poki-arena"
-                    width={500}
-                    height={300}
-                    loading='lazy'
-                  />
-                  
-                  </a>
-                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Developed a LUDO game using NEXTJS, Tailwindcss.</p>
-                </div>
-                <div className={`
-                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
-                  hidden md:flex h-full w-2 absolute top-1 -left-64 `} />
-
-              </div> */}
 
 
 
