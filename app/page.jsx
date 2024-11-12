@@ -165,7 +165,7 @@ export default function Home() {
             {/* <div  className='flex z-30 absolute left-0 top-5 '>
               <Image src="/LOGOP.png" alt="logo" width={100} height={100} loading='lazy' className='w-20  md:w-32 '/>
             </div> */}
-              <button className={`relative rounded-sm px-2 mb-2 py-2  border-2 border-white hover:bg-white hover:text-black transition-colors duration-200  text-sm ${choiceTheme == 'red' ?  'bg-transparent border-zinc-900' : choiceTheme == 'blue' ? 'bg-transparent' : choiceTheme == 'white' ? 'bg-transparent border-zinc-500' : 'bg-transparent text-white hover:border-white'}`}>
+              <button className={`relative rounded-sm px-2 mb-2 py-2  border-2 border-white hover:bg-white hover:text-black  text-sm ${choiceTheme == 'red' ?  'bg-transparent border-zinc-900' : choiceTheme == 'blue' ? 'bg-transparent' : choiceTheme == 'white' ? 'bg-transparent border-zinc-500' : 'bg-transparent text-white hover:border-white'}`}>
               <a
                 className="font-mono "
                 href="https://drive.google.com/file/d/1UvJjKtmezPk-4623rI-QvvhJkL9jR-7K/view"
@@ -297,7 +297,7 @@ export default function Home() {
                       <p className='text-[1.2rem] md:text-md'>
                       BaBy Land <span className='text-xs'> <a href="https://github.com/sarangk07/Ecommerce-baby-products" target="_blank">- git</a></span>
                       </p>
-                      <p className='text-xs md:text-sm cursor-default'>Mini-Project</p>
+                      <p className='text-xs md:text-sm cursor-default mt-1'>Mini-Project</p>
                     </div>
                   <a href="https://ecommerce-baby-products.vercel.app/" target="_blank">
                   <Image
@@ -325,7 +325,7 @@ export default function Home() {
                       <p className='text-[1.2rem] md:text-md'>
                         Modes Arena <span className='text-xs'> <a href="https://github.com/sarangk07/Car-Modz" target="_blank">- git</a></span>
                       </p>
-                      <p className='flex text-xs md:text-sm cursor-default'>
+                      <p className='flex text-xs md:text-sm cursor-default mt-1'>
                         in-progress
                       </p>
                     </div>
@@ -378,7 +378,7 @@ export default function Home() {
                       <p className='text-[1.2rem] md:text-md'>
                         Virtual Mingle <span className='text-xs'> <a href="https://github.com/sarangk07/Social-Media--Frontend-" target="_blank">- git</a></span>
                       </p>
-                      <p className='hidden md:flex text-xs md:text-sm cursor-default'>
+                      <p className='hidden md:flex text-xs md:text-sm cursor-default mt-1'>
                         Main-Project
                       </p>
                     </div>
@@ -405,7 +405,7 @@ export default function Home() {
                       <p className='text-[1.2rem] md:text-md'>
                         QuZ <span className='text-xs'> <a href="https://github.com/sarangk07/quz" target="_blank">- git</a></span>
                       </p>
-                      <p className='flex text-xs md:text-sm cursor-default'>
+                      <p className='flex text-xs md:text-sm cursor-default mt-1'>
                         Mini-Project
                       </p>
                     </div>
@@ -426,20 +426,18 @@ export default function Home() {
                   hidden md:flex h-full w-2 absolute top-1 -right-64 `} />
               </div>
 
-
-
             </div>
           </div>
           <div className="m-4 flex border-spacing-9  border-t-4">
             <div className={`${choiceTheme == 'white' ? 'text-zinc-400' : ''} w-full p-3 flex flex-col justify-center items-center overflow-x-auto  custom-scrollbar`}>
               <p>
-                "Got a project in mind? Let’s turn it into reality.
+                &quot;Got a project in mind? Let&rsquo;s turn it into reality.&quot;
               </p>
               <p>
-                Let’s build something amazing together.
+                Let&rsquo;s build something amazing together.
               </p>
               <p className='mb-5'>
-                Reach out and let’s collaborate on your next big idea."
+                Reach out and let&rsquo;s collaborate on your next big idea."
               </p>
                <a href="mailto:sarang00005@gmail.com" className='border  p-2 pt-1 m-2 rounded-md' >sarang00005@gmail.com</a>
                <div className=' flex md:mt-5 mt-0 ml-4 justify-center '>  

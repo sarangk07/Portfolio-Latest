@@ -60,8 +60,8 @@ const ProjectItem = ({ choiceTheme, timeTheme, children }) => {
                    'text-gray-200';
 
   const bgColor = choiceTheme === 'white' ? 'bg-zinc-200' :
-                 choiceTheme !== 'red' && choiceTheme !== 'blue' ? 'bg-stone-950' :
-                 '';
+                 choiceTheme !== 'red' && choiceTheme !== 'blue' ? 'bg-gradient-to-t from-black to-stone-900 hover:to-stone-700 rounded-t-md' :
+'bg-gradient-to-t from-black to-blue-800 hover:to-blue-900 rounded-t-md';
 
   return (
     <div
@@ -71,7 +71,7 @@ const ProjectItem = ({ choiceTheme, timeTheme, children }) => {
         ${textColor}
         ${bgColor}
         w-72 h-44 md:w-[580px] md:h-96 
-        pl-4 pr-4 md:bg-transparent
+        pl-4 pr-4 md:bg-transparent 
       `}
     >
       <div className="relative z-10">
@@ -80,7 +80,7 @@ const ProjectItem = ({ choiceTheme, timeTheme, children }) => {
       
       <div 
         ref={bottomBorderRef}
-        className="absolute bottom-0 left-0 h-1 w-full transform-gpu"
+        className="absolute bottom-0 left-0 h-1  w-full transform-gpu "
         style={{ backgroundColor: getBorderColor() }}
       />
     </div>
