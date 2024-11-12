@@ -60,7 +60,7 @@ const ProjectItem = ({ choiceTheme, timeTheme, children }) => {
                    'text-gray-200';
 
   const bgColor = choiceTheme === 'white' ? 'bg-zinc-200' :
-                 choiceTheme !== 'red' && choiceTheme !== 'blue' ? 'bg-gradient-to-t from-black to-stone-900 hover:to-stone-700 rounded-t-md' :
+                 choiceTheme !== 'red' && choiceTheme !== 'blue' ? 'bg-gradient-to-t from-black to-stone-800 hover:to-stone-700 rounded-t-md' :
 'bg-gradient-to-t from-black to-blue-800 hover:to-blue-900 rounded-t-md';
 
   return (

@@ -154,7 +154,7 @@ export default function Home() {
         <div className={`h-1/5 md:h-3/5 flex flex-col w-full text-center ${choiceTheme == 'red' ?  'text-red-200' : choiceTheme == 'blue' ? 'text-blue-200' : choiceTheme == 'white' ? 'text-zinc-400' : 'text-gray-200'}`}>
           <div
             ref={titleRef}
-            className={`h-[45rem] md:h-[42rem] overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-9 ml-4 mr-4 flex flex-col justify-center items-center ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? ' text-zinc-50 bg-gradient-to-r from-black via-blue-600 to-black shadow-md shadow-black/50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : 'bg-gradient-to-r from-black via-zinc-700 to-black shadow-lg shadow-black/50'}`}
+            className={`h-[45rem] md:h-[42rem] overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-9 ml-4 mr-4 flex flex-col justify-center items-center ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? ' text-zinc-50 bg-gradient-to-r from-black via-blue-600 to-black shadow-md shadow-black/50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : 'bg-gradient-to-r from-black via-stone-800 to-black shadow-lg shadow-black/50'}`}
           >
             <div className='flex flex-col z-50 absolute right-2 top-4'>
               <p onClick={()=> setChoiceTheme('blue')} className='w-4 h-4 bg-blue-500 mt-3 border border-white rounded-sm'/>
@@ -483,7 +483,7 @@ export default function Home() {
         </div>
         <div
           ref={footerRef}
-          className={`h-2/5 md:h-1/5 rounded-lg ml-2 mr-2  text-center font-mono text-md ${choiceTheme == 'red' ?  'bg-zinc-950 ' : choiceTheme == 'blue' ? 'bg-zinc-950' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-500' : 'bg-zinc-950'}`}
+          className={`h-2/5 md:h-1/5 rounded-lg ml-2 mr-2  text-center font-mono text-sm md:text-md ${choiceTheme == 'red' ?  'bg-zinc-950 ' : choiceTheme == 'blue' ? 'bg-zinc-950' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-500' : 'bg-zinc-950'}`}
         >
           © 2024. All Rights Reserved By Sarang
         </div>
