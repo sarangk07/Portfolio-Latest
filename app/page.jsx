@@ -50,7 +50,7 @@ export default function Home() {
           !contactRef.current || !footerRef.current) return;
 
       const ctx = gsap.context(() => {
-        // --Initial animations batch
+        // --Initial animations
         const initialTl = gsap.timeline({ delay: 1 });
         initialTl
           .fromTo(
@@ -323,20 +323,22 @@ export default function Home() {
               <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
                     <div className='flex justify-between'>
                       <p className='text-[1.2rem] md:text-md'>
-                        Modes Arena <span className='text-xs'> <a href="https://github.com/sarangk07/Car-Modz" target="_blank">- git</a></span>
+                        Torque Tribe <span className='text-xs'> <a href="https://github.com/sarangk07/Car-Modz" target="_blank">- git</a></span>
                       </p>
                       <p className='flex text-xs md:text-sm cursor-default mt-1'>
                         in-progress
                       </p>
                     </div>
+                  <a href="https://torque-tribe.vercel.app/" target="_blank">
                   <Image
                     className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
                     src="/Mode-Arena-latest.PNG"
-                    alt="ModeArea"
+                    alt="Torque Tribe"
                     width={500}
                     height={300}
                     loading='lazy'
                   />
+                  </a>
                   <p className='mt-3 hidden cursor-default md:flex md:flex-col text-sm  hover:text-black'>Developing a website for car accesseries with <span className='text-[14px] font-bold'>Nextjs,Tailwindcss,Redux,GSAP,Python-Django,DRF,SQLlite</span></p>
                   </ProjectItem>
 
@@ -424,6 +426,35 @@ export default function Home() {
                 <div className={`
                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -right-64 `} />
+              </div>
+
+
+
+              <div className={`relative left-11  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
+              <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
+                      <div className='flex justify-between'>
+                      <p className='text-[1.2rem] md:text-md'>
+                        B10 GSAP <span className='text-xs'> <a href="https://github.com/sarangk07/GSAP-tests" target="_blank">- git</a></span>
+                      </p>
+                      <p className='flex text-xs md:text-sm cursor-default mt-1'>
+                        Mini-Test-Project
+                      </p>
+                    </div>
+                  <a href="https://gsap-tests.vercel.app/" target="_blank">
+                  <Image
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
+                    src="/GSAP-b10-test.PNG"
+                    alt="B10 GSAP"
+                    width={500}
+                    height={300}
+                    loading='lazy'
+                  />
+                  </a>
+                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Try to make a ScrollTriger Animation using GSAP</p>
+                  </ProjectItem>
+                <div className={`
+                  ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
+                  hidden md:flex h-full w-2 absolute top-1 -left-64 `} />
               </div>
 
             </div>
