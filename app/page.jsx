@@ -429,15 +429,14 @@ export default function Home() {
               </div>
 
 
-
-              <div className={`relative left-11  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
+              <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
               <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
                       <div className='flex justify-between'>
                       <p className='text-[1.2rem] md:text-md'>
-                        B10 GSAP <span className='text-xs'> <a href="https://github.com/sarangk07/GSAP-tests" target="_blank">- git</a></span>
+                      B10 GSAP <span className='text-xs'> <a href="https://github.com/sarangk07/GSAP-tests" target="_blank">- git</a></span>
                       </p>
-                      <p className='flex text-xs md:text-sm cursor-default mt-1'>
-                        Mini-Test-Project
+                      <p className='hidden md:flex text-xs md:text-sm cursor-default mt-1'>
+                      Mini-Test-Project
                       </p>
                     </div>
                   <a href="https://gsap-tests.vercel.app/" target="_blank">
@@ -453,9 +452,15 @@ export default function Home() {
                   <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Try to make a ScrollTriger Animation using GSAP</p>
                   </ProjectItem>
                 <div className={`
-                  ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
+                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
                   hidden md:flex h-full w-2 absolute top-1 -left-64 `} />
               </div>
+
+
+
+
+
+
 
             </div>
           </div>
