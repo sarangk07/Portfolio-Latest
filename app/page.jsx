@@ -433,7 +433,7 @@ export default function Home() {
               <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
                       <div className='flex justify-between'>
                       <p className='text-[1.2rem] md:text-md'>
-                      B10 GSAP <span className='text-xs'> <a href="https://github.com/sarangk07/GSAP-tests" target="_blank">- git</a></span>
+                        GSAP ANIMATIONS<span className='text-xs'> <a href="https://github.com/sarangk07/GSAP-tests" target="_blank">- git</a></span>
                       </p>
                       <p className='hidden md:flex text-xs md:text-sm cursor-default mt-1'>
                       Mini-Test-Project
@@ -442,14 +442,14 @@ export default function Home() {
                   <a href="https://gsap-tests.vercel.app/" target="_blank">
                   <Image
                     className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
-                    src="/GSAP-b10-test.PNG"
+                    src="/GSAP.jpg"
                     alt="B10 GSAP"
                     width={500}
                     height={300}
                     loading='lazy'
                   />
                   </a>
-                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Try to make a ScrollTriger Animation using GSAP</p>
+                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>GSAP Animations</p>
                   </ProjectItem>
                 <div className={`
                    ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
