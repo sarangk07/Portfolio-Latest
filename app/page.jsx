@@ -294,7 +294,7 @@ export default function Home() {
                   
                   <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
                     <div className='flex justify-between'>
-                      <p className='text-[1.2rem] md:text-md'>
+                      <p className='text-[1rem] md:text-md'>
                       BaBy Land <span className='text-xs'> <a href="https://github.com/sarangk07/Ecommerce-baby-products" target="_blank">- git</a></span>
                       </p>
                       <p className='text-xs md:text-sm cursor-default mt-1'>Mini-Project</p>
@@ -322,7 +322,7 @@ export default function Home() {
                   
               <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
                     <div className='flex justify-between'>
-                      <p className='text-[1.2rem] md:text-md'>
+                      <p className='text-[1rem] md:text-md'>
                         Torque Tribe <span className='text-xs'> <a href="https://github.com/sarangk07/Car-Modz" target="_blank">- git</a></span>
                       </p>
                       <p className='flex text-xs md:text-sm cursor-default mt-1'>
@@ -351,7 +351,7 @@ export default function Home() {
               <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
               <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
                     <div className='flex justify-between'>
-                      <p className='text-[1.2rem] md:text-md'>
+                      <p className='text-[1rem] md:text-md'>
                         RentKaroo <span className='text-xs'> <a href="https://github.com/sarangk07/Rent_karoo" target="_blank">- git</a></span>
                       </p>
                     </div>
@@ -377,7 +377,7 @@ export default function Home() {
               <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
               <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
                       <div className='flex justify-between'>
-                      <p className='text-[1.2rem] md:text-md'>
+                      <p className='text-[1rem] md:text-md'>
                         Virtual Mingle <span className='text-xs'> <a href="https://github.com/sarangk07/Social-Media--Frontend-" target="_blank">- git</a></span>
                       </p>
                       <p className='hidden md:flex text-xs md:text-sm cursor-default mt-1'>
@@ -404,7 +404,7 @@ export default function Home() {
               <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
               <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
                       <div className='flex justify-between'>
-                      <p className='text-[1.2rem] md:text-md'>
+                      <p className='text-[1rem] md:text-md'>
                         QuZ <span className='text-xs'> <a href="https://github.com/sarangk07/quz" target="_blank">- git</a></span>
                       </p>
                       <p className='flex text-xs md:text-sm cursor-default mt-1'>
@@ -432,8 +432,8 @@ export default function Home() {
               <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
               <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
                       <div className='flex justify-between'>
-                      <p className='text-[1.2rem] md:text-md'>
-                        GSAP ANIMATIONS<span className='text-xs'> <a href="https://github.com/sarangk07/GSAP-tests" target="_blank">- git</a></span>
+                      <p className='text-[1rem] md:text-md'>
+                        GSAP Animations<span className='text-xs'> <a href="https://github.com/sarangk07/GSAP-tests" target="_blank">- git</a></span>
                       </p>
                       <p className='hidden md:flex text-xs md:text-sm cursor-default mt-1'>
                       Mini-Test-Project
@@ -457,7 +457,32 @@ export default function Home() {
               </div>
 
 
-
+              <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
+                <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
+                      <div className='flex justify-between'>
+                      <p className='text-[1rem] md:text-md'>
+                        Theyyam Web <span className='text-xs'> </span>
+                      </p>
+                      <p className='flex text-xs md:text-sm cursor-default mt-1'>
+                        Mini-Project
+                      </p>
+                    </div>
+                  <a href="https://theyyam-web.vercel.app/" target="_blank">
+                  <Image
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
+                    src="/theyyam2.PNG"
+                    alt="qz"
+                    width={500}
+                    height={300}
+                    loading='lazy'
+                  />
+                  </a>
+                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>A website for Theyyam festival details</p>
+                  </ProjectItem>
+                <div className={`
+                  ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
+                  hidden md:flex h-full w-2 absolute top-1 -right-64 `} />
+              </div>
 
 
 
