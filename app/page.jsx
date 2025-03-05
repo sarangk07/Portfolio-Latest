@@ -486,6 +486,35 @@ export default function Home() {
 
 
 
+              <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
+              <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
+                      <div className='flex justify-between'>
+                      <p className='text-[1rem] md:text-md'>
+                      SanSong<span className='text-xs'> </span>
+                      </p>
+                      <p className='hidden md:flex text-xs md:text-sm cursor-default mt-1'>
+                      Mini-Project
+                      </p>
+                    </div>
+                  <a href="https://online-radio-ashen.vercel.app/" target="_blank">
+                  <Image
+                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
+                    src="/sansong.PNG"
+                    alt="sansong"
+                    width={500}
+                    height={300}
+                    loading='lazy'
+                  />
+                  </a>
+                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Online Radio</p>
+                  </ProjectItem>
+                <div className={`
+                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
+                  hidden md:flex h-full w-2 absolute top-1 -left-64 `} />
+              </div>
+
+
+
 
             </div>
           </div>
