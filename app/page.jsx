@@ -499,7 +499,7 @@ export default function Home() {
                   <a href="https://online-radio-ashen.vercel.app/" target="_blank">
                   <Image
                     className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
-                    src="/sansong.PNG"
+                    src="/Sansong.PNG"
                     alt="sansong"
                     width={500}
                     height={300}
