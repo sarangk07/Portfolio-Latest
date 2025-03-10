@@ -1,7 +1,9 @@
 'use client';
+
 import { useEffect, useRef, useState, useCallback } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import Image from 'next/image';
 import ProjectItem from './components/ProjectItems';
 
@@ -17,7 +19,7 @@ export default function Home() {
 
   const [greeting, setGreeting] = useState('');
   const [timeTheme, setTimeTheme] = useState('');
-  const [choiceTheme, setChoiceTheme] = useState('dark');
+  const [choiceTheme, setChoiceTheme] = useState('white');
 
   // --Time-based content update
   const updateTimeBasedContent = useCallback(() => {
@@ -41,31 +43,76 @@ export default function Home() {
   }, [updateTimeBasedContent]);
 
   // --Main animations
+  // useEffect(() => {
+  //   gsap.registerPlugin(ScrollTrigger);
+    
+  //   // --all GSAP animations
+  //   const setupAnimations = () => {
+  //     if (!containerRef.current || !titleRef.current || 
+  //         !contactRef.current || !footerRef.current) return;
+
+  //     const ctx = gsap.context(() => {
+  //       // --Initial animations
+  //       // const initialTl = gsap.timeline({ delay: 1 });
+  //       // initialTl
+  //       //   .fromTo(
+  //       //     [titleRef.current, contactRef.current],
+  //       //     { opacity: 0, x: -50 },
+  //       //     { opacity: 1, x: 0, duration: 1, ease: 'power2.out', stagger: 0.2 }
+  //       //   )
+  //       //   .fromTo(
+  //       //     footerRef.current,
+  //       //     { y: 100, opacity: 0 },
+  //       //     { y: 0, opacity: 1, duration: 1, ease: 'power2.out' },
+  //       //     '-=0.5'
+  //       //   );
+
+  //       //--pixel bars animation
+  //       const pixelBars = document.querySelectorAll('.pixel-bar');
+  //       if (pixelBars.length) {
+  //         gsap.to(pixelBars, {
+  //           duration: 1.5,
+  //           y: '5%',
+  //           x: '5%',
+  //           rotation: 1,
+  //           repeat: 1,
+  //           yoyo: true,
+  //           ease: 'sine.inOut',
+  //           stagger: 0.15,
+  //         });
+  //       }
+  //     });
+
+  //     return ctx;
+  //   };
+
+  //   // --Debounced resize handler
+  //   let resizeTimeout;
+  //   const handleResize = () => {
+  //     clearTimeout(resizeTimeout);
+  //     resizeTimeout = setTimeout(() => {
+  //       ScrollTrigger.refresh(true);
+  //     }, 250);
+  //   };
+
+  //   const ctx = setupAnimations();
+  //   window.addEventListener('resize', handleResize, { passive: true });
+
+  //   return () => {
+  //     ctx?.revert();
+  //     window.removeEventListener('resize', handleResize);
+  //     ScrollTrigger.getAll().forEach(st => st.kill());
+  //     clearTimeout(resizeTimeout);
+  //   };
+  // }, []);
+
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    
-    // --all GSAP animations
     const setupAnimations = () => {
-      if (!containerRef.current || !titleRef.current || 
-          !contactRef.current || !footerRef.current) return;
-
+      if (!containerRef.current || !titleRef.current || !contactRef.current || !footerRef.current) return;
       const ctx = gsap.context(() => {
-        // --Initial animations
-        const initialTl = gsap.timeline({ delay: 1 });
-        initialTl
-          .fromTo(
-            [titleRef.current, contactRef.current],
-            { opacity: 0, x: -50 },
-            { opacity: 1, x: 0, duration: 1, ease: 'power2.out', stagger: 0.2 }
-          )
-          .fromTo(
-            footerRef.current,
-            { y: 100, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1, ease: 'power2.out' },
-            '-=0.5'
-          );
-
-        //--pixel bars animation
+        // Pixel bars animation-------------
         const pixelBars = document.querySelectorAll('.pixel-bar');
         if (pixelBars.length) {
           gsap.to(pixelBars, {
@@ -80,29 +127,19 @@ export default function Home() {
           });
         }
       });
-
+  
       return ctx;
     };
-
-    // --Debounced resize handler
-    let resizeTimeout;
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        ScrollTrigger.refresh(true);
-      }, 250);
-    };
-
+  
     const ctx = setupAnimations();
-    window.addEventListener('resize', handleResize, { passive: true });
-
+  
     return () => {
       ctx?.revert();
-      window.removeEventListener('resize', handleResize);
       ScrollTrigger.getAll().forEach(st => st.kill());
-      clearTimeout(resizeTimeout);
     };
   }, []);
+
+
 
   // --image lazy loading
   useEffect(() => {
