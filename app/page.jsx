@@ -1,11 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
 import Image from 'next/image';
 import ProjectItem from './components/ProjectItems';
+
 
 
 export default function Home() {
@@ -42,104 +40,6 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [updateTimeBasedContent]);
 
-  // --Main animations
-  // useEffect(() => {
-  //   gsap.registerPlugin(ScrollTrigger);
-    
-  //   // --all GSAP animations
-  //   const setupAnimations = () => {
-  //     if (!containerRef.current || !titleRef.current || 
-  //         !contactRef.current || !footerRef.current) return;
-
-  //     const ctx = gsap.context(() => {
-  //       // --Initial animations
-  //       // const initialTl = gsap.timeline({ delay: 1 });
-  //       // initialTl
-  //       //   .fromTo(
-  //       //     [titleRef.current, contactRef.current],
-  //       //     { opacity: 0, x: -50 },
-  //       //     { opacity: 1, x: 0, duration: 1, ease: 'power2.out', stagger: 0.2 }
-  //       //   )
-  //       //   .fromTo(
-  //       //     footerRef.current,
-  //       //     { y: 100, opacity: 0 },
-  //       //     { y: 0, opacity: 1, duration: 1, ease: 'power2.out' },
-  //       //     '-=0.5'
-  //       //   );
-
-  //       //--pixel bars animation
-  //       const pixelBars = document.querySelectorAll('.pixel-bar');
-  //       if (pixelBars.length) {
-  //         gsap.to(pixelBars, {
-  //           duration: 1.5,
-  //           y: '5%',
-  //           x: '5%',
-  //           rotation: 1,
-  //           repeat: 1,
-  //           yoyo: true,
-  //           ease: 'sine.inOut',
-  //           stagger: 0.15,
-  //         });
-  //       }
-  //     });
-
-  //     return ctx;
-  //   };
-
-  //   // --Debounced resize handler
-  //   let resizeTimeout;
-  //   const handleResize = () => {
-  //     clearTimeout(resizeTimeout);
-  //     resizeTimeout = setTimeout(() => {
-  //       ScrollTrigger.refresh(true);
-  //     }, 250);
-  //   };
-
-  //   const ctx = setupAnimations();
-  //   window.addEventListener('resize', handleResize, { passive: true });
-
-  //   return () => {
-  //     ctx?.revert();
-  //     window.removeEventListener('resize', handleResize);
-  //     ScrollTrigger.getAll().forEach(st => st.kill());
-  //     clearTimeout(resizeTimeout);
-  //   };
-  // }, []);
-
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    const setupAnimations = () => {
-      if (!containerRef.current || !titleRef.current || !contactRef.current || !footerRef.current) return;
-      const ctx = gsap.context(() => {
-        // Pixel bars animation-------------
-        const pixelBars = document.querySelectorAll('.pixel-bar');
-        if (pixelBars.length) {
-          gsap.to(pixelBars, {
-            duration: 1.5,
-            y: '5%',
-            x: '5%',
-            rotation: 1,
-            repeat: 1,
-            yoyo: true,
-            ease: 'sine.inOut',
-            stagger: 0.15,
-          });
-        }
-      });
-  
-      return ctx;
-    };
-  
-    const ctx = setupAnimations();
-  
-    return () => {
-      ctx?.revert();
-      ScrollTrigger.getAll().forEach(st => st.kill());
-    };
-  }, []);
-
-
 
   // --image lazy loading
   useEffect(() => {
@@ -168,9 +68,6 @@ export default function Home() {
   }, []);
 
 
-
-  
-
   // --Theme effect
   useEffect(() => {
     document.documentElement.style.colorScheme = 'none';
@@ -178,15 +75,12 @@ export default function Home() {
 
 
 
-
-  
-
   return (
     <>
 
       <div
         ref={containerRef}
-        className={`relative cursor-default  backdrop-brightness-105 bg-blend-hard-light h-fit  font-medium  top-left-animation  ${choiceTheme == 'white' ? 'bg-zinc-100 font-pixelify-sans' : choiceTheme == 'blue' ? 'font-spicy-rice-regular' : 'font-serif bg-black'}`}
+        className={`relative hover-effect cursor-default  backdrop-brightness-105 bg-blend-hard-light h-fit  font-medium  top-left-animation  ${choiceTheme == 'white' ? 'bg-zinc-100 font-pixelify-sans' : choiceTheme == 'blue' ? 'font-spicy-rice-regular' : 'font-serif bg-black'}`}
       >
         <div className={`h-1/5 md:h-3/5 flex flex-col w-full text-center ${choiceTheme == 'red' ?  'text-red-200' : choiceTheme == 'blue' ? 'text-blue-200' : choiceTheme == 'white' ? 'text-zinc-400' : 'text-gray-200'}`}>
           <div
