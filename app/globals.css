@@ -1,90 +1,393 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+25&family=Pixelify+Sans:wght@400..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+25&family=Pixelify+Sans:wght@400..700&family=Silkscreen:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Protest+Strike&family=Spicy+Rice&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ===== DESIGN TOKENS ===== */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* Dark Theme Colors */
+  --bg-primary: #0f0f17;
+  --bg-secondary: #1a1a2e;
+  --bg-tertiary: #16213e;
+  --bg-elevated: #252542;
+
+  /* Accent Colors */
+  --accent-cyan: #00d9ff;
+  --accent-purple: #7c3aed;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-pink: #ec4899;
+
+  /* Text Colors */
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* Glow Colors */
+  --glow-cyan: rgba(0, 217, 255, 0.4);
+  --glow-purple: rgba(124, 58, 237, 0.4);
+  --glow-emerald: rgba(16, 185, 129, 0.4);
+
+  /* Pixel Dimensions */
+  --pixel-size: 4px;
+  --pixel-border: 2px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* ===== BASE STYLES ===== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  cursor: none;
-  background: linear-gradient(
-      to bottom,
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'VT323', monospace;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== PIXEL UTILITIES ===== */
+
+/* Pixel Border Effect */
+.pixel-border {
+  border: var(--pixel-border) solid var(--text-secondary);
+  box-shadow:
+    inset calc(var(--pixel-border) * -1) calc(var(--pixel-border) * -1) 0 0 rgba(0, 0, 0, 0.3),
+    inset var(--pixel-border) var(--pixel-border) 0 0 rgba(255, 255, 255, 0.1);
+}
+
+/* 3D Pixel Box Effect */
+.pixel-box {
+  position: relative;
+  background: var(--bg-secondary);
+  border: 2px solid var(--bg-elevated);
+  box-shadow:
+    4px 4px 0 0 var(--bg-primary),
+    6px 6px 0 0 rgba(0, 0, 0, 0.5);
+}
+
+.pixel-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.15), transparent);
+}
+
+/* Subtle accent styling - no neon glow */
+.accent-cyan {
+  border-color: var(--accent-cyan);
+}
+
+.accent-purple {
+  border-color: var(--accent-purple);
+}
+
+.accent-emerald {
+  border-color: var(--accent-emerald);
+}
+
+/* ===== PIXEL BUTTON ===== */
+.pixel-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  font-family: 'Silkscreen', cursive;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-primary);
+  background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-secondary) 100%);
+  border: 2px solid var(--accent-cyan);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow:
+    0 4px 0 0 #0a0a12,
+    0 6px 10px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.pixel-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 0 0 #0a0a12,
+    0 8px 15px rgba(0, 0, 0, 0.4),
+    0 0 20px var(--glow-cyan),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-color: var(--accent-cyan);
+  text-shadow: 0 0 10px var(--accent-cyan);
+}
+
+.pixel-btn:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 2px 0 0 #0a0a12,
+    0 3px 5px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* ===== PIXEL CARD ===== */
+.pixel-card {
+  position: relative;
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  border: 2px solid var(--bg-elevated);
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.pixel-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.pixel-card::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  background: var(--bg-primary);
+  z-index: -1;
+  border: 2px solid var(--bg-elevated);
+}
+
+.pixel-card:hover {
+  transform: translate(-2px, -2px);
+  border-color: var(--accent-cyan);
+  box-shadow:
+    6px 6px 0 0 var(--bg-primary),
+    0 0 20px rgba(0, 217, 255, 0.15);
+}
+
+/* ===== SKILL BAR (Minecraft Style) ===== */
+.skill-bar {
+  position: relative;
+  height: 20px;
+  background: var(--bg-primary);
+  border: 2px solid var(--bg-elevated);
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  background: linear-gradient(180deg,
+      var(--accent-emerald) 0%,
+      #0d9668 50%,
+      var(--accent-emerald) 100%);
+  position: relative;
+  transition: width 1s ease-out;
+}
+
+/* Pixel segments overlay */
+.skill-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(90deg,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      transparent 18px,
+      rgba(0, 0, 0, 0.3) 18px,
+      rgba(0, 0, 0, 0.3) 20px);
 }
 
-
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 12px; 
+/* Shine effect */
+.skill-bar-fill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #333; 
-  border: 2px solid #666; 
-  border-radius: 2px;
-  background-image: linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1) 75%, transparent 75%, transparent);
-  background-size: 8px 8px; 
-  background-clip: content-box; 
+/* ===== ANIMATIONS ===== */
+
+/* Typewriter cursor blink */
+@keyframes blink {
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
 
-.custom-scrollbar::-webkit-scrollbar-track {
-  background-color: transparent;
-  border-radius: 6px; 
-  opacity: 0; 
+.cursor-blink::after {
+  content: '_';
+  animation: blink 1s infinite;
+  color: var(--accent-cyan);
 }
 
+/* Glow pulse */
+@keyframes glow-pulse {
 
-.pixel-bar {
-  background-image: linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1) 75%, transparent 75%, transparent);
-  background-size: 8px 8px; 
+  0%,
+  100% {
+    box-shadow: 0 0 5px var(--glow-cyan), 0 0 10px var(--glow-cyan);
+  }
+
+  50% {
+    box-shadow: 0 0 15px var(--glow-cyan), 0 0 30px var(--glow-cyan);
+  }
 }
 
-
-.svg-pixelated {
-  image-rendering: pixelated;
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
 }
 
+/* Float animation */
+@keyframes float {
 
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
 
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pixel fade in */
+@keyframes pixel-fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+    filter: blur(2px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+.animate-pixel-fade-in {
+  animation: pixel-fade-in 0.5s ease-out forwards;
+}
+
+/* Scroll indicator bounce */
+@keyframes bounce-down {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.animate-bounce-down {
+  animation: bounce-down 1.5s ease-in-out infinite;
+}
+
+/* ===== BACKGROUND PATTERNS ===== */
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-noise {
+  position: relative;
+}
+
+.bg-noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+  border-left: 1px solid var(--bg-elevated);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-tertiary) 100%);
+  border: 2px solid var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--bg-tertiary) 0%, var(--accent-cyan) 100%);
+}
+
+/* ===== TEXT UTILITIES ===== */
+/* Clean text styling without glow */
+
+/* ===== RESPONSIVE TYPOGRAPHY ===== */
+.text-display {
+  font-family: 'Silkscreen', cursive;
+  font-size: clamp(2rem, 8vw, 5rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.text-heading {
+  font-family: 'Silkscreen', cursive;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+}
+
+.text-subheading {
+  font-family: 'VT323', monospace;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.text-body {
+  font-family: 'VT323', monospace;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+}
+
+.text-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+}
+
+/* ===== LAYER UTILITIES ===== */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-
-  
 }
-
-
-
-
-
-
-
-
-
-
-
-

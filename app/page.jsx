@@ -1,514 +1,479 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import PixelButton from './components/PixelButton';
+import PixelCard from './components/PixelCard';
+import SkillBar from './components/SkillBar';
 import ProjectItem from './components/ProjectItems';
-
-
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from '@studio-freight/lenis';
 
 export default function Home() {
-  const containerRef = useRef(null);
-  const titleRef = useRef(null);
-  const contactRef = useRef(null);
-  const footerRef = useRef(null);
-  const projectsRef = useRef(null);
+  const heroRef = useRef(null);
+  const nameRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const [mounted, setMounted] = useState(false);
+  const [showStudyProjects, setShowStudyProjects] = useState(false);
 
-  
+  // Skills data
+  const frontendSkills = [
+    { name: 'JavaScript', level: 85 },
+    { name: 'React.js', level: 88 },
+    { name: 'Next.js', level: 80 },
+    { name: 'HTML & CSS', level: 95 },
+    { name: 'Tailwind CSS', level: 95 },
+  ];
 
-  const [greeting, setGreeting] = useState('');
-  const [timeTheme, setTimeTheme] = useState('');
-  const [choiceTheme, setChoiceTheme] = useState('white');
+  const backendSkills = [
+    { name: 'Python', level: 40 },
+    { name: 'Django & DRF', level: 35 },
+    { name: 'Node.js', level: 55 },
+    { name: 'Express.js', level: 55 },
+    { name: 'PostgreSQL', level: 60 },
+    { name: 'MS SQL Server', level: 55 },
+  ];
 
-  // --Time-based content update
-  const updateTimeBasedContent = useCallback(() => {
-    const hours = new Date().getHours();
-    const newGreeting = hours < 12 ? 'Good Morning' : 
-                       hours < 18 ? 'Good Afternoon' : 
-                       'Good Evening';
-    const newTheme = hours < 12 ? 'morning' : 
-                     hours < 18 ? 'afternoon' : 
-                     'evening';
-    
-    setGreeting(newGreeting);
-    setTimeTheme(newTheme);
-  }, []);
 
-  // --Time update
+  const toolsSkills = [
+    { name: 'GSAP', level: 70 },
+    { name: 'Redux', level: 50 },
+    { name: 'Git', level: 65 },
+  ];
+
+  // Projects data
+  const projects = [
+    {
+      title: 'chikeys',
+      subtitle: 'Static Restaurant Project',
+      description: 'A static restaurant website with modern UI and smooth user experience.',
+      imageSrc: '/chikeysStatic.PNG',
+      liveUrl: 'https://www.chikeys.com/en',
+      githubUrl: null,
+      tags: ['Nextjs', 'GSAP', 'Tailwind CSS'],
+    },
+    {
+      title: 'Beone',
+      subtitle: 'Full Stack E-commerce Project',
+      description: 'A complete e-commerce platform ',
+      imageSrc: '/beonetrading.PNG',
+      liveUrl: 'https://www.beonetrading.com/',
+      githubUrl: null,
+      tags: ['Nodejs', 'Expressjs', 'MSSQL', 'AWS', 'Razorpay', 'Shiprocket', 'Reactjs', 'Tailwindcss'],
+    },
+    {
+      title: 'Nextlooksports',
+      subtitle: 'Static Corporate Project',
+      description: 'A static corporate website with modern UI and smooth user experience.',
+      imageSrc: '/nextlookstatic.PNG',
+      liveUrl: 'https://corporate.nextlooksports.com/',
+      githubUrl: null,
+      tags: ['Nextjs', 'Tailwind CSS'],
+    },
+    {
+      title: 'Nextlook',
+      subtitle: 'Full Stack E-commerce Project',
+      description: 'A complete e-commerce platform ',
+      imageSrc: '/nextlookecom.PNG',
+      liveUrl: 'https://www.nextlooksports.com/',
+      githubUrl: null,
+      tags: ['Nodejs', 'Expressjs', 'MSSQL', 'AWS', 'OTO', 'Reactjs', 'Tailwindcss'],
+    },
+
+    {
+      title: 'Dhole Radio',
+      subtitle: 'Mini Project',
+      description: 'Online radio streaming application with custom equalizer and theme support.',
+      imageSrc: '/Sansong.PNG',
+      liveUrl: 'https://online-radio-ashen.vercel.app/',
+      githubUrl: null,
+      tags: ['React', 'Web Audio API', 'GSAP', 'Tailwindcss'],
+    },
+    {
+      title: 'RentKaroo',
+      subtitle: 'Full Stack Project',
+      description: 'A complete car rental platform with user authentication, payment integration via Razorpay, and AWS deployment.',
+      imageSrc: '/RentKaro.PNG',
+      liveUrl: 'https://rentkaro.shop/',
+      githubUrl: 'https://github.com/sarangk07/Rent_karoo',
+      tags: ['Django', 'PostgreSQL', 'AWS', 'Razorpay'],
+    },
+    {
+      title: 'Torque Tribe',
+      subtitle: 'In Progress',
+      description: 'Car accessories e-commerce platform with modern animations and full-stack architecture.',
+      imageSrc: '/Mode-Arena-latest.PNG',
+      liveUrl: 'https://torque-tribe.vercel.app/',
+      githubUrl: 'https://github.com/sarangk07/Car-Modz',
+      tags: ['Next.js', 'Redux', 'GSAP', 'Django'],
+    },
+    {
+      title: 'Virtual Mingle',
+      subtitle: 'Main Project',
+      description: 'Social media platform with real-time features, modern UI animations, and responsive design.',
+      imageSrc: '/social-meadia.PNG',
+      liveUrl: 'https://social-media-azure-alpha.vercel.app/',
+      githubUrl: 'https://github.com/sarangk07/Social-Media--Frontend-',
+      tags: ['Next.js', 'GSAP', 'Tailwind'],
+    },
+
+    {
+      title: 'Baby Land',
+      subtitle: 'Mini Project',
+      description: 'E-commerce website for baby products with clean UI and smooth user experience.',
+      imageSrc: '/Baby-Products.PNG',
+      liveUrl: 'https://ecommerce-baby-products.vercel.app/',
+      githubUrl: 'https://github.com/sarangk07/Ecommerce-baby-products',
+      tags: ['React', 'Bootstrap'],
+    },
+    {
+      title: 'Theyyam Web',
+      subtitle: 'Mini Project',
+      description: 'Cultural website showcasing the traditional Theyyam festival with immersive visuals.',
+      imageSrc: '/theyyam2.PNG',
+      liveUrl: 'https://theyyam-web.vercel.app/',
+      githubUrl: null,
+      tags: ['Next.js', 'GSAP'],
+    },
+  ];
+
+  const mainProjects = projects.slice(0, 4);
+  const studyProjects = projects.slice(4);
+
+  // Initialize Lenis smooth scroll
   useEffect(() => {
-    updateTimeBasedContent();
-    const timer = setInterval(updateTimeBasedContent, 60000);
-    return () => clearInterval(timer);
-  }, [updateTimeBasedContent]);
-
-
-  // --image lazy loading
-  useEffect(() => {
-    const imageObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-            observer.unobserve(img);
-          }
-        });
-      },
-      {
-        rootMargin: '50px 0px',
-        threshold: 0.1
-      }
-    );
-
-    document.querySelectorAll('img[data-src]').forEach(img => {
-      imageObserver.observe(img);
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false,
     });
 
-    return () => imageObserver.disconnect();
+    // Connect Lenis to GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove(lenis.raf);
+    };
   }, []);
 
-
-  // --Theme effect
   useEffect(() => {
-    document.documentElement.style.colorScheme = 'none';
+    setMounted(true);
+    gsap.registerPlugin(ScrollTrigger);
   }, []);
 
+  useEffect(() => {
+    if (!mounted || !heroRef.current) return;
 
+    const ctx = gsap.context(() => {
+      // Hero animations
+      gsap.fromTo(nameRef.current,
+        { opacity: 0, y: 30, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 1, ease: 'power3.out', delay: 0.3 }
+      );
+
+      gsap.fromTo(subtitleRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.6 }
+      );
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, [mounted]);
+
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-pixel-dark flex items-center justify-center">
+        <div className="text-pixel-text font-pixel animate-pulse">Loading...</div>
+      </div>
+    );
+  }
 
   return (
-    <>
+    <main className="min-h-screen bg-pixel-dark text-pixel-text overflow-x-hidden">
+      {/* Background Grid Pattern */}
+      <div className="fixed inset-0 bg-pixel-grid bg-grid opacity-50 pointer-events-none" />
 
-      <div
-        ref={containerRef}
-        className={`relative hover-effect cursor-default  backdrop-brightness-105 bg-blend-hard-light h-fit  font-medium  top-left-animation  ${choiceTheme == 'white' ? 'bg-zinc-100 font-pixelify-sans' : choiceTheme == 'blue' ? 'font-spicy-rice-regular' : 'font-serif bg-black'}`}
+      {/* Subtle gradient overlay */}
+      <div className="fixed inset-0 bg-gradient-radial from-pixel-tertiary/20 via-transparent to-transparent pointer-events-none" />
+
+      {/* ===== HERO SECTION ===== */}
+      <section
+        ref={heroRef}
+        className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8"
       >
-        <div className={`h-1/5 md:h-3/5 flex flex-col w-full text-center ${choiceTheme == 'red' ?  'text-red-200' : choiceTheme == 'blue' ? 'text-blue-200' : choiceTheme == 'white' ? 'text-zinc-400' : 'text-gray-200'}`}>
-          <div
-            ref={titleRef}
-            className={`h-[45rem] md:h-[42rem] overflow-hidden backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110 rounded-b-xl pt-9 ml-4 mr-4 flex flex-col justify-center items-center ${choiceTheme == 'red' ?  'bg-red-600 text-zinc-900' : choiceTheme == 'blue' ? ' text-zinc-50 bg-gradient-to-r from-black via-blue-600 to-black shadow-md shadow-black/50' : choiceTheme == 'white' ? 'pt-28 bg-zinc-100 text-zinc-800' : 'bg-gradient-to-r from-black via-stone-800 to-black shadow-lg shadow-black/50'}`}
-          >
-            <div className='flex flex-col z-50 absolute right-2 top-4'>
-              <p onClick={()=> setChoiceTheme('blue')} className='w-4 h-4 bg-blue-500 mt-3 border border-white rounded-sm'/>
-              {/* <p onClick={()=> setChoiceTheme('red')} className='w-4 h-4 bg-red-500 mt-3 border border-white rounded-sm'/> */}
-              <p onClick={()=> setChoiceTheme('white')} className='w-4 h-4 bg-white mt-3 border border-white rounded-sm'/>
-              <p onClick={()=> setChoiceTheme('dark')} className='w-4 h-4 bg-zinc-900 mt-3 border border-white rounded-sm'/>
-            </div>
-            {/* <div  className='flex z-30 absolute left-0 top-5 '>
-              <Image src="/LOGOP.png" alt="logo" width={100} height={100} loading='lazy' className='w-20  md:w-32 '/>
-            </div> */}
-              <button className={`relative rounded-sm px-2 mb-2 py-2  border-2 border-white hover:bg-white hover:text-black  text-sm ${choiceTheme == 'red' ?  'bg-transparent border-zinc-900' : choiceTheme == 'blue' ? 'bg-transparent' : choiceTheme == 'white' ? 'bg-transparent border-zinc-500' : 'bg-transparent text-white hover:border-white'}`}>
-              <a
-                className="font-mono "
-                href="https://drive.google.com/file/d/1UvJjKtmezPk-4623rI-QvvhJkL9jR-7K/view"
-                target="_blank"  
-                rel="noopener noreferrer" 
-              >
-                VIEW CV
-              </a>
-              </button>
-              <div className='flex flex-col justify-center items-center h-screen '>
-                <p className='text-[2rem] md:text-[3rem]'>Hello, I'M</p>
-                
-                <p className='text-[1.5rem] md:text-[2rem]'>SARANG</p>
-              </div>
-          </div>
-          <div className="flex flex-col md:flex md:flex-row  m-4 rounded-lg backdrop-hue-rotate-90 backdrop-grayscale  backdrop-contrast-150 backdrop-blur-md backdrop-brightness-110">
-            <div
-              ref={contactRef}
-              className={` m-3${choiceTheme == 'white' ? 'h-4/4 md:w-3/3' : 'h-4/4 md:w-3/3 '}`}
-            >
-              <div className={`relative h-52 md:h-72  text-right ${timeTheme === 'morning' ? 'bg-cyan-600 ' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'}  p-4`}>
-                <div className={`absolute -bottom-2 -right-2  w-full h-full ${choiceTheme == 'red' ?  'bg-red-700 ' : choiceTheme == 'blue' ? 'bg-black border-2 border-blue-300' : choiceTheme == 'white' ? 'bg-zinc-100 text-zinc-500 border-2 border-zinc-300' : 'bg-black  border-2 rounded-md '}`}></div>
-                <div className={` ${choiceTheme == 'white' ? 'font-silkscreen-regular ' : 'font-serif text-lg '} relative  flex flex-col justify-between font-semi-bold md:text-3xl  z-10 w-full h-full text-stone-900 overflow-y-scroll text-md `} style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                  <p className={`leading-relaxed md:leading-relaxed ${choiceTheme == 'white' ? 'text-gray-500' : choiceTheme == 'blue' ? 'text-white ' : choiceTheme == 'dark' ? 'text-zinc-200' : 'text-stone-900'}`}><span className={`${timeTheme === 'morning' ? 'text-cyan-500' : timeTheme === 'afternoon' ? 'text-emerald-500' : 'text-zinc-500'} font-bold `}>{greeting}</span> everyone! I'M <span className='font-bold '>Sarang </span>— a dedicated developer, driven by a passion for coding, committed to achieving excellence, and constantly seeking opportunities to grow and learn.</p>
-                </div>
-              </div>
-            <div className={`${choiceTheme == 'white '|| 'dark' ? 'flex flex-col md:flex-row md:justify-around' : ''}`}>
-              <div className='text-left mt-3 rounded-xl p-4'>
-                <div className='underline underline-offset-8 text-2xl mb-4 '>Skills</div>
-                <div className={`space-y-4  text-xs ${choiceTheme == 'white' ? 'font-silkscreen-regular' : ' font-serif'}`}>
-                  <div className='flex items-center justify-between'>
-                    <span className='font-bold '>JavaScript</span>
-                    <div className='relative ml-1 w-64 h-4  pixel-bar bg-stone-800'>
-                      <div className={`absolute pl-1 top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '85%' }}></div>
-                    </div>
-                  </div>
-                  <div className='flex items-center justify-between'>
-                    <span className='font-bold'>Reactjs</span>
-                    <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute pl-1 top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '88%' }}></div>
-                    </div>
-                  </div>
-                  <div className='flex items-center justify-between'>
-                    <span className='font-bold'>Nextjs</span>
-                    <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '80%' }}></div>
-                    </div>
-                  </div>
-                  <div className='flex items-center justify-between'>
-                    <span className='font-bold'>HTML & CSS</span>
-                    <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '95%' }}></div>
-                    </div>
-                  </div>
-                  <div className='flex items-center justify-between'>
-                    <span className='font-bold'>Python</span>
-                    <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '80%' }}></div>
-                    </div>
-                  </div>
-                  <div className='flex items-center justify-between'>
-                    <span className='font-bold'>PSQL</span>
-                    <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '70%' }}></div>
-                    </div>
-                  </div>
-                  <div className='flex items-center justify-between'>
-                    <span className='font-bold'>Django & DRF</span>
-                    <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '70%' }}></div>
-                    </div>
-                  </div>
-                  <div className='flex items-center justify-between'>
-                    <span className='font-bold'>ORM</span>
-                    <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '60%' }}></div>
-                    </div>
-                  </div>
-                  <div className='flex items-center justify-between'>
-                    <span className='font-bold'>Tailwind CSS</span>
-                    <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '95%' }}></div>
-                    </div>
-                  </div>
-                  <div className='flex items-center justify-between'>
-                    <span className='font-bold'>Redux</span>
-                    <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 ' : ''}`} style={{ width: '70%' }}></div>
-                    </div>
-                  </div>
-                  <div className='flex items-center justify-between'>
-                    <span className='font-bold hover:font-extrabold'>GSAP</span>
-                    <div className='relative ml-1 w-64 h-4 pixel-bar bg-stone-800'>
-                      <div className={`absolute  top-0 left-0 h-full  pixel-bar ${timeTheme === 'morning' ? 'bg-cyan-500' : timeTheme === 'afternoon' ? 'bg-emerald-500' : 'bg-zinc-500'} ${choiceTheme === 'red' ? ' bg-red-600 animate-glow' : ''}`} style={{ width: '50%' }}></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-                {/* {choiceTheme == 'white' || 'dark' ?
-                  <>
-                    <div className='hidden lg:flex p-5'>
-                      <img className='opacity-[0.50]' src="./graphics1.png" alt="" />
-                      
-                       <h2>what i do</h2>
-                       <div></div>
-                       
-                    </div>
-                  </>
-                :
-                  <>
-                  </>
-                } */}
-            </div>  
-            </div>
-          </div>
-        </div>
+        {/* Decorative corner elements - hidden on mobile */}
+        <div className="hidden sm:block absolute top-6 left-6 w-12 lg:w-16 h-12 lg:h-16 border-l-2 border-t-2 border-pixel-text-muted/30" />
+        <div className="hidden sm:block absolute top-6 right-6 w-12 lg:w-16 h-12 lg:h-16 border-r-2 border-t-2 border-pixel-text-muted/30" />
+        <div className="hidden sm:block absolute bottom-6 left-6 w-12 lg:w-16 h-12 lg:h-16 border-l-2 border-b-2 border-pixel-text-muted/30" />
+        <div className="hidden sm:block absolute bottom-6 right-6 w-12 lg:w-16 h-12 lg:h-16 border-r-2 border-b-2 border-pixel-text-muted/30" />
 
-        <div className={`h-2/5 text-gray-200 m-2 rounded-lg   text-2xl ${choiceTheme == 'red' ?  'bg-black font-sans' : choiceTheme == 'blue' ? 'font-serif bg-black' : choiceTheme == 'white' ? 'font-pixelify-sans bg-zinc-200 text-gray-900' : 'bg-black font-sans text-gray-200 border-t-4'}`}>
-          <div className="m-4 ">
-            <p className={`${choiceTheme == 'white' ? 'text-zinc-500' : ''} flex items-center justify-center mb-5`}>
-             My Projects
+        <div className="text-center space-y-6 sm:space-y-8 relative z-10 w-full max-w-2xl mx-auto">
+          {/* Name */}
+          <div ref={nameRef} className="space-y-3 sm:space-y-4">
+            <p className="font-pixel text-sm sm:text-lg text-pixel-text-secondary tracking-widest uppercase">Hi, i'm</p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-pixel text-pixel-text tracking-wide leading-tight">
+              SARANG K
+            </h1>
+            <div className="h-[2px] w-16 sm:w-24 mx-auto bg-pixel-text-muted" />
+          </div>
+
+          {/* Subtitle */}
+          <div ref={subtitleRef} className="space-y-4 sm:space-y-6">
+            <p className="font-pixel text-sm sm:text-base md:text-lg text-pixel-text-secondary tracking-wide">
+              Frontend Developer • Full Stack Enthusiast
             </p>
-            <div ref={projectsRef} className='flex  items-center flex-col overflow-hidden md:overflow-x-auto custom-scrollbar text-zinc-900 mb-3 pb-5'>
-              <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
-                  
-                  
-                  <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
-                    <div className='flex justify-between'>
-                      <p className='text-[1rem] md:text-md'>
-                      BaBy Land <span className='text-xs'> <a href="https://github.com/sarangk07/Ecommerce-baby-products" target="_blank">- git</a></span>
-                      </p>
-                      <p className='text-xs md:text-sm cursor-default mt-1'>Mini-Project</p>
-                    </div>
-                  <a href="https://ecommerce-baby-products.vercel.app/" target="_blank">
-                  <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64 z-20`}
-                    src="/Baby-Products.PNG"
-                    alt="Baby Land"
-                    width={500}
-                    height={300}
-                    loading='lazy'
-                  />
-                  </a>
-                  <p className=' mt-3 hidden md:flex text-sm  cursor-default hover:text-black'>Developed a small e-commerce website with Reactjs,Bootstrap</p>
-                  </ProjectItem>
 
-
-                <div className={`
-                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
-                  hidden md:flex h-full w-2 absolute top-1 -right-64 `} />              
-              </div>
-
-              <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
-                  
-              <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
-                    <div className='flex justify-between'>
-                      <p className='text-[1rem] md:text-md'>
-                        Torque Tribe <span className='text-xs'> <a href="https://github.com/sarangk07/Car-Modz" target="_blank">- git</a></span>
-                      </p>
-                      <p className='flex text-xs md:text-sm cursor-default mt-1'>
-                        in-progress
-                      </p>
-                    </div>
-                  <a href="https://torque-tribe.vercel.app/" target="_blank">
-                  <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
-                    src="/Mode-Arena-latest.PNG"
-                    alt="Torque Tribe"
-                    width={500}
-                    height={300}
-                    loading='lazy'
-                  />
-                  </a>
-                  <p className='mt-3 hidden cursor-default md:flex md:flex-col text-sm  hover:text-black'>Developing a website for car accesseries with <span className='text-[14px] font-bold'>Nextjs,Tailwindcss,Redux,GSAP,Python-Django,DRF,SQLlite</span></p>
-                  </ProjectItem>
-
-
-                <div className={`
-                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
-                  hidden md:flex h-full w-2 absolute top-1 -left-64 `} />
-              </div>
-
-              <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
-              <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
-                    <div className='flex justify-between'>
-                      <p className='text-[1rem] md:text-md'>
-                        RentKaroo <span className='text-xs'> <a href="https://github.com/sarangk07/Rent_karoo" target="_blank">- git</a></span>
-                      </p>
-                    </div>
-                   <a href="https://rentkaro.shop/" target="_blank">
-                   <Image
-                      className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
-                      src="/RentKaro.PNG"
-                      alt="RentKaro"
-                      width={500}
-                      height={300}
-                      loading='lazy'
-                    />
-                   </a>
-                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Developed a Rent a Car website using python Django,PSQL,JWT,SMTP,AWS,Razorpay</p>
-                  </ProjectItem>
-
-
-                <div className={`
-                  ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
-                  hidden md:flex h-full w-2 absolute top-1 -right-64 `} />
-              </div>
-
-              <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
-              <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
-                      <div className='flex justify-between'>
-                      <p className='text-[1rem] md:text-md'>
-                        Virtual Mingle <span className='text-xs'> <a href="https://github.com/sarangk07/Social-Media--Frontend-" target="_blank">- git</a></span>
-                      </p>
-                      <p className='hidden md:flex text-xs md:text-sm cursor-default mt-1'>
-                        Main-Project
-                      </p>
-                    </div>
-                  <a href="https://social-media-azure-alpha.vercel.app/" target="_blank">
-                  <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
-                    src="/social-meadia.PNG"
-                    alt="social-meadia"
-                    width={500}
-                    height={300}
-                    loading='lazy'
-                  />
-                  </a>
-                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Developed a social meadia website using NEXTJS ,API ,Tailwindcss ,GSAP</p>
-                  </ProjectItem>
-                <div className={`
-                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
-                  hidden md:flex h-full w-2 absolute top-1 -left-64 `} />
-              </div>
-
-              <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
-              <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
-                      <div className='flex justify-between'>
-                      <p className='text-[1rem] md:text-md'>
-                        QuZ <span className='text-xs'> <a href="https://github.com/sarangk07/quz" target="_blank">- git</a></span>
-                      </p>
-                      <p className='flex text-xs md:text-sm cursor-default mt-1'>
-                        Mini-Project
-                      </p>
-                    </div>
-                  <a href="https://quz-game.vercel.app/" target="_blank">
-                  <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
-                    src="/quz.PNG"
-                    alt="qz"
-                    width={500}
-                    height={300}
-                    loading='lazy'
-                  />
-                  </a>
-                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Developed a Quiz-game using NEXTJS ,Open-Trivia API ,Tailwindcss</p>
-                  </ProjectItem>
-                <div className={`
-                  ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
-                  hidden md:flex h-full w-2 absolute top-1 -right-64 `} />
-              </div>
-
-
-              <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
-              <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
-                      <div className='flex justify-between'>
-                      <p className='text-[1rem] md:text-md'>
-                        GSAP Animations<span className='text-xs'> <a href="https://github.com/sarangk07/GSAP-tests" target="_blank">- git</a></span>
-                      </p>
-                      <p className='hidden md:flex text-xs md:text-sm cursor-default mt-1'>
-                      Mini-Test-Project
-                      </p>
-                    </div>
-                  <a href="https://gsap-tests.vercel.app/" target="_blank">
-                  <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
-                    src="/GSAP.jpg"
-                    alt="B10 GSAP"
-                    width={500}
-                    height={300}
-                    loading='lazy'
-                  />
-                  </a>
-                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>GSAP Animations</p>
-                  </ProjectItem>
-                <div className={`
-                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
-                  hidden md:flex h-full w-2 absolute top-1 -left-64 `} />
-              </div>
-
-
-              <div className={`relative right-11  md:right-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
-                <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
-                      <div className='flex justify-between'>
-                      <p className='text-[1rem] md:text-md'>
-                        Theyyam Web <span className='text-xs'> </span>
-                      </p>
-                      <p className='flex text-xs md:text-sm cursor-default mt-1'>
-                        Mini-Project
-                      </p>
-                    </div>
-                  <a href="https://theyyam-web.vercel.app/" target="_blank">
-                  <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
-                    src="/theyyam2.PNG"
-                    alt="qz"
-                    width={500}
-                    height={300}
-                    loading='lazy'
-                  />
-                  </a>
-                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>A website for Theyyam festival details</p>
-                  </ProjectItem>
-                <div className={`
-                  ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
-                  hidden md:flex h-full w-2 absolute top-1 -right-64 `} />
-              </div>
-
-
-
-              <div className={`relative left-1  md:left-32 mt-5 md:mt-0 project-item md:ml-5 ml-10 mb-3 w-fit  ${choiceTheme == 'white' ? 'bg-zinc-100' : ''} bg-pixel-pattern bg-pixel p-1 cursor-pointer`}>
-              <ProjectItem choiceTheme={choiceTheme} timeTheme={timeTheme}>
-                      <div className='flex justify-between'>
-                      <p className='text-[1rem] md:text-md'>
-                      SanSong<span className='text-xs'> </span>
-                      </p>
-                      <p className='hidden md:flex text-xs md:text-sm cursor-default mt-1'>
-                      Mini-Project
-                      </p>
-                    </div>
-                  <a href="https://online-radio-ashen.vercel.app/" target="_blank">
-                  <Image
-                    className={`${choiceTheme == 'red' ? 'shadow-custom-red' : choiceTheme == 'blue' ? 'shadow-custom-blue' : 'shadow-md opacity-100'} opacity-[100%] md:w-fit md:h-72 h-44 w-64`}
-                    src="/Sansong.PNG"
-                    alt="sansong"
-                    width={500}
-                    height={300}
-                    loading='lazy'
-                  />
-                  </a>
-                  <p className='mt-3 hidden cursor-default md:flex text-sm  hover:text-black'>Online Radio</p>
-                  </ProjectItem>
-                <div className={`
-                   ${choiceTheme == 'red' ? 'bg-red-600 animate-glow' : choiceTheme == 'blue' ? 'bg-blue-600 animate-glowBlue' : choiceTheme == 'white' ? 'bg-zinc-400' : 'bg-zinc-800'}
-                  hidden md:flex h-full w-2 absolute top-1 -left-64 `} />
-              </div>
-
-
-
-
-            </div>
+            <p className="max-w-md lg:max-w-lg mx-auto font-pixel-body text-pixel-text-muted text-base sm:text-lg leading-relaxed px-4 sm:px-0">
+              Building modern web experiences with clean code and thoughtful design.
+            </p>
           </div>
-          <div className="m-4 flex border-spacing-9  border-t-4">
-            <div className={`${choiceTheme == 'white' ? 'text-zinc-400' : ''} w-full p-3 flex flex-col justify-center items-center overflow-x-auto  custom-scrollbar`}>
-              <p>
-                &quot;Got a project in mind? Let&rsquo;s turn it into reality.&quot;
-              </p>
-              <p>
-                Let&rsquo;s build something amazing together.
-              </p>
-              <p className='mb-5'>
-                Reach out and let&rsquo;s collaborate on your next big idea."
-              </p>
-               <a href="mailto:sarang00005@gmail.com" className='border  p-2 pt-1 m-2 rounded-md' >sarang00005@gmail.com</a>
-               <div className=' flex md:mt-5 mt-0 ml-4 justify-center '>  
-                <svg
-                 className={`w-10 h-10 ${choiceTheme == 'white' ? 'hover:text-zinc-400 text-black transform hover:duration-200' : 'text-white'} `} viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path 
-                    fillRule="evenodd" 
-                    clipRule="evenodd" 
-                    d="M128 32C74.9807 32 32 74.9807 32 128V384C32 437.019 74.9807 480 128 480H384C437.019 480 480 437.019 480 384V128C480 74.9807 437.019 32 384 32H128ZM175.999 116.001C169.372 107.165 156.836 105.374 147.999 112.001C139.163 118.629 137.372 131.165 143.999 140.001L230.999 256.001L143.999 372.001C137.372 380.838 139.163 393.374 147.999 400.001C156.836 406.629 169.372 404.838 175.999 396.001L255.999 289.335L335.999 396.001C342.627 404.838 355.163 406.629 363.999 400.001C372.836 393.374 374.627 380.838 367.999 372.001L280.999 256.001L367.999 140.001C374.627 131.165 372.836 118.629 363.999 112.001C355.163 105.374 342.627 107.165 335.999 116.001L255.999 222.668L175.999 116.001Z" 
-                    fill="currentColor" 
+
+          {/* CTA Button */}
+          <div className="pt-4 sm:pt-6">
+            <PixelButton
+              href="https://drive.google.com/file/d/1UvJjKtmezPk-4623rI-QvvhJkL9jR-7K/view"
+              size="md"
+              className="sm:text-sm"
+            >
+              View Resume
+            </PixelButton>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-pixel-text-muted">
+          <span className="font-pixel-mono text-xs hidden sm:block">Scroll</span>
+          <div className="animate-bounce-arrow">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== SKILLS SECTION ===== */}
+      <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-10 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-pixel text-pixel-text mb-4">Skills</h2>
+            <div className="h-[2px] w-12 sm:w-16 mx-auto bg-pixel-text-muted" />
+          </div>
+
+          {/* Skills Grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {/* Frontend */}
+            <PixelCard className="p-4 sm:p-6">
+              <h3 className="font-pixel text-pixel-text text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 bg-pixel-text-muted" />
+                Frontend
+              </h3>
+              <div className="space-y-3 sm:space-y-4">
+                {frontendSkills.map((skill) => (
+                  <SkillBar
+                    key={skill.name}
+                    name={skill.name}
+                    level={skill.level}
                   />
-                </svg>
-                <a href="https://www.linkedin.com/in/sarang-k-2b7844244/">
-                <svg className={`w-10 h-10 ${choiceTheme == 'white' ?  'hover:text-zinc-400 text-blue-600 transform hover:duration-200' : 'text-white'} `} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 107.3 107.3">
-                  <g id="Layer_2" data-name="Layer 2">
-                    <g data-name="图层 1">
-                      <path 
-                        className="cls-1" 
-                        d="M82,58.16v20a.89.89,0,0,1-.9.89H70.78a.89.89,0,0,1-.89-.89V59.56c0-4.89-1.75-8.24-6.14-8.24a6.62,6.62,0,0,0-6.21,4.43,8.29,8.29,0,0,0-.4,3V78.16a.89.89,0,0,1-.9.89H45.92a.88.88,0,0,1-.89-.89c0-5,.12-29,0-34.63a.89.89,0,0,1,.89-.91h10.3a.9.9,0,0,1,.9.9v4.26a.83.83,0,0,0-.08.12h.08v-.12a12,12,0,0,1,10.91-6c8,0,14,5.2,14,16.39ZM27.11,79.05H37.43a.89.89,0,0,0,.89-.89V43.52a.89.89,0,0,0-.89-.9H27.11a.9.9,0,0,0-.9.9V78.16A.89.89,0,0,0,27.11,79.05Z"
-                        fill="currentColor"
-                      />
-                      <circle className="cls-1" cx="31.91" cy="31.5" r="6.48" fill="currentColor"/>
-                      <path 
-                        className="cls-1" 
-                        d="M88.49,6.89a11.94,11.94,0,0,1,11.92,11.92V88.49a11.94,11.94,0,0,1-11.92,11.92H18.81A11.94,11.94,0,0,1,6.89,88.49V18.81A11.94,11.94,0,0,1,18.81,6.89H88.49m0-6.89H18.81A18.81,18.81,0,0,0,0,18.81V88.49A18.81,18.81,0,0,0,18.81,107.3H88.49A18.81,18.81,0,0,0,107.3,88.49V18.81A18.81,18.81,0,0,0,88.49,0Z" 
-                        fill="currentColor"
-                      />
-                    </g>
-                  </g>
-                </svg>
+                ))}
+              </div>
+            </PixelCard>
+
+            {/* Backend */}
+            <PixelCard className="p-4 sm:p-6">
+              <h3 className="font-pixel text-pixel-text text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 bg-pixel-text-muted" />
+                Backend
+              </h3>
+              <div className="space-y-3 sm:space-y-4">
+                {backendSkills.map((skill) => (
+                  <SkillBar
+                    key={skill.name}
+                    name={skill.name}
+                    level={skill.level}
+                  />
+                ))}
+              </div>
+            </PixelCard>
+
+            {/* Tools */}
+            <PixelCard className="p-4 sm:p-6 sm:col-span-2 lg:col-span-1">
+              <h3 className="font-pixel text-pixel-text text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 bg-pixel-text-muted" />
+                Tools
+              </h3>
+              <div className="space-y-3 sm:space-y-4">
+                {toolsSkills.map((skill) => (
+                  <SkillBar
+                    key={skill.name}
+                    name={skill.name}
+                    level={skill.level}
+                  />
+                ))}
+              </div>
+            </PixelCard>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== PROJECTS SECTION ===== */}
+      <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-pixel-secondary/30 to-transparent">
+        <div className="max-w-6xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-10 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-pixel text-pixel-text mb-4">Projects</h2>
+            <div className="h-[2px] w-12 sm:w-16 mx-auto bg-pixel-text-muted" />
+            <p className="mt-4 font-pixel-body text-pixel-text-secondary text-sm sm:text-base">
+              Featured work that I&apos;m proud of
+            </p>
+          </div>
+
+          {/* Main Projects */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+            {mainProjects.map((project, index) => (
+              <ProjectItem
+                key={index}
+                {...project}
+              />
+            ))}
+          </div>
+
+          {/* Show More Section */}
+          {!showStudyProjects ? (
+            <div className="text-center mt-12 space-y-4">
+              <p className="font-pixel-body text-pixel-text-muted text-sm sm:text-base max-w-xl mx-auto">
+                These are projects I created while learning and mastering my tech stack.
+              </p>
+              <PixelButton
+                onClick={() => setShowStudyProjects(true)}
+                variant="secondary"
+                size="md"
+              >
+                View Learning Projects
+              </PixelButton>
+            </div>
+          ) : (
+            <div className="mt-8 space-y-12">
+              <div className="text-center relative">
+                <div className="absolute inset-x-0 top-1/2 h-px bg-pixel-text-muted/30 -z-10"></div>
+                <span className="bg-pixel-dark px-4 font-pixel text-pixel-text-secondary text-sm">Learning Projects</span>
+              </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                {studyProjects.map((project, index) => (
+                  <ProjectItem
+                    key={index}
+                    {...project}
+                  />
+                ))}
+              </div>
+              <div className="text-center mt-8">
+                <PixelButton
+                  onClick={() => setShowStudyProjects(false)}
+                  variant="ghost"
+                  size="sm"
+                >
+                  Show Less
+                </PixelButton>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ===== CONTACT SECTION ===== */}
+      <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-xl lg:max-w-3xl mx-auto text-center">
+          {/* Decorative frame */}
+          <div className="relative p-6 sm:p-8 lg:p-12 border-2 border-pixel-elevated bg-pixel-secondary/30">
+            {/* Corner decorations - visible on larger screens */}
+            <div className="hidden sm:block absolute -top-1 -left-1 w-3 lg:w-4 h-3 lg:h-4 border-l-2 border-t-2 border-pixel-text-muted" />
+            <div className="hidden sm:block absolute -top-1 -right-1 w-3 lg:w-4 h-3 lg:h-4 border-r-2 border-t-2 border-pixel-text-muted" />
+            <div className="hidden sm:block absolute -bottom-1 -left-1 w-3 lg:w-4 h-3 lg:h-4 border-l-2 border-b-2 border-pixel-text-muted" />
+            <div className="hidden sm:block absolute -bottom-1 -right-1 w-3 lg:w-4 h-3 lg:h-4 border-r-2 border-b-2 border-pixel-text-muted" />
+
+            <div className="space-y-4 sm:space-y-6">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-pixel text-pixel-text">
+                Let&apos;s Collaborate
+              </h2>
+
+              <p className="font-pixel-body text-base sm:text-lg text-pixel-text-secondary max-w-md mx-auto px-2 sm:px-0">
+                Got a project in mind? I&apos;d love to help turn your ideas into reality.
+              </p>
+
+              <div className="pt-2 sm:pt-4">
+                <PixelButton
+                  href="mailto:sarang00005@gmail.com"
+                  size="md"
+                >
+                  Get In Touch
+                </PixelButton>
+              </div>
+
+              {/* Social Links */}
+              <div className="flex items-center justify-center gap-3 sm:gap-4 pt-4 sm:pt-6">
+                {/* GitHub */}
+                <a
+                  href="https://github.com/sarangk07"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 sm:p-3 border-2 border-pixel-elevated hover:border-pixel-text text-pixel-text-secondary hover:text-pixel-text transition-all duration-200"
+                >
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z" />
+                  </svg>
                 </a>
-                <a href="https://github.com/sarangk07">
-                <svg className={`w-10 h-10 ${choiceTheme == 'white' ? 'hover:text-zinc-400 text-zinc-900 transform hover:duration-100' : 'text-white'} `} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-                  <g fill="currentColor">
-                    <path fillRule="evenodd" d="M64 5.103c-33.347 0-60.388 27.035-60.388 60.388 0 26.682 17.303 49.317 41.297 57.303 3.017.56 4.125-1.31 4.125-2.905 0-1.44-.056-6.197-.082-11.243-16.8 3.653-20.345-7.125-20.345-7.125-2.747-6.98-6.705-8.836-6.705-8.836-5.48-3.748.413-3.67.413-3.67 6.063.425 9.257 6.223 9.257 6.223 5.386 9.23 14.127 6.562 17.573 5.02.542-3.903 2.107-6.568 3.834-8.076-13.413-1.525-27.514-6.704-27.514-29.843 0-6.593 2.36-11.98 6.223-16.21-.628-1.52-2.695-7.662.584-15.98 0 0 5.07-1.623 16.61 6.19C53.7 35 58.867 34.327 64 34.304c5.13.023 10.3.694 15.127 2.033 11.526-7.813 16.59-6.19 16.59-6.19 3.287 8.317 1.22 14.46.593 15.98 3.872 4.23 6.215 9.617 6.215 16.21 0 23.194-14.127 28.3-27.574 29.796 2.167 1.874 4.097 5.55 4.097 11.183 0 8.08-.07 14.583-.07 16.572 0 1.607 1.088 3.49 4.148 2.897 23.98-7.994 41.263-30.622 41.263-57.294C124.388 32.14 97.35 5.104 64 5.104z" clipRule="evenodd"></path>
-                    <path d="M26.484 91.806c-.133.3-.605.39-1.035.185-.44-.196-.685-.605-.543-.906.13-.31.603-.395 1.04-.188.44.197.69.61.537.91zm-.743-.55M28.93 94.535c-.287.267-.85.143-1.232-.28-.396-.42-.47-.983-.177-1.254.298-.266.844-.14 1.24.28.394.426.472.984.17 1.255zm-.575-.618M31.312 98.012c-.37.258-.976.017-1.35-.52-.37-.538-.37-1.183.01-1.44.373-.258.97-.025 1.35.507.368.545.368 1.19-.01 1.452zm0 0M34.573 101.373c-.33.365-1.036.267-1.552-.23-.527-.487-.674-1.18-.343-1.544.336-.366 1.045-.264 1.564.23.527.486.686 1.18.333 1.543zm0 0M39.073 103.324c-.147.473-.825.688-1.51.486-.683-.207-1.13-.76-.99-1.238.14-.477.823-.7 1.512-.485.683.206 1.13.756.988 1.237zm0 0M44.016 103.685c.017.498-.563.91-1.28.92-.723.017-1.308-.387-1.315-.877 0-.503.568-.91 1.29-.924.717-.013 1.306.387 1.306.88zm0 0M48.614 102.903c.086.485-.413.984-1.126 1.117-.7.13-1.35-.172-1.44-.653-.086-.498.422-.997 1.122-1.126.714-.123 1.354.17 1.444.663zm0 0"></path>
-                  </g>
-                </svg>
+
+                {/* LinkedIn */}
+                <a
+                  href="https://www.linkedin.com/in/sarang-k-2b7844244/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 sm:p-3 border-2 border-pixel-elevated hover:border-pixel-text text-pixel-text-secondary hover:text-pixel-text transition-all duration-200"
+                >
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </a>
+
+                {/* X/Twitter */}
+                <a
+                  href="#"
+                  className="p-2.5 sm:p-3 border-2 border-pixel-elevated hover:border-pixel-text text-pixel-text-secondary hover:text-pixel-text transition-all duration-200"
+                >
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
                 </a>
               </div>
             </div>
           </div>
         </div>
-        <div
-          ref={footerRef}
-          className={`h-2/5 md:h-1/5 rounded-lg ml-2 mr-2  text-center font-mono text-sm md:text-md ${choiceTheme == 'red' ?  'bg-zinc-950 ' : choiceTheme == 'blue' ? 'bg-zinc-950' : choiceTheme == 'white' ? 'bg-zinc-200 text-zinc-500' : 'bg-zinc-950'}`}
-        >
-          © 2024. All Rights Reserved By Sarang
+      </section>
+
+      {/* ===== FOOTER ===== */}
+      <footer className="relative py-6 sm:py-8 px-4 sm:px-6 border-t border-pixel-elevated">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="font-pixel-mono text-xs sm:text-sm text-pixel-text-muted">
+            © 2024 SARANG. All Rights Reserved.
+          </p>
+          <p className="font-pixel-mono text-xs text-pixel-text-muted mt-2">
+            Built with Next.js + Tailwind CSS
+          </p>
         </div>
-      </div>
-    </>
+      </footer>
+    </main >
   );
 }
