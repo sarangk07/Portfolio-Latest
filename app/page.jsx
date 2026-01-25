@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import PixelButton from './components/PixelButton';
 import PixelCard from './components/PixelCard';
-import SkillBar from './components/SkillBar';
+
 import ProjectItem from './components/ProjectItems';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -264,70 +264,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== SKILLS SECTION ===== */}
-      <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-pixel text-pixel-text mb-4">Skills</h2>
-            <div className="h-[2px] w-12 sm:w-16 mx-auto bg-pixel-text-muted" />
-          </div>
 
-          {/* Skills Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {/* Frontend */}
-            <PixelCard className="p-4 sm:p-6">
-              <h3 className="font-pixel text-pixel-text text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2">
-                <span className="w-2 h-2 bg-pixel-text-muted" />
-                Frontend
-              </h3>
-              <div className="space-y-3 sm:space-y-4">
-                {frontendSkills.map((skill) => (
-                  <SkillBar
-                    key={skill.name}
-                    name={skill.name}
-                    level={skill.level}
-                  />
-                ))}
-              </div>
-            </PixelCard>
-
-            {/* Backend */}
-            <PixelCard className="p-4 sm:p-6">
-              <h3 className="font-pixel text-pixel-text text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2">
-                <span className="w-2 h-2 bg-pixel-text-muted" />
-                Backend
-              </h3>
-              <div className="space-y-3 sm:space-y-4">
-                {backendSkills.map((skill) => (
-                  <SkillBar
-                    key={skill.name}
-                    name={skill.name}
-                    level={skill.level}
-                  />
-                ))}
-              </div>
-            </PixelCard>
-
-            {/* Tools */}
-            <PixelCard className="p-4 sm:p-6 sm:col-span-2 lg:col-span-1">
-              <h3 className="font-pixel text-pixel-text text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2">
-                <span className="w-2 h-2 bg-pixel-text-muted" />
-                Tools
-              </h3>
-              <div className="space-y-3 sm:space-y-4">
-                {toolsSkills.map((skill) => (
-                  <SkillBar
-                    key={skill.name}
-                    name={skill.name}
-                    level={skill.level}
-                  />
-                ))}
-              </div>
-            </PixelCard>
-          </div>
-        </div>
-      </section>
 
       {/* ===== PROJECTS SECTION ===== */}
       <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-pixel-secondary/30 to-transparent">
@@ -392,6 +329,76 @@ export default function Home() {
           )}
         </div>
       </section>
+
+
+      {/* ===== SKILLS SECTION ===== */}
+      <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-10 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-pixel text-pixel-text mb-4">Built Using</h2>
+            <div className="h-[2px] w-12 sm:w-16 mx-auto bg-pixel-text-muted" />
+          </div>
+
+          {/* Skills Grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {/* Frontend */}
+            <PixelCard className="p-4 sm:p-6 h-full">
+              <h3 className="font-pixel text-pixel-text text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 bg-pixel-text-muted" />
+                Frontend
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {frontendSkills.map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="px-3 py-2 bg-pixel-dark border-2 border-pixel-elevated text-pixel-text font-pixel text-xs sm:text-sm hover:border-pixel-text-secondary transition-colors cursor-default"
+                  >
+                    {skill.name}
+                  </div>
+                ))}
+              </div>
+            </PixelCard>
+
+            {/* Backend */}
+            <PixelCard className="p-4 sm:p-6 h-full">
+              <h3 className="font-pixel text-pixel-text text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 bg-pixel-text-muted" />
+                Backend
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {backendSkills.map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="px-3 py-2 bg-pixel-dark border-2 border-pixel-elevated text-pixel-text font-pixel text-xs sm:text-sm hover:border-pixel-text-secondary transition-colors cursor-default"
+                  >
+                    {skill.name}
+                  </div>
+                ))}
+              </div>
+            </PixelCard>
+
+            {/* Tools */}
+            <PixelCard className="p-4 sm:p-6 sm:col-span-2 lg:col-span-1 h-full">
+              <h3 className="font-pixel text-pixel-text text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 bg-pixel-text-muted" />
+                Tools
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {toolsSkills.map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="px-3 py-2 bg-pixel-dark border-2 border-pixel-elevated text-pixel-text font-pixel text-xs sm:text-sm hover:border-pixel-text-secondary transition-colors cursor-default"
+                  >
+                    {skill.name}
+                  </div>
+                ))}
+              </div>
+            </PixelCard>
+          </div>
+        </div>
+      </section>
+
 
       {/* ===== CONTACT SECTION ===== */}
       <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
