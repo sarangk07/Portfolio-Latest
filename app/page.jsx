@@ -22,8 +22,11 @@ export default function Home() {
     { name: 'JavaScript', level: 85 },
     { name: 'React.js', level: 88 },
     { name: 'Next.js', level: 80 },
+    { name: 'GSAP', level: 70 },
     { name: 'HTML & CSS', level: 95 },
     { name: 'Tailwind CSS', level: 95 },
+    { name: 'Redux', level: 50 },
+    { name: 'TypeScript', level: 40 },
   ];
 
   const backendSkills = [
@@ -33,13 +36,19 @@ export default function Home() {
     { name: 'Express.js', level: 55 },
     { name: 'PostgreSQL', level: 60 },
     { name: 'MS SQL Server', level: 55 },
+    { name: 'AWS', level: 65 },
+    { name: 'S3', level: 70 },
+    { name: 'EC2', level: 65 },
+    { name: 'RDS', level: 60 },
+    { name: 'CloudFront', level: 60 },
   ];
 
 
   const toolsSkills = [
-    { name: 'GSAP', level: 70 },
-    { name: 'Redux', level: 50 },
     { name: 'Git', level: 65 },
+    { name: 'Razorpay', level: 75 },
+    { name: 'Shiprocket', level: 70 },
+    { name: 'OTO', level: 60 },
   ];
 
   // Projects data
@@ -100,6 +109,15 @@ export default function Home() {
       tags: ['Django', 'PostgreSQL', 'AWS', 'Razorpay'],
     },
     {
+      title: 'NFSMW Fan Site',
+      subtitle: 'Mini Project',
+      description: 'Fan site for the popular game Need for Speed Most Wanted with interactive UI and animations.',
+      imageSrc: '/nfsmw.PNG',
+      liveUrl: 'https://gsap-nfsmw.vercel.app/',
+      githubUrl: null,
+      tags: ['Next.js', 'GSAP'],
+    },
+    {
       title: 'Torque Tribe',
       subtitle: 'In Progress',
       description: 'Car accessories e-commerce platform with modern animations and full-stack architecture.',
@@ -127,15 +145,16 @@ export default function Home() {
       githubUrl: 'https://github.com/sarangk07/Ecommerce-baby-products',
       tags: ['React', 'Bootstrap'],
     },
-    {
-      title: 'Theyyam Web',
-      subtitle: 'Mini Project',
-      description: 'Cultural website showcasing the traditional Theyyam festival with immersive visuals.',
-      imageSrc: '/theyyam2.PNG',
-      liveUrl: 'https://theyyam-web.vercel.app/',
-      githubUrl: null,
-      tags: ['Next.js', 'GSAP'],
-    },
+    // {
+    //   title: 'Theyyam Web',
+    //   subtitle: 'Mini Project',
+    //   description: 'Cultural website showcasing the traditional Theyyam festival with immersive visuals.',
+    //   imageSrc: '/theyyam2.PNG',
+    //   liveUrl: 'https://theyyam-web.vercel.app/',
+    //   githubUrl: null,
+    //   tags: ['Next.js', 'GSAP'],
+    // },
+    
   ];
 
   const mainProjects = projects.slice(0, 4);
@@ -274,7 +293,7 @@ export default function Home() {
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-pixel text-pixel-text mb-4">Projects</h2>
             <div className="h-[2px] w-12 sm:w-16 mx-auto bg-pixel-text-muted" />
             <p className="mt-4 font-pixel-body text-pixel-text-secondary text-sm sm:text-base">
-              Featured work that I&apos;m proud of
+              Featured work I&apos;ve contributed to
             </p>
           </div>
 
