@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import PixelButton from './components/PixelButton';
 import PixelCard from './components/PixelCard';
+import FloatingParticles from './components/FloatingParticles';
 
 import ProjectItem from './components/ProjectItems';
 import gsap from 'gsap';
@@ -154,7 +155,7 @@ export default function Home() {
     //   githubUrl: null,
     //   tags: ['Next.js', 'GSAP'],
     // },
-    
+
   ];
 
   const mainProjects = projects.slice(0, 4);
@@ -168,8 +169,8 @@ export default function Home() {
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
+      wheelMultiplier: 0.7, // Reduced from 1 for smoother trackpad feel
+      touchMultiplier: 1.5, // Reduced from 2 for better touch control
       infinite: false,
     });
 
@@ -231,8 +232,9 @@ export default function Home() {
       {/* ===== HERO SECTION ===== */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8"
+        className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden"
       >
+        <FloatingParticles />
         {/* Decorative corner elements - hidden on mobile */}
         <div className="hidden sm:block absolute top-6 left-6 w-12 lg:w-16 h-12 lg:h-16 border-l-2 border-t-2 border-pixel-text-muted/30" />
         <div className="hidden sm:block absolute top-6 right-6 w-12 lg:w-16 h-12 lg:h-16 border-r-2 border-t-2 border-pixel-text-muted/30" />

@@ -21,30 +21,30 @@ const ProjectItem = ({
 
     if (!cardRef.current) return;
 
-    gsap.fromTo(cardRef.current,
-      {
-        opacity: 0,
-        y: 50,
-        scale: 0.98,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: cardRef.current,
-          start: 'top bottom-=100',
-          end: 'top center',
-          toggleActions: 'play none none reverse',
+    const ctx = gsap.context(() => {
+      gsap.fromTo(cardRef.current,
+        {
+          opacity: 0,
+          y: 50,
+          scale: 0.98,
         },
-      }
-    );
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: cardRef.current,
+            start: 'top bottom-=100',
+            end: 'top center',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    }, cardRef);
 
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
+    return () => ctx.revert(); // Clean up only this component's animations
   }, []);
 
   return (
