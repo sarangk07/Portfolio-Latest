@@ -12,7 +12,7 @@
     "@studio-freight/lenis": "^1.0.42",
     "gsap": "^3.12.5",
     "lucide-react": "^0.436.0",
-    "next": "^14.2.32",
+    "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
     "tailwind-scrollbar": "^3.1.0"
