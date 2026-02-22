@@ -5,6 +5,7 @@ import Image from 'next/image';
 import PixelButton from './components/PixelButton';
 import PixelCard from './components/PixelCard';
 import FloatingParticles from './components/FloatingParticles';
+import FloatingLogos from './components/FloatingLogos';
 
 import ProjectItem from './components/ProjectItems';
 import gsap from 'gsap';
@@ -362,8 +363,13 @@ export default function Home() {
 
 
       {/* ===== SKILLS SECTION ===== */}
-      <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+      <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        {/* Animated Logos Background */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <FloatingLogos />
+        </div>
+
+        <div className="max-w-6xl mx-auto relative z-10">
           {/* Section Header */}
           <div className="text-center mb-10 sm:mb-12 lg:mb-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-pixel text-pixel-text mb-4">Built Using</h2>
