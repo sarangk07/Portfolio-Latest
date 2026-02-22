@@ -17,34 +17,13 @@ const ProjectItem = ({
   const cardRef = useRef(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
     if (!cardRef.current) return;
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(cardRef.current,
-        {
-          opacity: 0,
-          y: 50,
-          scale: 0.98,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: cardRef.current,
-            start: 'top bottom-=100',
-            end: 'top center',
-            toggleActions: 'play none none reverse',
-          },
-        }
-      );
-    }, cardRef);
-
-    return () => ctx.revert(); // Clean up only this component's animations
+    // Set initial state instantly without animation
+    gsap.set(cardRef.current, {
+      opacity: 1,
+      y: 0,
+    });
   }, []);
 
   return (
@@ -73,13 +52,13 @@ const ProjectItem = ({
               src={imageSrc}
               alt={title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-cover will-change-transform group-hover:scale-110 transition-transform duration-700"
               loading="lazy"
             />
           )}
 
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-pixel-dark via-transparent to-transparent opacity-60" />
+          {/* Gradient overlay - simplified for performance */}
+          <div className="absolute inset-0 bg-gradient-to-t from-pixel-dark via-transparent to-transparent opacity-60 pointer-events-none" />
         </div>
 
         {/* Tags */}

@@ -37,11 +37,11 @@ export default function Home() {
     { name: 'Express.js', level: 55 },
     { name: 'PostgreSQL', level: 60 },
     { name: 'MS SQL Server', level: 55 },
-    { name: 'AWS', level: 65 },
-    { name: 'S3', level: 70 },
-    { name: 'EC2', level: 65 },
-    { name: 'RDS', level: 60 },
-    { name: 'CloudFront', level: 60 },
+    // { name: 'AWS', level: 65 },
+    // { name: 'S3', level: 70 },
+    // { name: 'EC2', level: 65 },
+    // { name: 'RDS', level: 60 },
+    // { name: 'CloudFront', level: 60 },
   ];
 
 
@@ -50,6 +50,8 @@ export default function Home() {
     { name: 'Razorpay', level: 75 },
     { name: 'Shiprocket', level: 70 },
     { name: 'OTO', level: 60 },
+    { name: 'Sanity CMS', level: 40 },
+    { name: 'Playwright', level: 40 },
   ];
 
   // Projects data
@@ -161,39 +163,45 @@ export default function Home() {
   const mainProjects = projects.slice(0, 4);
   const studyProjects = projects.slice(4);
 
-  // Initialize Lenis smooth scroll
+  // Lenis smooth scroll disabled for performance
+  // Lighthouse showed 6+ seconds main thread work from Lenis + GSAP ticker
+  // Native browser scroll is much faster
+  /*
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 0.8,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 0.7, // Reduced from 1 for smoother trackpad feel
-      touchMultiplier: 1.5, // Reduced from 2 for better touch control
+      wheelMultiplier: 0.5,
+      touchMultiplier: 1.2,
       infinite: false,
+      syncTouch: true,
     });
-
-    // Connect Lenis to GSAP ScrollTrigger
-    lenis.on('scroll', ScrollTrigger.update);
 
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
 
-    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.lagSmoothing(1000, 16);
 
     return () => {
       lenis.destroy();
       gsap.ticker.remove(lenis.raf);
     };
   }, []);
+  */
 
   useEffect(() => {
     setMounted(true);
     gsap.registerPlugin(ScrollTrigger);
   }, []);
 
+  // Hero animations disabled for performance
+  // Lighthouse showed heavy JS execution
+  // Cards/buttons animate on interaction (CSS hover), which is fine
+  /*
   useEffect(() => {
     if (!mounted || !heroRef.current) return;
 
@@ -212,6 +220,7 @@ export default function Home() {
 
     return () => ctx.revert();
   }, [mounted]);
+  */
 
   if (!mounted) {
     return (

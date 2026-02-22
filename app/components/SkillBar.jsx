@@ -20,7 +20,7 @@ const SkillBar = ({
             <div className="relative h-5 bg-pixel-dark border-2 border-pixel-elevated overflow-hidden">
                 {/* Fill bar */}
                 <div
-                    className="h-full bg-gradient-to-r from-pixel-text-muted to-pixel-text-secondary transition-all duration-1000 ease-out"
+                    className="h-full bg-gradient-to-r from-pixel-text-muted to-pixel-text-secondary transition-all duration-300 ease-out"
                     style={{ width: `${level}%` }}
                 >
                     {/* Shine effect */}

@@ -40,7 +40,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Removed scroll-behavior: smooth to prevent conflicts with Lenis smooth scroll */
+  /* Let Lenis handle smooth scrolling for better performance */
 }
 
 body {
