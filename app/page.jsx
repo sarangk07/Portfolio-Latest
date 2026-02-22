@@ -80,7 +80,8 @@ export default function Home() {
       subtitle: 'Static Corporate Project',
       description: 'A static corporate website with modern UI and smooth user experience.',
       imageSrc: '/nextlookstatic.PNG',
-      liveUrl: 'https://corporate.nextlooksports.com/',
+      // liveUrl: 'https://corporate.nextlooksports.com/',
+      liveUrl: null,
       githubUrl: null,
       tags: ['Nextjs', 'Tailwind CSS'],
     },
@@ -89,11 +90,24 @@ export default function Home() {
       subtitle: 'Full Stack E-commerce Project',
       description: 'A complete e-commerce platform ',
       imageSrc: '/nextlookecom.PNG',
-      liveUrl: 'https://www.nextlooksports.com/',
+      // liveUrl: 'https://www.nextlooksports.com/',
+      liveUrl: null,
       githubUrl: null,
       tags: ['Nodejs', 'Expressjs', 'MSSQL', 'AWS', 'OTO', 'Reactjs', 'Tailwindcss'],
     },
+    {
+      title: 'Infonode',
+      subtitle: 'Infonode Company Website',
+      description: 'A static company website with modern UI and smooth user experience.',
+      imageSrc: '/infonode.PNG',
+      liveUrl: 'https://www.infonodetech.com/',
+      githubUrl: null,
+      tags: ['Nextjs', 'GSAP', 'Tailwind CSS'],
+    },
 
+
+
+    
     {
       title: 'Dhole Radio',
       subtitle: 'Mini Project',
@@ -121,6 +135,16 @@ export default function Home() {
       githubUrl: null,
       tags: ['Next.js', 'GSAP'],
     },
+
+    {
+      title: 'QUZ',
+      subtitle: 'Mini Project',
+      description: 'A fun quiz game with multiple categories, timer, and score tracking.',
+      imageSrc: '/quzgame.PNG',
+      liveUrl: 'https://quz-game.vercel.app/',
+      githubUrl: null,
+      tags: ['Next.js', 'tailwindcss', 'opentdb API'],
+    },
     {
       title: 'Torque Tribe',
       subtitle: 'In Progress',
@@ -130,6 +154,8 @@ export default function Home() {
       githubUrl: 'https://github.com/sarangk07/Car-Modz',
       tags: ['Next.js', 'Redux', 'GSAP', 'Django'],
     },
+
+    
     {
       title: 'Virtual Mingle',
       subtitle: 'Main Project',
@@ -161,8 +187,8 @@ export default function Home() {
 
   ];
 
-  const mainProjects = projects.slice(0, 4);
-  const studyProjects = projects.slice(4);
+  const mainProjects = projects.slice(0, 5);
+  const studyProjects = projects.slice(5);
 
   // Lenis smooth scroll disabled for performance
   // Lighthouse showed 6+ seconds main thread work from Lenis + GSAP ticker
@@ -232,7 +258,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-pixel-dark text-pixel-text overflow-x-hidden">
+    <main className="min-h-screen bg-pixel-dark text-pixel-text overflow-x-hidden cursor-default">
       {/* Background Grid Pattern */}
       <div className="fixed inset-0 bg-pixel-grid bg-grid opacity-50 pointer-events-none" />
 
