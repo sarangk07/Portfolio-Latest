@@ -504,11 +504,11 @@ export default function Home() {
       <footer className="relative py-6 sm:py-8 px-4 sm:px-6 border-t border-pixel-elevated">
         <div className="max-w-6xl mx-auto text-center">
           <p className="font-pixel-mono text-xs sm:text-sm text-pixel-text-muted">
-            © 2024 SARANG. All Rights Reserved.
+            © {new Date().getFullYear()} SARANG. All Rights Reserved.
           </p>
-          <p className="font-pixel-mono text-xs text-pixel-text-muted mt-2">
+          {/* <p className="font-pixel-mono text-xs text-pixel-text-muted mt-2">
             Built with Next.js + Tailwind CSS
-          </p>
+          </p> */}
         </div>
       </footer>
     </main >
