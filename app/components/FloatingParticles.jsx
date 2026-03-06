@@ -24,8 +24,8 @@ const FloatingParticles = () => {
         // --- Configuration ---
         // Optimized particles - Lenis removed so we have headroom
         // More particles for better visual impact without performance hit
-        const starCount = 60;    // More twinkling stars
-        const debrisCount = 25;  // More moving particles
+        const starCount = 90;    // More twinkling stars
+        const debrisCount = 8;  // More moving particles
 
         const debrisColors = [
             'bg-pixel-text-muted',
@@ -91,10 +91,10 @@ const FloatingParticles = () => {
 
             // More dynamic and varied orbital animations for rich visual effect
             gsap.to(particle, {
-                x: `random(-100, 100)`,   // Increased range for more movement
-                y: `random(-100, 100)`,   // Wider drift
+                x: `random(-700, 700)`,   // Increased range for more movement
+                y: `random(-700, 700)`,   // Wider drift
                 rotation: `random(0, 720)`,  // Full 2 rotations
-                duration: `random(20, 45)`,  // Varied speeds
+                duration: `random(20, 65)`,  // Varied speeds
                 ease: 'sine.inOut',
                 repeat: -1,
                 yoyo: true,
@@ -128,7 +128,7 @@ const FloatingParticles = () => {
 
         const handleMouseMove = (e) => {
             const now = Date.now();
-            
+
             // Only update target on throttle interval (not every pixel movement)
             if (now - lastMouseUpdateTime >= MOUSE_UPDATE_THROTTLE) {
                 targetMouseRef.current.x = (e.clientX / window.innerWidth - 0.5) * 2;
