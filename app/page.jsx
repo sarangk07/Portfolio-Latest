@@ -6,6 +6,7 @@ import PixelButton from './components/PixelButton';
 import PixelCard from './components/PixelCard';
 import FloatingParticles from './components/FloatingParticles';
 import FloatingLogos from './components/FloatingLogos';
+import Supernova from './components/Supernova';
 
 import ProjectItem from './components/ProjectItems';
 import gsap from 'gsap';
@@ -271,6 +272,7 @@ export default function Home() {
         className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden"
       >
         <FloatingParticles />
+        <Supernova />
         {/* Decorative corner elements - hidden on mobile */}
         <div className="hidden sm:block absolute top-6 left-6 w-12 lg:w-16 h-12 lg:h-16 border-l-2 border-t-2 border-pixel-text-muted/30" />
         <div className="hidden sm:block absolute top-6 right-6 w-12 lg:w-16 h-12 lg:h-16 border-r-2 border-t-2 border-pixel-text-muted/30" />
