@@ -237,7 +237,7 @@ export default function Home() {
       // If image fails to load, still allow page to load
       setNebulaBgLoaded(true);
     };
-    img.src = '/nebula-bg.jpg';
+    img.src = '/nebula-bg.webp';
   }, []);
   // Lighthouse showed heavy JS execution
   // Cards/buttons animate on interaction (CSS hover), which is fine
@@ -271,7 +271,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-black text-pixel-text overflow-x-hidden cursor-default">
+    <main className="min-h-screen bg-pixel-dark text-pixel-text overflow-x-hidden cursor-default">
       {/* Background Grid Pattern - for all sections */}
       <div className="fixed inset-0 bg-pixel-grid bg-grid opacity-50 pointer-events-none" style={{ zIndex: 2 }} />
 
@@ -281,7 +281,17 @@ export default function Home() {
         className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden"
         style={{ zIndex: 10 }}
       >
-        {/* Nebula Background Image removed from hero for mobile performance */}
+        {/* Nebula Background Image - Desktop only for performance */}
+        <img 
+          ref={nebulaBgRef}
+          src="/nebula-bg.webp"
+          alt="nebula background"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none hidden sm:block"
+          style={{
+            zIndex: 0,
+          }}
+        />
+
         <FloatingParticles />
         <Supernova />
         {/* Decorative corner elements - hidden on mobile */}
@@ -337,7 +347,7 @@ export default function Home() {
 
 
       {/* ===== PROJECTS SECTION ===== */}
-      <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-pixel-secondary/30 to-transparent">
+      <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-pixel-secondary/30 to-transparent">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-10 sm:mb-12 lg:mb-16">
