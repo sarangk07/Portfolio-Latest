@@ -52,8 +52,7 @@ const Supernova = () => {
         gsap.set(container, {
           x: -mouseRef.current.x * 5,
           y: -mouseRef.current.y * 5,
-          overwrite: 'auto',
-          force3D: true
+          overwrite: false
         });
       }
 
@@ -67,7 +66,7 @@ const Supernova = () => {
 
     // Create galaxy core (tiny bright center)
     const core = document.createElement('div');
-    core.className = 'absolute rounded-full will-change-transform';
+    core.className = 'absolute rounded-full';
     core.style.width = '4px';
     core.style.height = '4px';
     core.style.left = '50%';
@@ -129,13 +128,12 @@ const Supernova = () => {
           onUpdate: function() {
             const progress = this.progress();
             const angle = startAngle + progress * Math.PI * 2 * orbitDirection;
+            // Add spiral movement
             const spiralRadius = orbitRadius * (0.8 + 0.4 * Math.sin(progress * Math.PI * 2 + spiralOffset));
             gsap.set(particle, {
               x: Math.cos(angle) * spiralRadius,
               y: Math.sin(angle) * spiralRadius,
-              rotation: progress * 360 * orbitDirection,
-              overwrite: 'auto',
-              force3D: true
+              rotation: progress * 360 * orbitDirection
             });
           }
         });
@@ -150,8 +148,7 @@ const Supernova = () => {
         ease: 'sine.inOut',
         repeat: -1,
         yoyo: true,
-        delay: Math.random() * 2,
-        force3D: true
+        delay: Math.random() * 2
       });
     }
 
@@ -160,8 +157,7 @@ const Supernova = () => {
       rotation: 360,
       duration: 20,
       ease: 'none',
-      repeat: -1,
-      force3D: true
+      repeat: -1
     });
 
     // Core slow pulse
@@ -171,8 +167,7 @@ const Supernova = () => {
       duration: 4,
       ease: 'sine.inOut',
       repeat: -1,
-      yoyo: true,
-      force3D: true
+      yoyo: true
     });
 
     // Occasional shooting star effect
@@ -201,7 +196,6 @@ const Supernova = () => {
         scale: 0.2,
         duration: duration,
         ease: 'power2.out',
-        force3D: true,
         onComplete: () => star.remove()
       });
     };
@@ -230,13 +224,12 @@ const Supernova = () => {
       ref={containerRef}
       className="supernova-container absolute pointer-events-none overflow-hidden"
       style={{ 
-        zIndex: 5,
+        zIndex: 1,
         width: '120px',
         height: '120px',
         left: '50%',
         top: '50%',
-        transform: 'translate(-50%, -50%)',
-        willChange: 'transform'
+        transform: 'translate(-50%, -50%)'
       }}
     />
   );
