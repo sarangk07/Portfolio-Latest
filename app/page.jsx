@@ -281,14 +281,13 @@ export default function Home() {
         className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden"
         style={{ zIndex: 10 }}
       >
-        {/* Nebula Background Image - Only on Hero Section */}
-        <div 
+        {/* Nebula Background Image - Using img tag */}
+        <img 
           ref={nebulaBgRef}
-          className="absolute opacity-70 inset-0 w-full h-full pointer-events-none"
+          src="/nebula-bg.jpg"
+          alt="nebula background"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
           style={{
-            backgroundImage: 'url(/nebula-bg.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
             zIndex: 0,
           }}
         />
