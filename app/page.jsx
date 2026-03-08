@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 import PixelButton from './components/PixelButton';
 import PixelCard from './components/PixelCard';
 import FloatingParticles from './components/FloatingParticles';
@@ -19,6 +18,8 @@ export default function Home() {
   const subtitleRef = useRef(null);
   const [mounted, setMounted] = useState(false);
   const [showStudyProjects, setShowStudyProjects] = useState(false);
+  const [nebulaBgLoaded, setNebulaBgLoaded] = useState(false);
+  const nebulaBgRef = useRef(null);
 
   // Skills data
   const frontendSkills = [
@@ -222,11 +223,33 @@ export default function Home() {
   */
 
   useEffect(() => {
-    setMounted(true);
     gsap.registerPlugin(ScrollTrigger);
   }, []);
 
-  // Hero animations disabled for performance
+  // Preload nebula image with link tag + wait for load before showing page
+  useEffect(() => {
+    // Add preload link to head for early image discovery
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = '/nebula-bg.jpg';
+    document.head.appendChild(link);
+
+    // Load image - page shows only when image is ready
+    const img = new Image();
+    img.onload = () => {
+      setNebulaBgLoaded(true);
+      setMounted(true);
+    };
+    img.onerror = () => {
+      // If image fails to load, still show page after 2 seconds
+      setTimeout(() => {
+        setNebulaBgLoaded(true);
+        setMounted(true);
+      }, 2000);
+    };
+    img.src = '/nebula-bg.jpg';
+  }, []);
   // Lighthouse showed heavy JS execution
   // Cards/buttons animate on interaction (CSS hover), which is fine
   /*
@@ -260,17 +283,33 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-pixel-dark text-pixel-text overflow-x-hidden cursor-default">
-      {/* Background Grid Pattern */}
-      <div className="fixed inset-0 bg-pixel-grid bg-grid opacity-50 pointer-events-none" />
-
-      {/* Subtle gradient overlay */}
-      <div className="fixed inset-0 bg-gradient-radial from-pixel-tertiary/20 via-transparent to-transparent pointer-events-none" />
+      {/* Background Grid Pattern - for all sections */}
+      <div className="fixed inset-0 bg-pixel-grid bg-grid opacity-50 pointer-events-none" style={{ zIndex: 2 }} />
 
       {/* ===== HERO SECTION ===== */}
       <section
         ref={heroRef}
         className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden"
+        style={{ zIndex: 10 }}
       >
+        {/* Nebula Background Image - Only on Hero Section */}
+        <div 
+          ref={nebulaBgRef}
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          style={{
+            backgroundImage: nebulaBgLoaded ? 'url(/nebula-bg.jpg)' : 'none',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            zIndex: 0,
+          }}
+        />
+
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 w-full h-full bg-black/40 pointer-events-none" style={{ zIndex: 1 }} />
+
+        {/* Subtle gradient overlay */}
+        <div className="absolute inset-0 w-full h-full bg-gradient-radial from-pixel-tertiary/20 via-transparent to-transparent pointer-events-none" style={{ zIndex: 3 }} />
+
         <FloatingParticles />
         <Supernova />
         {/* Decorative corner elements - hidden on mobile */}
@@ -295,7 +334,7 @@ export default function Home() {
               Frontend Developer • Full Stack Enthusiast
             </p>
 
-            <p className="max-w-md lg:max-w-lg mx-auto font-pixel-body text-pixel-text-muted text-base sm:text-lg leading-relaxed px-4 sm:px-0">
+            <p className="max-w-md lg:max-w-lg mx-auto font-pixel-body text-pixel-text-secondary text-base sm:text-lg leading-relaxed px-4 sm:px-0">
               Building modern web experiences with clean code and thoughtful design.
             </p>
           </div>
@@ -326,7 +365,7 @@ export default function Home() {
 
 
       {/* ===== PROJECTS SECTION ===== */}
-      <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-pixel-secondary/30 to-transparent">
+      <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-pixel-secondary/30 to-transparent">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-10 sm:mb-12 lg:mb-16">
