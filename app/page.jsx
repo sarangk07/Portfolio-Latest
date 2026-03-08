@@ -307,8 +307,8 @@ export default function Home() {
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 w-full h-full bg-black/40 pointer-events-none" style={{ zIndex: 1 }} />
 
-        {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 w-full h-full bg-gradient-radial from-pixel-tertiary/20 via-transparent to-transparent pointer-events-none" style={{ zIndex: 3 }} />
+        {/* Subtle gradient overlay - below animations */}
+        <div className="absolute inset-0 w-full h-full bg-gradient-radial from-pixel-tertiary/20 via-transparent to-transparent pointer-events-none" style={{ zIndex: 2 }} />
 
         <FloatingParticles />
         <Supernova />
