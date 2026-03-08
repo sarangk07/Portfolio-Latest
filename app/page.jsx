@@ -271,7 +271,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-pixel-dark text-pixel-text overflow-x-hidden cursor-default">
+    <main className="min-h-screen bg-black text-pixel-text overflow-x-hidden cursor-default">
       {/* Background Grid Pattern - for all sections */}
       <div className="fixed inset-0 bg-pixel-grid bg-grid opacity-50 pointer-events-none" style={{ zIndex: 2 }} />
 
@@ -281,17 +281,7 @@ export default function Home() {
         className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden"
         style={{ zIndex: 10 }}
       >
-        {/* Nebula Background Image - Using img tag */}
-        <img 
-          ref={nebulaBgRef}
-          src="/nebula-bg.jpg"
-          alt="nebula background"
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-          style={{
-            zIndex: 0,
-          }}
-        />
-
+        {/* Nebula Background Image removed from hero for mobile performance */}
         <FloatingParticles />
         <Supernova />
         {/* Decorative corner elements - hidden on mobile */}
