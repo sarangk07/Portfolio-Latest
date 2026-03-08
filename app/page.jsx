@@ -284,7 +284,7 @@ export default function Home() {
         {/* Nebula Background Image - Only on Hero Section */}
         <div 
           ref={nebulaBgRef}
-          className="absolute inset-0 w-full h-full pointer-events-none"
+          className="absolute opacity-70 inset-0 w-full h-full pointer-events-none"
           style={{
             backgroundImage: 'url(/nebula-bg.jpg)',
             backgroundSize: 'cover',
@@ -293,14 +293,8 @@ export default function Home() {
           }}
         />
 
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 w-full h-full bg-black/40 pointer-events-none" style={{ zIndex: 1 }} />
-
         <FloatingParticles />
         <Supernova />
-
-        {/* Subtle gradient overlay - on top of animations */}
-        <div className="absolute inset-0 w-full h-full bg-gradient-radial from-pixel-tertiary/20 via-transparent to-transparent pointer-events-none" style={{ zIndex: 4 }} />
         {/* Decorative corner elements - hidden on mobile */}
         <div className="hidden sm:block absolute top-6 left-6 w-12 lg:w-16 h-12 lg:h-16 border-l-2 border-t-2 border-pixel-text-muted/30" />
         <div className="hidden sm:block absolute top-6 right-6 w-12 lg:w-16 h-12 lg:h-16 border-r-2 border-t-2 border-pixel-text-muted/30" />
