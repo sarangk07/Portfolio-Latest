@@ -14,12 +14,14 @@ import Lenis from '@studio-freight/lenis';
 
 export default function Home() {
   const heroRef = useRef(null);
+  const heroContentRef = useRef(null);
+  const heroBgRef = useRef(null);
   const nameRef = useRef(null);
   const subtitleRef = useRef(null);
   const [mounted, setMounted] = useState(false);
   const [showStudyProjects, setShowStudyProjects] = useState(false);
   const [nebulaBgLoaded, setNebulaBgLoaded] = useState(false);
-  const nebulaBgRef = useRef(null);
+  const [supernovaScale, setSupernovaScale] = useState(1);
 
   // Skills data
   const frontendSkills = [
@@ -227,6 +229,60 @@ export default function Home() {
     gsap.registerPlugin(ScrollTrigger);
   }, []);
 
+  // Hero scroll animation - pin and scale effect
+  useEffect(() => {
+    if (!mounted || !nebulaBgLoaded) return;
+    
+    // Wait for next tick to ensure refs are available
+    const timeoutId = setTimeout(() => {
+      if (heroRef.current && heroBgRef.current) {
+        const ctx = gsap.context(() => {
+          // Create a scroll-triggered animation for the hero section
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: 'top top',
+              end: '+=150%', // Scroll distance for the animation (150% of viewport)
+              pin: true,
+              scrub: 1, // Smooth scrubbing
+              anticipatePin: 1,
+            }
+          });
+
+          // Scale the background image - creates space travel effect
+          tl.to(heroBgRef.current, {
+            scale: 1.2,
+            ease: 'none',
+            scrub: 1,
+          }, 0);
+
+          // Fade out hero content gradually
+          tl.to(heroContentRef.current, {
+            opacity: 0,
+            scale: 3.8,
+            ease: 'power2.out',
+            scrub: 2,
+          }, 0);
+
+          // Update supernova scale state for external component
+          ScrollTrigger.create({
+            trigger: heroRef.current,
+            start: 'top top',
+            end: '+=150%',
+            onUpdate: (self) => {
+              // Scale from 1 to 2 based on scroll progress
+              setSupernovaScale(1 + self.progress * 1.2);
+            }
+          });
+        }, heroRef);
+
+        return () => ctx.revert();
+      }
+    }, 100);
+
+    return () => clearTimeout(timeoutId);
+  }, [mounted, nebulaBgLoaded]);
+
   // Preload nebula background image
   useEffect(() => {
     const img = new Image();
@@ -283,24 +339,25 @@ export default function Home() {
       >
         {/* Nebula Background Image - Desktop only for performance */}
         <img 
-          ref={nebulaBgRef}
+          ref={heroBgRef}
           src="/nebula-bg.webp"
           alt="nebula background"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none hidden sm:block"
           style={{
             zIndex: 0,
+            transform: 'scale(1)',
           }}
         />
 
         <FloatingParticles />
-        <Supernova />
+        <Supernova scale={supernovaScale} />
         {/* Decorative corner elements - hidden on mobile */}
         <div className="hidden sm:block absolute top-6 left-6 w-12 lg:w-16 h-12 lg:h-16 border-l-2 border-t-2 border-pixel-text-muted/30" />
         <div className="hidden sm:block absolute top-6 right-6 w-12 lg:w-16 h-12 lg:h-16 border-r-2 border-t-2 border-pixel-text-muted/30" />
         <div className="hidden sm:block absolute bottom-6 left-6 w-12 lg:w-16 h-12 lg:h-16 border-l-2 border-b-2 border-pixel-text-muted/30" />
         <div className="hidden sm:block absolute bottom-6 right-6 w-12 lg:w-16 h-12 lg:h-16 border-r-2 border-b-2 border-pixel-text-muted/30" />
 
-        <div className="text-center space-y-6 sm:space-y-8 relative z-10 w-full max-w-2xl mx-auto">
+        <div className="text-center space-y-6 sm:space-y-8 relative z-10 w-full max-w-2xl mx-auto" ref={heroContentRef}>
           {/* Name */}
           <div ref={nameRef} className="space-y-3 sm:space-y-4">
             <p className="font-pixel text-sm sm:text-lg text-pixel-text-secondary tracking-widest uppercase">Hi, i'm</p>

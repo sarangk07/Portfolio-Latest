@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
-const Supernova = () => {
+const Supernova = ({ scale = 1 }) => {
   const containerRef = useRef(null);
   const diskRef = useRef(null);
   const particlesRef = useRef([]);
@@ -219,6 +219,14 @@ const Supernova = () => {
     };
   }, []);
 
+  // Apply scale from scroll animation
+  useEffect(() => {
+    if (containerRef.current) {
+      // Always apply scale transform
+      containerRef.current.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    }
+  }, [scale]);
+
   return (
     <div
       ref={containerRef}
@@ -228,8 +236,7 @@ const Supernova = () => {
         width: '120px',
         height: '120px',
         left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)'
+        top: '50%'
       }}
     />
   );
