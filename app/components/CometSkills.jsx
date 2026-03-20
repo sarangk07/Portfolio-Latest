@@ -18,11 +18,11 @@ const CometSkills = () => {
         { name: 'GSAP', icon: '/logos/gsap.png' },
         { name: 'HTML', icon: '/logos/htmlp.png' },
         { name: 'CSS', icon: '/logos/cssp.png' },
-        { name: 'Redux', icon: '/logos/jsp.png' },
+        { name: 'SqlServer', icon: '/logos/mssql.png' },
         { name: 'Node.js', icon: '/logos/nodejsp.png' },
         { name: 'PostgreSQL', icon: '/logos/psqlp.png' },
         { name: 'Python', icon: '/logos/python.png' },
-        { name: 'Sanity', icon: '/logos/sanity.jpg' },
+        { name: 'Sanity', icon: '/logos/sanityp.png' },
         { name: 'Playwright', icon: '/logos/playwrightp.png' },
     ];
 

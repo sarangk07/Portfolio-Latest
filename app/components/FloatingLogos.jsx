@@ -16,7 +16,7 @@ const FloatingLogos = ({ scrollTriggerId = null }) => {
         { name: 'GSAP', icon: '/logos/gsap.png', color: 'text-green-400' },
         { name: 'HTML', icon: '/logos/htmlp.png', color: 'text-orange-400' },
         { name: 'CSS', icon: '/logos/cssp.png', color: 'text-blue-400' },
-        { name: 'Redux', icon: '/logos/jsp.png', color: 'text-purple-400' },
+        { name: 'SqlServer', icon: '/logos/mssql.png', color: 'text-red-700' },
         { name: 'Node.js', icon: '/logos/nodejsp.png', color: 'text-green-500' },
         { name: 'Express', icon: '/logos/gsap.png', color: 'text-gray-300' },
         { name: 'PostgreSQL', icon: '/logos/psqlp.png', color: 'text-blue-500' },
