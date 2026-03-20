@@ -7,6 +7,7 @@ import FloatingParticles from './components/FloatingParticles';
 import FloatingLogos from './components/FloatingLogos';
 import CometSkills from './components/CometSkills';
 import Supernova from './components/Supernova';
+import GalaxyLoader from './components/GalaxyLoader';
 
 import ProjectItem from './components/ProjectItems';
 import gsap from 'gsap';
@@ -320,11 +321,7 @@ export default function Home() {
   */
 
   if (!mounted || !nebulaBgLoaded) {
-    return (
-      <div className="min-h-screen bg-pixel-dark flex items-center justify-center">
-        <div className="text-pixel-text font-pixel animate-pulse">Loading...</div>
-      </div>
-    );
+    return <GalaxyLoader />;
   }
 
   return (

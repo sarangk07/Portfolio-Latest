@@ -199,25 +199,28 @@ const CometSkills = () => {
                     comet.x += comet.vx;
                     comet.y += comet.vy;
 
-                    // Boundary collision
-                    const maxX = containerWidth - comet.size;
-                    const maxY = containerHeight - comet.size;
+                    // Boundary collision - keep comets inside with padding
+                    const padding = 10;
+                    const minX = padding;
+                    const maxX = containerWidth - comet.size - padding;
+                    const minY = padding;
+                    const maxY = containerHeight - comet.size - padding;
 
-                    if (comet.x < 0) {
-                        comet.x = 0;
-                        comet.vx *= -0.5;
+                    if (comet.x < minX) {
+                        comet.x = minX;
+                        comet.vx = Math.abs(comet.vx) * 0.5;
                     }
                     if (comet.x > maxX) {
                         comet.x = maxX;
-                        comet.vx *= -0.5;
+                        comet.vx = -Math.abs(comet.vx) * 0.5;
                     }
-                    if (comet.y < 0) {
-                        comet.y = 0;
-                        comet.vy *= -0.5;
+                    if (comet.y < minY) {
+                        comet.y = minY;
+                        comet.vy = Math.abs(comet.vy) * 0.5;
                     }
                     if (comet.y > maxY) {
                         comet.y = maxY;
-                        comet.vy *= -0.5;
+                        comet.vy = -Math.abs(comet.vy) * 0.5;
                     }
 
                     comet.element.style.transform = `
