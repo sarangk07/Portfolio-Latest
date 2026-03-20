@@ -5,6 +5,7 @@ import PixelButton from './components/PixelButton';
 import PixelCard from './components/PixelCard';
 import FloatingParticles from './components/FloatingParticles';
 import FloatingLogos from './components/FloatingLogos';
+import CometSkills from './components/CometSkills';
 import Supernova from './components/Supernova';
 
 import ProjectItem from './components/ProjectItems';
@@ -360,7 +361,7 @@ export default function Home() {
         <div className="text-center space-y-6 sm:space-y-8 relative z-10 w-full max-w-2xl mx-auto" ref={heroContentRef}>
           {/* Name */}
           <div ref={nameRef} className="space-y-3 sm:space-y-4">
-            <p className="font-pixel text-sm sm:text-lg text-pixel-text-secondary tracking-widest uppercase">Hi, i'm</p>
+            <p className="font-pixel text-sm sm:text-lg text-pixel-text tracking-widest uppercase">Hi, i'm</p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-pixel text-pixel-text tracking-wide leading-tight">
               SARANG K
             </h1>
@@ -369,13 +370,13 @@ export default function Home() {
 
           {/* Subtitle */}
           <div ref={subtitleRef} className="space-y-4 sm:space-y-6">
-            <p className="font-pixel text-sm sm:text-base md:text-lg text-pixel-text-secondary tracking-wide">
+            <p className="font-pixel text-sm sm:text-base md:text-lg text-pixel-text tracking-wide">
               Frontend Developer • Full Stack Enthusiast
             </p>
 
-            <p className="max-w-md lg:max-w-lg mx-auto font-pixel-body text-pixel-text-muted text-base sm:text-lg leading-relaxed px-4 sm:px-0">
+            {/* <p className="max-w-md lg:max-w-lg mx-auto font-pixel-body text-pixel-text-muted text-base sm:text-lg leading-relaxed px-4 sm:px-0">
               Building modern web experiences with clean code and thoughtful design.
-            </p>
+            </p> */}
           </div>
 
           {/* CTA Button */}
@@ -469,74 +470,25 @@ export default function Home() {
 
 
       {/* ===== SKILLS SECTION ===== */}
-      <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Animated Logos Background */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
+      <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden min-h-[500px]">
+        {/* Comet Skills - Main interactive element */}
+        <div className="absolute inset-0 z-10 pointer-events-auto">
+          <CometSkills />
+        </div>
+
+        {/* Subtle background logos for depth */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
           <FloatingLogos />
         </div>
 
-        <div className="max-w-6xl mx-auto relative z-10">
+        <div className="max-w-6xl mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full z-0 pointer-events-none">
           {/* Section Header */}
-          <div className="text-center mb-10 sm:mb-12 lg:mb-16">
+          <div className="text-center mb-10 sm:mb-12 lg:mb-16 user-select-none">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-pixel text-pixel-text mb-4">Built Using</h2>
             <div className="h-[2px] w-12 sm:w-16 mx-auto bg-pixel-text-muted" />
-          </div>
-
-          {/* Skills Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {/* Frontend */}
-            <PixelCard className="p-4 sm:p-6 h-full">
-              <h3 className="font-pixel text-pixel-text text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2">
-                <span className="w-2 h-2 bg-pixel-text-muted" />
-                Frontend
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {frontendSkills.map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="px-3 py-2 bg-pixel-dark border-2 border-pixel-elevated text-pixel-text font-pixel text-xs sm:text-sm hover:border-pixel-text-secondary transition-colors cursor-default"
-                  >
-                    {skill.name}
-                  </div>
-                ))}
-              </div>
-            </PixelCard>
-
-            {/* Backend */}
-            <PixelCard className="p-4 sm:p-6 h-full">
-              <h3 className="font-pixel text-pixel-text text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2">
-                <span className="w-2 h-2 bg-pixel-text-muted" />
-                Backend
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {backendSkills.map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="px-3 py-2 bg-pixel-dark border-2 border-pixel-elevated text-pixel-text font-pixel text-xs sm:text-sm hover:border-pixel-text-secondary transition-colors cursor-default"
-                  >
-                    {skill.name}
-                  </div>
-                ))}
-              </div>
-            </PixelCard>
-
-            {/* Tools */}
-            <PixelCard className="p-4 sm:p-6 sm:col-span-2 lg:col-span-1 h-full">
-              <h3 className="font-pixel text-pixel-text text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2">
-                <span className="w-2 h-2 bg-pixel-text-muted" />
-                Tools
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {toolsSkills.map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="px-3 py-2 bg-pixel-dark border-2 border-pixel-elevated text-pixel-text font-pixel text-xs sm:text-sm hover:border-pixel-text-secondary transition-colors cursor-default"
-                  >
-                    {skill.name}
-                  </div>
-                ))}
-              </div>
-            </PixelCard>
+            {/* <p className="mt-4 font-pixel-body text-pixel-text-muted text-sm sm:text-base">
+              Hover over the comets to interact • Drag cursor to see them float away
+            </p> */}
           </div>
         </div>
       </section>
